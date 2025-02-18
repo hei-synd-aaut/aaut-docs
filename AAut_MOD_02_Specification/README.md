@@ -270,11 +270,13 @@ La traçabilité est un élément fondamental pour démontrer la conformité ré
 
 Dans certains systèmes très complexes, on pourra aller jusqu'à utiliser une Matrice de traçabilité.
 
-<figure>
-  <img src="./img/URS_Matrix_Diagram.png"
-     alt="Image lost: URS_Matrix_Diagram.png">
-  <figcaption>Matrice de traçabilité</figcaption>
-</figure>
+<div align="center">
+  <figure>
+    <img src="./img/URS_Matrix_Diagram.png"
+         alt="Image lost: URS_Matrix_Diagram.png">
+    <figcaption>Matrice de traçabilité</figcaption>
+  </figure>
+</div>
 
 > Toute cette phase documentaire ne garanti pas que votre machine fonctionne bien, mais que vous ayez **vérifié** si chaque élément fonctionne.
 
