@@ -8,7 +8,14 @@
 
 [Cédric Lenoir](mailto:cedric.lenoir@hevs.ch)
 
-# AAut Module 03 /  S88 Model
+# AAut Module 03 /  S88 Process Model
+
+- [Introduction](#introduction)
+- [S-88 & PackML, Classes de processus industriels](#s-88--packml-classes-de-processus-industriels)
+- [Machine](#machine)
+- [ISA 88](#isa-88)
+- [Exercices](#exercices)
+- [Pour alimenter votre réflexion sur une base ISA-95](#pour-alimenter-votre-réflexion-sur-une-base-isa-95)
 
 ## Aperçu
 - Afin de maitriser la complexité d'une installation d'automation, il est nécessaire de pouvoir en créer un model. Ce model doit permettre à l'ingénieur de créer l'architecture de son insallation, que ce soit au niveau de sa structure ou de son comportement.
@@ -23,11 +30,11 @@ Les documents ISA ou IEC ne sont pas libres de droits, c'est pourquoi il n'est p
 > ISA prohibits the entry of ISA standards and related ISA intellectual property (“ISA IP”) into any form of Artificial Intelligence (AI) tools, such as ChatGPT. Additionally, creating derivatives of ISA IP using AI is also prohibited without express written permission from ISA’s CEO. In the case of such use, ISA will suspend a licensee’s access to ISA IP, and further legal action will be considered. Please review ISA's Terms and Conditions for further information.
 
 ## Ce qu'il faut retenir:
-Ce cours est basé sur ISA-88, nommé aussi S88. ISA-88 est conçu à la base pour l'industrie du processus, comme la chimie, mais les concepts peuvent être repris pour modéliser d'autres types de processus.
+Ce cours est basé sur ISA-88, nommé aussi S88. ISA-88 est conçu à la base pour l'industrie du processus, comme la chimie, **<span style="color:red">mais les concepts peuvent être repris pour modéliser d'autres types de processus.</span>**
 
 Un des thèmes clé de ISA-88 est une séparation entre l'aspect procedure, une recette, et sa composante physique. L'objectif est de construire des installations modulaires qui puissent être utilisées pour produire différentes variantes de produit.
 
-> Un model ISA-88 n'implique pas obligatoirement un processus automatique. L'humain a aussi son rôle à jouer dans certaines étapes.
+> Un model ISA-88 n'implique pas nécessairement un processus automatique. L'humain a aussi son rôle à jouer dans certaines étapes.
 
 ## Ce qu'il faut savoir
 - Modéliser la structure physique d'un processus simple à l'aide de ISA-88, Unit, Equipment Model, Control Module.
@@ -217,6 +224,8 @@ Dans leur forme la plus simple, les modules de contrôle peuvent simplement êtr
 Contrairement à un module d'équipement, un module de contrôle ne peut pas exécuter de procédures de recette.
 
 L’instrumentation peut être utilisée par plusieurs modules de contrôle, par exemple deux modules de contrôle « dose d’eau » et « dose de crème » peuvent utiliser le même débitmètre comme instrumentation commune. Un dispositif de contrôle (par ex. Vanne, moteur) doit être contrôlé par un (et un seul) module de contrôle.
+
+#### Exemple: a Unit Vertical Filler
 
 <figure>
   <img src="./img/Unit Vertical Filler.png"
@@ -479,7 +488,9 @@ A un moment donné dans le cycle de la machine, il va falloir :
 
 Il est plus que probable que les simples états Start et Stop, pour autant qu’ils soient même définis soient suffisants pour définir le contexte dans lequel le robot cartésien va pouvoir évoluer
 
-#	[ISA 95](https://www.isa.org/standards-and-publications/isa-standards/isa-standards-committees/isa95), ou [IEC 62264](https://www.iso.org/standard/57308.html), *pour information*.
+#	[ISA 95](https://www.isa.org/standards-and-publications/isa-standards/isa-standards-committees/isa95), ou [IEC 62264](https://www.iso.org/standard/57308.html), 
+*pour information*.
+
 **Les fonctions couvertes par ISA 95 sortent du cadre de ce cours**. Elles se situent « en dessus » de la norme ISA 88 pour faire le lien avec les logiciels de gestion d’entreprise, Enterprise Resource Planning, ERP.
 
 La norme ISA 95 se compose de 11 fonctions stratégiques pour l’amélioration du pilotage de la production Chacune d’elles est associée à une fiche qui décrit comment se situe la fonction dans un système Manufacturing Execution System, MES et en détaille les principales tâches.
@@ -496,6 +507,13 @@ Les 11 fonctions de la norme ISA-95
   9.	Gestion de la documentation
   10.	Gestion de la main d’œuvre
   11.	Gestion de la maintenance
+
+# Exercices
+## Exercice 1
+Utiliez le diagramme de classe Mermaid pour décrire le [Unit Vertical Filler](#exemple-a-unit-vertical-filler). Puis transformez sa structure en code Structured Text IEC-61131-3.
+
+## Exercice 2
+Utilisez un digramme de classe Mermaid pour décrire [Un exemple de modélisation d'une unité représentée par son schéma P&ID](#un-exemple-de-modélisation-dune-unité-représentée-par-son-schéma-pid).
 
 # Pour alimenter votre réflexion sur une base ISA-95
 <div align="center">
@@ -564,6 +582,4 @@ OPC-UA (Open Platform Communications Unified Architecture) est souvent considér
 En résumé, OPC-UA peut être utilisé comme une base pour créer un namespace unifié, en fournissant les outils nécessaires pour centraliser et intégrer les données de manière sécurisée et évolutive.
 
 > OPC-UA sera brièvement abordé dans la suite de ce cours d'automatisation.
-
-
 
