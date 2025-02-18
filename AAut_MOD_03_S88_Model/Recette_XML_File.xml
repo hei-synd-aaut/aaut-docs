@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Recette XML File -->
+<Recette>
+  <Phase>
+    <N>1</N>
+    <Nom>Remplir</Nom>
+    <Parametres>
+      <Parametre>
+        <Nom>Eau</Nom>
+        <Valeur>1000 kg</Valeur>
+        <Type>Entrée</Type>
+      </Parametre>
+    </Parametres>
+  </Phase>
+  <Phase>
+    <N>2</N>
+    <Nom>Ajouter</Nom>
+    <Parametres>
+      <Parametre>
+        <Nom>Sel</Nom>
+        <Valeur>50 kg</Valeur>
+        <Type>Entrée</Type>
+      </Parametre>
+    </Parametres>
+  </Phase>
+  <Phase>
+    <N>3</N>
+    <Nom>Chauffer</Nom>
+    <Parametres>
+      <Parametre>
+        <Nom>Vapeur</Nom>
+        <Valeur>50°C</Valeur>
+        <Type>Process</Type>
+      </Parametre>
+    </Parametres>
+  </Phase>
+  <Phase>
+    <N>4</N>
+    <Nom>Ajouter</Nom>
+    <Parametres>
+      <Parametre>
+        <Nom>Sucre</Nom>
+        <Valeur>30 kg</Valeur>
+        <Type>Entrée</Type>
+      </Parametre>
+    </Parametres>
+  </Phase>
+</Recette>
