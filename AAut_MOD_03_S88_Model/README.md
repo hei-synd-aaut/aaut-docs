@@ -8,7 +8,7 @@
 
 [Cédric Lenoir](mailto:cedric.lenoir@hevs.ch)
 
-# Module 02 /  Model ISA88
+# AAut Module 03 /  S88 Model
 
 ## Aperçu
 - Afin de maitriser la complexité d'une installation d'automation, il est nécessaire de pouvoir en créer un model. Ce model doit permettre à l'ingénieur de créer l'architecture de son insallation, que ce soit au niveau de sa structure ou de son comportement.
@@ -51,18 +51,18 @@ Un des thèmes clé de ISA-88 est une séparation entre l'aspect procedure, une 
 - **MES**, **Manufacturing Execution System** / *Système d'Exécution de la Fabrication (SEF)*.
 - **SCADA (Supervisory Control and Data Acquisition)**: A system used for remote monitoring and control of industrial processes. It collects data from sensors and instruments located at remote sites and transmits it to a central computer for processing and control. / *Un système utilisé pour la surveillance et le contrôle à distance des processus industriels. Il collecte des données à partir de capteurs et d'instruments situés sur des sites distants et les transmet à un ordinateur central pour traitement et contrôle.*
 
-<figure>
-  <img src="./img/Résumé des différents niveaux d&apos;automatisation.webp"
-     alt="Image lost: Résumé des différents niveaux d&apos;automatisation.webp">
-  <figcaption>Résumé des différents niveaux d&apos;automatisation.webp, Source: 
-www.erp-information.com</figcaption>
-</figure>
+<div align="center">
+  <figure>
+    <img src="./img/Résumé des différents niveaux d&apos;automatisation.webp"
+       alt="Image lost: Résumé des différents niveaux d&apos;automatisation.webp">
+    <figcaption>Résumé des différents niveaux d&apos;automatisation, Source: 
+    www.erp-information.com</figcaption>
+  </figure>
+</div>
 
 Les différents logiciels qui composent la pyramide ci-dessus sont très souvent conçus par des entités différentes, une des raisons d'être de la normalisation est de simplifier la communication entre ces différents niveaux.
 
-Il existe pour certains types d'industries, transports ferroviaires: IEC 61375, IEC 62278, IEC 62425, IEC 62888, pour l'automatisation des réseaux de distribution d'énergie électrique de type SmartGrid, on parlera IEC 61850. **Dans la cadre de cours, nous aborderons principalement le niveau PLC, soit l'automatisation au niveau machine, couvert par ISA-88**.
-
-
+Il existe pour certains types d'industries, transports ferroviaires: [IEC 61375](https://webstore.iec.ch/en/publication/5397), [IEC 62278](https://webstore.iec.ch/en/publication/6747), [IEC 62425](https://webstore.iec.ch/en/publication/7001), [IEC 62888](https://webstore.iec.ch/en/publication/30007), pour l'automatisation des réseaux de distribution d'énergie électrique de type SmartGrid, on parlera [IEC 61850](https://iec61850.dvl.iec.ch/). **Dans la cadre de cours, nous aborderons principalement le niveau PLC, soit l'automatisation au niveau machine, couvert par [ISA-88](https://www.isa.org/standards-and-publications/isa-standards/isa-standards-committees/isa88)**.
 
 
 # Introduction
@@ -126,10 +126,8 @@ ensemble qui constitue presque une machine, mais qui ne peut assurer à lui seul
 
 ##	Qu’est-ce que le S88 ?
 S88 est un modèle et une méthodologie pour la conception et la gestion d'un contrôle de production flexible. La maintenabilité est améliorée grâce à une structure meilleure et universelle. À l'origine, la norme S88 est conçue pour l'industrie par lots/ « batch manufacturing », mais elle est également applicable dans les processus discrets et continus. S88 est une norme pour améliorer la manipulation des processus de production.
-IEC61512-1
 
-Si S88 est la notation la plus répandue, on retrouve cette normalisation au niveau IEC 61512-1
-
+Si S88 est la notation la plus répandue, on retrouve cette normalisation au niveau [IEC 61512-1](https://webstore.iec.ch/en/publication/5528)
 
 L’idée de S88 est de découpler le produit et sa recette, la procédure, de ses équipements le modèle physique et du processus.
 
@@ -481,7 +479,7 @@ A un moment donné dans le cycle de la machine, il va falloir :
 
 Il est plus que probable que les simples états Start et Stop, pour autant qu’ils soient même définis soient suffisants pour définir le contexte dans lequel le robot cartésien va pouvoir évoluer
 
-#	ISA 95, ou IEC 62264, *pour information*.
+#	[ISA 95](https://www.isa.org/standards-and-publications/isa-standards/isa-standards-committees/isa95), ou [IEC 62264](https://www.iso.org/standard/57308.html), *pour information*.
 **Les fonctions couvertes par ISA 95 sortent du cadre de ce cours**. Elles se situent « en dessus » de la norme ISA 88 pour faire le lien avec les logiciels de gestion d’entreprise, Enterprise Resource Planning, ERP.
 
 La norme ISA 95 se compose de 11 fonctions stratégiques pour l’amélioration du pilotage de la production Chacune d’elles est associée à une fiche qui décrit comment se situe la fonction dans un système Manufacturing Execution System, MES et en détaille les principales tâches.
@@ -498,3 +496,74 @@ Les 11 fonctions de la norme ISA-95
   9.	Gestion de la documentation
   10.	Gestion de la main d’œuvre
   11.	Gestion de la maintenance
+
+# Pour alimenter votre réflexion sur une base ISA-95
+<div align="center">
+  <figure>
+    <img src="./img/Automation_Pyramid_752K9D7VCA_1300.avif"
+       alt="Image lost: Automation_Pyramid_752K9D7VCA_1300.avif">
+    <figcaption>Source: Katti, Badarinath. (2020). Ontology-Based Approach to Decentralized Production Control in the Context of Cloud Manufacturing Execution Systems. 10.13140/RG.2.2.11486.46402</figcaption>
+  </figure>
+</div>
+
+[Cette image est tirée d'un article du site de Flow-Fuse](https://flowfuse.com/blog/2023/08/isa-95-automation-pyramid-to-unified-namespace/), qui est l'éditeur de la brique logicielle que nous utilisons avec Node-RED pour l'édition des interfaces utilisateurs dans les cours pratiques.
+
+En voici un résumé rédigé avec Copilot ainsi que deux questions posées à Copilot.
+
+- [Résumé de la page Flow-Fuse résumée par Copilot](#pourquoi-la-pyramide-dautomatisation-bloque-la-transformation-numérique).
+- Question à Copilot: [Qu'est-ce qu'un namespace unifié (UNS) ?](#quest-ce-quun-namespace-unifié-uns-)
+- Question à Copilot: [Est-ce que OPC-UA peut être considéré comme un UNS ?](#est-ce-que-opc-ua-peut-être-considéré-comme-un-uns-)
+
+## Pourquoi la pyramide d'automatisation bloque la transformation numérique
+
+### Introduction
+La pyramide d'automatisation ISA-95 traditionnelle a été une pierre angulaire de l'automatisation industrielle. Cependant, elle pose des défis significatifs aux efforts de transformation numérique.
+
+### La pyramide d'automatisation
+Le modèle pyramidal organise les systèmes d'entreprise en niveaux hiérarchiques, des dispositifs physiques en bas à la planification d'entreprise en haut. Cette structure crée des silos, entravant le flux de données et l'intégration.
+
+### Namespace unifié
+Un namespace unifié (UNS) offre une solution en fournissant une source unique de vérité pour toutes les données. Il élimine les silos, permettant un échange de données fluide et une prise de décision en temps réel.
+
+### Avantages du UNS
+- **Accessibilité améliorée des données**: Toutes les données sont accessibles en temps réel.
+- **Flexibilité accrue**: Intégration plus facile des nouvelles technologies.
+- **Meilleure prise de décision**: Les données en temps réel soutiennent des décisions éclairées.
+
+### Conclusion
+Passer de la pyramide d'automatisation à un namespace unifié est crucial pour réussir la transformation numérique dans les environnements industriels.
+
+### Résumé
+La pyramide d'automatisation ISA-95, bien que fondamentale, crée des barrières à la transformation numérique. L'adoption d'un namespace unifié peut surmonter ces barrières en permettant l'accès et l'intégration des données en temps réel, facilitant ainsi une meilleure prise de décision et une flexibilité technologique accrue.
+
+### Qu'est-ce qu'un namespace unifié (UNS) ?
+
+Un namespace unifié (UNS) est une architecture de gestion des données qui centralise toutes les informations d'une organisation dans un seul espace de noms. Cela signifie que toutes les données, qu'elles proviennent de capteurs, de systèmes de contrôle, de logiciels de gestion ou d'autres sources, sont accessibles et interconnectées de manière cohérente et uniforme.
+
+Le UNS permet de surmonter les limitations des systèmes hiérarchiques traditionnels en éliminant les silos de données. Il facilite l'intégration des technologies de l'Internet des objets (IoT), des systèmes de gestion de la production (MES), des systèmes de planification des ressources d'entreprise (ERP) et d'autres outils numériques. En conséquence, les entreprises peuvent accéder à des données en temps réel, améliorer leur prise de décision et accroître leur agilité opérationnelle.
+
+Les principaux avantages d'un UNS incluent :
+- **Centralisation des données** : Toutes les données sont stockées et accessibles à partir d'un seul endroit.
+- **Interopérabilité** : Les systèmes disparates peuvent communiquer et échanger des informations sans barrières.
+- **Évolutivité** : Facilité d'ajouter de nouvelles sources de données et technologies sans restructurer l'architecture existante.
+- **Visibilité en temps réel** : Accès instantané aux données actuelles pour une prise de décision rapide et informée.
+
+En adoptant un UNS, les entreprises peuvent transformer leurs opérations et tirer pleinement parti des initiatives de transformation numérique.
+
+
+### Est-ce que OPC-UA peut être considéré comme un UNS ?
+
+OPC-UA (Open Platform Communications Unified Architecture) est souvent considéré comme une technologie clé pour la mise en œuvre d'un namespace unifié (UNS). OPC-UA est un protocole de communication indépendant de la plateforme qui permet l'échange sécurisé et fiable de données dans les environnements industriels.
+
+#### Caractéristiques de OPC-UA en tant que UNS :
+- **Interopérabilité** : OPC-UA permet la communication entre différents systèmes et dispositifs, facilitant l'intégration des données.
+- **Sécurité** : Il offre des fonctionnalités de sécurité robustes, y compris l'authentification, l'autorisation et le cryptage des données.
+- **Scalabilité** : OPC-UA peut évoluer pour répondre aux besoins des petites installations comme des grandes entreprises.
+- **Modélisation de l'information** : Il permet de structurer et de modéliser les données de manière cohérente, ce qui est essentiel pour un UNS.
+
+En résumé, OPC-UA peut être utilisé comme une base pour créer un namespace unifié, en fournissant les outils nécessaires pour centraliser et intégrer les données de manière sécurisée et évolutive.
+
+> OPC-UA sera brièvement abordé dans la suite de ce cours d'automatisation.
+
+
+
