@@ -521,7 +521,7 @@ On constate que les risques **R1**, **R3** ont un niveau qui n’est pas accepta
 </figure>
 
 ### Commentaire
-Mieux vaut une analyse de risque relativement simple mais qui sera utilisée, qu'une analyse trop complexe qui ne sera pas mise en oeuvre, justement en raison de sa complexité. Le canevas Excel basé sur Innosuisse est [mis en disposition dans la documentation en ligne de ce cours](./documentation/A%20exemple%20of%20FMEA%20from%20Innosuisse.xlsx).
+Mieux vaut une analyse de risque relativement simple mais qui sera utilisée, qu'une analyse trop complexe qui ne sera pas mise en oeuvre, justement en raison de sa complexité. Le canevas Excel basé sur Innosuisse est [mis à disposition dans la documentation en ligne de ce cours](./documentation/An_Exemple_Of_FMEA_From_Innosuisse.xlsx).
 
 #	Tests
 Dans un projet de validation, les plans de test ou les protocoles de test sont utilisés pour démontrer qu'un système répond aux exigences précédemment établies dans les documents de spécification, de conception et de configuration.
@@ -571,7 +571,7 @@ Contrairement à ce que l’on pourrait penser, les risques techniques au moment
 Si un moteur de 110 kW pour une pompe de refroidissement, soit un beau bébé de l’ordre de 750 kg est sous dimensionné en raison d’une erreur dans la spécification, le dépassement de budget et du délai seront probablement garantis. Cependant, il y a extrêmement peu de risque de détruire le même moteur en raison d’une erreur au niveau du codage du PLC de commande.
 
 # Annexes
-Les documents de type URS, FS et autres font en général partie du savoir faire d'une entreprise et sont rarement disponibles en ligne. Des exemples utilisés dans des travaux pratiques et quelques travaux de bachelor à la HEVS sont disponibles en ligne [URS](./documentation/Mct2%20PW10%20URS%20Template.docx), [FS](./documentation/Mct2%20PW10%20FS%20Template.docx), [SDS](./documentation/Mct2%20PW10%20SDS%20Template.docx), [HDS](./documentation/Mct2%20PW10%20HDS%20Template.docx), [PQ](./documentation/Mct2%20PW10%20PQ%20Template.docx), [OQ](./documentation/Mct2%20PW10%20OQ%20Template.docx) et [IQ](./documentation/Mct2%20PW10%20IQ%20Template.docx) .
+Les documents de type URS, FS et autres font en général partie du savoir faire d'une entreprise et sont rarement disponibles en ligne. Des exemples utilisés dans des travaux pratiques et quelques travaux de bachelor à la HEVS sont disponibles en ligne [URS](./documentation/AAut_URS_Template.docx), [FS](./documentation/AAut_FS_Template.docx), [SDS](./documentation/AAut_SDS_Template.docx), [HDS](./documentation/AAut_HDS_Template.docx), [PQ](./documentation/AAut_PQ_Template.docx), [OQ](./documentation/AAut_OQ_Template.docx) et [IQ](./documentation/AAut_IQ_Template.docx) .
 
 
 ### SDS
