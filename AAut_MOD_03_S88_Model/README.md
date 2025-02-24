@@ -85,11 +85,13 @@ architecturale.
 # 	S-88 & PackML, Classes de processus industriels
 Il ne s’agit pas de rentrer en détail dans les différents types de processus industriels. Cela dépasse le cadre de ce cours. En revanche, ce cours s’inspire en grande partie du modèle physique décrit dans la norme ISA-88 et du PackML qui en dérive et sera décrit plus bas. PackML qui concerne plus les processus discrets fait l'objet d'un module séparé.
 
+<div align="center">
 <figure>
   <img src="./img/Batch vs Continuous Manufacturing.jpg"
      alt="Image lost: Batch vs Continuous Manufacturing.jpg">
   <figcaption>Batch vs Continuous Manufacturing, Source: www.researchgate.net</figcaption>
 </figure>
+</div>
 
 ##	Processus, lots et traitements par lots
 Selon ISA 88, un processus est une séquence d'activités chimiques, physiques ou biologiques pour la conversion, le transport ou stockage de matière ou d'énergie. Les procédés de fabrication industrielle peuvent généralement être classés sous forme de fabrication continue de pièces discrètes ou par lots. La classification d'un processus dépend de si la sortie du processus apparaît dans un flux continu, « Continuous », en quantités finies de pièces « Discrete parts manufacturing », ou en quantités finies de matière « Batches ».
@@ -102,10 +104,12 @@ Dans un processus continu, les matériaux sont passés en flux continu à traver
 ##	 Discrete parts manufacturing processes
 Dans un processus de fabrication de pièces discrètes, les produits sont classés en lots de production basés sur les matières premières communes, les exigences de production et les historiques de production. Dans un processus de fabrication de pièces discrètes, une quantité spécifiée de produit se déplace comme une unité (groupe de pièces) entre les postes de travail, et chaque pièce conserve son identité unique.
 
+<div align="center">
 <figure>
   <img src="./img/Discrete Batch High-precision assembly systems for medical devices..webp"
      alt="Image lost: Discrete Batch High-precision assembly systems for medical devices..webp">
   <figcaption>Discrete Batch High-precision assembly systems for medical devices  Source: www.pharmaceutical-technology.com</figcaption>
+  </div>
 
 ##	Batch processes
 Les traitements par lots abordés dans cette norme conduisent à la production de quantités finies de matières (lots) en soumettant des quantités de matières premières à un ordre défini d'actions de traitement à l'aide d'un ou plusieurs équipements. Le produit fabriqué par un processus par lots est appelé un lot. Les processus par lots sont des processus discontinus. Les processus par lots ne sont ni
@@ -152,11 +156,13 @@ L’idée étant qu’avec un seul modèles physique combiné à différentes pr
 Si l’on prend l’exemple d’un robot. Le robot sera le modèle physique. Il est parfaitement imaginable que ce robot soit piloté en mode manuel par un opérateur. Dans ce cas extrême, le model procédural sera inexistant. Cet aspect-là est essentiel à garder à l’esprit au moment où il faudra passer à la réalisation.
 Historiquement, les premier PLC se résumaient à des « bornier intelligents » pour le model physique, alors que des « ordinateurs » pilotaient le model procédural. Avec la « montée en puissance » des PLC cette barrière a tendance à s’estomper. C’est pour cette raison que le model S88, relativement ancien garde sa modernité. Ce n’est qu’avec une délimitation claire au niveau du logiciel du PLC que l’on conservera, voir améliorera la modularité d’une unité de production.
 
+<div align="center">
  <figure>
   <img src="./img/S88 Model overview.png"
      alt="Image lost: S88 Model overview.png">
   <figcaption>S88 Model overview</figcaption>
 </figure>
+</div>
 
 ##	The Physical Model
 De fait, le model physique est la base du concept ISA-88.
@@ -165,11 +171,13 @@ De fait, le model physique est la base du concept ISA-88.
 Les équipements sont modélisés à l'aide du modèle physique. Ce modèle a une hiérarchie de sept niveaux. Il donne un aperçu des équipements disponibles dans l'entreprise. Sur la base de cette vue d'ensemble, les gens peuvent définir les possibilités d'une installation.
 Les trois niveaux les plus élevés, Entreprise, Site et Area sont importants pour l'administration, mais moins importants pour la conception d'une installation de production. Plus de détails sur ces niveaux peuvent être trouvés dans la norme S95.
 
+<div align="center">
  <figure>
   <img src="./img/S88 Physical Model.png"
      alt="Image lost: S88 Physical Model.png">
   <figcaption>S88 Physical Model</figcaption>
 </figure>
+</div>
 
 Les quatre niveaux les plus bas, Process Cell, Unit, Equipement Module et Control Module sont importants pour l'installation de production. Chaque composant physique d'un contrôle automatisé doit correspondre à l'un de ces niveaux.
 
@@ -180,10 +188,11 @@ La réalité est plus complexe, mais cette définition suffit pour le cours d’
 Note
 La différence entre le modèle physique d’une unité de production orientée « S88-Bach » et une ligne d’assemblage ou de « packaging » se situe au niveau de la désignation. Fondamentalement, le principe reste le même.
 
+
 |S88 Line Hierarchy|Packaging Line Hierarchy|
 |-----------|--------------|
 |![](./img/S88%20Line%20Hierarchy.png)|![](./img/Packaging%20Line%20Hierarchy.png)|
-   
+
 
 ###	Unit
 Le terme « Unit » est plus ou moins abstrait en ce qui concerne le ou les équipements, « Equipment Module » qui lui sont associés. L'unité peut réaliser des activités qui apportent une valeur ajoutée au produit. En d'autres termes, une unité est un outil de fabrication associé (ou non) à l'instrumentation et aux équipements associés.
@@ -196,11 +205,13 @@ Une unité contient un certain nombre de modules d'équipement, « Equipment Mod
 #### Small Container Filling Machine for Endless Liner
 Exemple d'une unité de remplissage de container de l'entreprise [Burgener AG à Viège](https://www.burgener-ag.ch). Une manière simple de définir une unité, ou machine, consiste en la présence d'un PLC, Programmable Logic Computer et d'un HMI, Human Machine Interface.
 
+<div align="center">
  <figure>
   <img src="./img/Small Container Filling Machine for Endless Liner.png"
      alt="Image lost: Small Container Filling Machine for Endless Liner.png">
   <figcaption>Small Container Filling Machine for Endless Liner, Souce: www.burgener-ag.ch</figcaption>
 </figure>
+</div>
 
 ###	Equipment Module
 La norme S88 définit un module d'équipement comme « un groupe fonctionnel d'équipement qui peut effectuer un nombre fini d'activités de traitement mineures spécifiques ». En d'autres termes, les modules d'équipement regroupent des dispositifs physiques pour exécuter une ou plusieurs fonctions spécifiques. Un module d'équipement peut être constitué de modules de commande ou d'autres modules d'équipement.
@@ -227,11 +238,13 @@ L’instrumentation peut être utilisée par plusieurs modules de contrôle, par
 
 #### Exemple: a Unit Vertical Filler
 
+<div align="center">
 <figure>
   <img src="./img/Unit Vertical Filler.png"
      alt="Image lost: Unit Vertical Filler.png">
   <figcaption>Unit Vertical Filler</figcaption>
 </figure>
+</div>
 
 
 ###	Equipment or control module ?
@@ -248,17 +261,21 @@ Si cet notion de Device n'existe pas dans le language ISA-88. elle peut être ut
 
 ### Un exemple de modélisation d'une unité représentée par son schéma P&ID.
 
+<div align="center">
 <figure>
   <img src="./img/Example of P&ID Diagram.png"
      alt="Image lost: Example of P&ID Diagram.png">
   <figcaption>Exemple de diagramme P&ID</figcaption>
 </figure>
+</div>
 
+<div align="center">
 <figure>
   <img src="./img/SysML version of P&ID Reactor (partial).png"
      alt="Image lost: SysML version of P&ID Reactor (partial).png">
   <figcaption>SysML version of P&ID Reactor (partial)</figcaption>
 </figure>
+</div>
 
 C'est ce type de décomposition qu'il doit être possible de dessiner en automatisation de base.
 
@@ -268,11 +285,13 @@ Le contrôle procédural ordonne aux actions orientées équipement de se dérou
 
 Le contrôle procédural est composé d'éléments procéduraux qui sont combinés de manière hiérarchique pour accomplir la tâche d'un processus complet tel que défini par le modèle de processus. La hiérarchie des éléments procéduraux identifiés et nommés comprend des procédures, des procédures unitaires, des opérations et des phases.
 
+<div align="center">
  <figure>
   <img src="./img/S88 Procedural Model.png"
      alt="Image lost: S88 Procedural Model.png">
   <figcaption>S88 Procedural Model</figcaption>
 </figure>
+</div>
 
 ###	Procedure
 La procédure est le niveau le plus élevé de la hiérarchie et définit la stratégie pour effectuer une action de traitement majeure telle que la création d'un lot. Il est défini en termes d'un ensemble ordonné de procédures unitaires.
@@ -333,11 +352,13 @@ La nuance n’est pas forcément aisée à comprendre. Cela signifie qu’au sei
 
 ##	The Process Model
  
+<div align="center">
 <figure>
   <img src="./img/S88 Process Model.png"
      alt="Image lost: S88 Process Model.png">
   <figcaption>S88 Process Model</figcaption>
 </figure>
+</div>
 
 Pour la définition du Process, voir ci-dessus, Classes de processus industriels.
 
@@ -366,11 +387,13 @@ Chaque opération de processus peut être subdivisée en un ensemble ordonné d'
 - Weld part X21
 - Move plate to next station
 
+<div align="center">
 <figure>
   <img src="./img/S88 Relations.png"
      alt="Image lost: S88 Relations.png">
   <figcaption>S88 Relations</figcaption>
 </figure>
+</div>
 
 ##	« Receipt », les recettes
 Les recettes sont un des concepts de base du model S88. Une des bases de sa modularité.
