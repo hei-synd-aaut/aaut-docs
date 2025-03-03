@@ -8,11 +8,11 @@
 
 [Cédric Lenoir](mailto:cedric.lenoir@hevs.ch)
 
-# AAut Module 05 /  IEC-61131-3 les outils OOP
+# AAut Module 04 Overview /  IEC-61131-3 les outils OOP
 
 ## Sommaire
 
-- [AAut Module 05 /  IEC-61131-3 les outils OOP](#aaut-module-05---iec-61131-3-les-outils-oop)
+- [AAut Module 04 Overview /  IEC-61131-3 les outils OOP](#aaut-module-04-overview---iec-61131-3-les-outils-oop)
   - [Sommaire](#sommaire)
   - [Préambule](#préambule)
   - [Aperçu](#aperçu)

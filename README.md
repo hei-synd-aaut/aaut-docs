@@ -19,3 +19,5 @@ Une introduction sur la spécification des processus pour l'automatisation, couv
 
 # AAut [MOD 03 S88 Process Model](/AAut_MOD_03_S88_Model/README.md)
 Ce module traite de la norme **ISA-88** pour la modélisation et la gestion des processus industriels, en particulier pour les systèmes de production par lots. Il explique les concepts clés tels que le **modèle physique**, le modèle procédural et les recettes, et fournit des exemples concrets de leur application. Le document aborde également les différences entre les **processus continus, discrets et par lots**, ainsi que l'importance de la normalisation pour l'interopérabilité des systèmes. Enfin, il mentionne la norme ISA-95 pour la gestion des ressources d'entreprise et propose des exercices pratiques pour appliquer les concepts appris.
+
+# AAut [Module 04, IEC 61131-3 OOP Tools](./AAut_MOD_04_IEC_OOP_TOOLS/)
