@@ -117,7 +117,8 @@
 -   Attention: peut augmenter la complexité du code, poser des problèmes de maintenance et de robustesse.
 -   OOP n'est pas qu'un problème de syntaxe, c'est aussi une méthode de travail qui peut se faire sans les extensions OOP du 61131-3.
 
-> A ma connaissance, au 18 février 2025, il n'existe pas d'autre implémentation de la norme IEC-61131-3 OOP que celle de [Codesys](https://www.codesys.com/) qui est un compiateur largement utilisé par de nombreux fournisseurs de solution PLC.
+> A ma connaissance, au 18 février 2025, il n'existe pas d'autre implémentation de la norme IEC-61131-3 OOP que celle de [Codesys](https://www.codesys.com/) qui est un compilateur largement utilisé par de nombreux fournisseurs de solution PLC.
+> > *Il semble que [BR-Automation, ABB Group](https://www.br-automation.com) ait présenté un produit en novembre 2024.*
 
 ## Ce qu'il faut savoir
 -   Les différents éléments de OOP 61131-3.
