@@ -66,30 +66,39 @@
   - [Extension ou écrasement d'éléments hérités](#extension-ou-écrasement-déléments-hérités)
   - [Use Cases pour l'héritage](#use-cases-pour-lhéritage)
     - [Utilisation inchangée](#utilisation-inchangée)
-      - [Exemple :](#exemple-2)
+      - [Exemple :](#exemple-)
         - [Bloc fonctionnel FB\_Base :](#bloc-fonctionnel-fb_base-)
         - [Method FB\_Base.ExecuteProcess:](#method-fb_baseexecuteprocess)
-        - [Function block FB\_Sub:](#function-block-fb_sub)
-        - [Method FB\_Sub.ExecuteProcess:](#method-fb_subexecuteprocess)
+        - [Function block FB\_Extended:](#function-block-fb_extended)
+        - [Method FB\_Extended.ExecuteProcess:](#method-fb_extendedexecuteprocess)
     - [Overwrite](#overwrite)
-      - [Exemple :](#exemple-3)
-        - [Bloc fonctionnel FB\_Base :](#bloc-fonctionnel-fb_base)
+      - [Exemple :](#exemple--1)
+        - [Bloc fonctionnel FB\_Base :](#bloc-fonctionnel-fb_base--1)
         - [Method FB\_Base.ExecuteProcess:](#method-fb_baseexecuteprocess-1)
-        - [Function block FB\_Sub:](#function-block-fb_sub-1)
-        - [Method FB\_Sub.ExecuteProcess:](#method-fb_subexecuteprocess-1)
+        - [Function block FB\_Extended:](#function-block-fb_extended-1)
+        - [Method FB\_Extended.ExecuteProcess:](#method-fb_extendedexecuteprocess-1)
     - [Extension](#extension)
-      - [Exemple :](#exemple-)
+      - [Exemple :](#exemple--2)
         - [Function block FB\_Base:](#function-block-fb_base)
         - [Method FB\_Base.ExecuteProcess:](#method-fb_baseexecuteprocess-2)
-        - [Function block FB\_Sub:](#function-block-fb_sub-2)
-        - [Method FB\_Sub.ExecuteProcess:](#method-fb_subexecuteprocess-2)
+        - [Function block FB\_Extended:](#function-block-fb_extended-2)
+        - [Method FB\_Extended.ExecuteProcess:](#method-fb_extendedexecuteprocess-2)
 - [Abstract](#abstract-2)
   - [Application de l'abstraction](#application-de-labstraction)
   - [Règles d'utilisation du mot-clé ABSTRACT](#règles-dutilisation-du-mot-clé-abstract)
-    - [Exemple](#exemple-4)
+    - [Exemple](#exemple-2)
       - [Abstract basic class:](#abstract-basic-class)
       - [Non-abstract sub-class:](#non-abstract-sub-class)
-  - [Différences entre un FB abstrait et une interface](#différences-entre-un-fb-abstrait-et-une-interface)
+  - [Différences entre un FB abstrait, ``Abstract`` et une interface](#différences-entre-un-fb-abstrait-abstract-et-une-interface)
+- [Super^](#super)
+      - [Exemple](#exemple-3)
+    - [Using the SUPER and THIS pointers:](#using-the-super-and-this-pointers)
+      - [Function block FB\_Base:](#function-block-fb_base-1)
+      - [Method FB\_Base.M\_Count:](#method-fb_basem_count)
+      - [Function Block FB\_BaseExtended](#function-block-fb_baseextended)
+      - [Method FB\_BaseExtended.M\_Count:](#method-fb_baseextendedm_count)
+      - [Code of Function Block FB\_BaseExtended](#code-of-function-block-fb_baseextended)
+- [THIS^](#this)
 - [Référence principale](#référence-principale)
 - [Autres références](#autres-références)
 
@@ -315,12 +324,16 @@ classDiagram
 - **Encapsulation** : Regroupement des données et des méthodes au sein des FB, avec contrôle d'accès.
 - **Abstract Function Block** : FB qui ne peut pas être instancié directement et sert de modèle pour d'autres FB.
 - **Dynamic Memory Allocation** : Allocation dynamique de mémoire, bien que limitée dans IEC 61131-3.
+- **SUPER^** : ``SUPER`` est une variable spéciale utilisée pour la programmation orientée objet. ``SUPER`` est le pointeur d'un bloc fonctionnel vers l'instance de bloc fonctionnel de base à partir de laquelle le bloc fonctionnel a été créé. 
 
 Ces mots clés permettent de structurer et de gérer le code de manière modulaire et réutilisable dans les systèmes d'automatisation industrielle.
 
 # Détails des extensions OOP du 61131-3
 
 > extraits de la [documentation en ligne de Beckhoff](https://infosys.beckhoff.com). Existe en allemand et en anglais.
+
+---
+
 
 ## Object Method
 Les méthodes sont une extension de la norme IEC 61131-3 et un moyen de programmation orientée objet utilisé pour l'encapsulation de données. Une méthode contient une déclaration et une implémentation. Cependant, contrairement à une fonction, une méthode n'est pas un bloc de programmation indépendant, mais est subordonnée à un bloc de fonction ou à un programme. Une méthode peut accéder à toutes les variables valides du bloc de programmation de niveau supérieur.
@@ -463,6 +476,9 @@ En plus de ces modificateurs d'accès, vous pouvez ajouter manuellement le modif
 #### Abstract
 Indique que la méthode n'a pas d'implémentation et que l'implémentation est fournie par le FB dérivé.
 
+---
+
+
 ## Object Property
 ### Implementation sample
 Declaration of the function block FB_Sample
@@ -527,6 +543,8 @@ Indique que la méthode n'a pas d'implémentation et que l'implémentation est f
 
 > L'objet **Property**, se retrouve à la base dans les languages **Delphi** et **C#**. A noter que le développement de ces deux languages a été dirigé par la même personne: Anders Hejlsberg.
 > > ``Property`` n'est que moyennement utile en 61131-3 puisque nous disposons déjà des notions de ``VAR_INPUT`` et ``VAR_OUTPUT``. Par contre property est indispensable à la création d'interfaces, ou par extension de Function Blocks ``Abstract``.
+
+---
 
 ## Object Interface
 
@@ -663,6 +681,10 @@ END_VAR
 sResultA := F_DeliverType(iSample := fbA); // call with instance of type FB_A
 sResultB := F_DeliverType(iSample := fbB); // call with instance of type FB_B
 ```
+
+---
+
+
 # Inheritance
 Nous avions déjà partiellement vu l'héritage pour une structure lors du cours du 4ème semestre. Nous allons étendre ce concept.
 
@@ -707,13 +729,13 @@ En IEC 61131-3, le terme **bloc fonctionnel** peut être utilisé de manière in
 
 ### Nombre d'extensions pour chaque bloc fonctionnel de base
 
-Le nombre d'extensions pour chaque bloc fonctionnel de base est illimité. Un bloc fonctionnel peut donc être étendu et personnalisé avec plusieurs autres blocs fonctionnels.
+Le nombre d'extensions pour chaque bloc fonctionnel de base est **illimité**. Un bloc fonctionnel peut être étendu et personnalisé avec plusieurs autres blocs fonctionnels.
 
 Possible:
 ```iecst
-FUNCTION_BLOCK FB_Sub EXTENDS FB_Base
-FUNCTION_BLOCK FB_SubSub EXTENDS FB_Sub
-FUNCTION_BLOCK FB_SubSubSub EXTENDS FB_SubSub
+FUNCTION_BLOCK FB_Extended EXTENDS FB_Base
+FUNCTION_BLOCK FB_ExtendedExtended EXTENDS FB_Extended
+FUNCTION_BLOCK FB_ExtendedExtendedExtended EXTENDS FB_ExtendedExtended
 ...
 ```
 
@@ -725,7 +747,7 @@ Exception : un bloc fonctionnel peut implémenter plusieurs interfaces et une i
 
 **Not possible**
 ```iecst
-FUNCTION_BLOCK FB_Sub EXTENDS FB_Base1, FB_Base2
+FUNCTION_BLOCK FB_Extended EXTENDS FB_Base1, FB_Base2
 ```
 **Possible**
 ```iecst
@@ -733,7 +755,7 @@ FUNCTION_BLOCK FB_Sample IMPLEMENTS I_Sample1, I_Sample2
 ```
 **Possible**
 ```iecst
-INTERFACE I_Sub EXTENDS I_Base_1, I_Base_2 
+INTERFACE I_Extended EXTENDS I_Base_1, I_Base_2 
 ```
 
 ## Principe d'héritage
@@ -790,15 +812,15 @@ Ces trois cas d'utilisation sont expliqués ci-dessous à l'aide de l'exemple de
 
 ### Utilisation inchangée
 
-- Exigence : la sous-classe nécessite exactement les mêmes implémentations que celles déjà programmées dans la méthode de la classe de base.
-- Implémentation : dans ce cas, la méthode n'est pas créée pour la sous-classe.
-- Conséquence : la sous-classe utilise l'implémentation de méthode de la classe de base.
+- Exigence : la sous-classe nécessite exactement les mêmes implémentations que celles déjà programmées dans la méthode de la classe de base.
+- Implémentation : dans ce cas, la méthode n'est pas créée pour la sous-classe.
+- Conséquence : la sous-classe utilise l'implémentation de méthode de la classe de base.
 
 
-#### Exemple :
+#### Exemple :
   - La classe de base doit contrôler un axe pour exécuter un processus.
   - La même exigence s'applique à la sous-classe : la sous-classe doit également contrôler l'axe.
-  - Dans ce cas, la méthode ``ExecuteProcess`` n'est pas créée pour la sous-classe. Si la méthode est appelée pour une instance de la sous-classe ``fbSub.ExecuteProcess (...)``, l'implémentation de base de la méthode est automatiquement appelée ``FB_Base.ExecuteProcess``. La sous-classe bénéficie ainsi des implémentations déjà implémentées dans la classe de base.
+  - Dans ce cas, la méthode ``ExecuteProcess`` n'est pas créée pour la sous-classe. Si la méthode est appelée pour une instance de la sous-classe ``fbExtended.ExecuteProcess (...)``, l'implémentation de base de la méthode est automatiquement appelée ``FB_Base.ExecuteProcess``. La sous-classe bénéficie ainsi des implémentations déjà implémentées dans la classe de base.
 
 <div align="center">
 
@@ -814,11 +836,11 @@ classDiagram
         +BOOL Error
     }
 
-    class FB_Sub {
+    class FB_Extended {
     }
 
 FB_Base *-- FB_Axis
-FB_Base <|-- FB_Sub
+FB_Base <|-- FB_Extended
 
 ```
 
@@ -846,26 +868,26 @@ fbAxis.Execute(bExecute := bExecuteProcess);
 // Setting the return value of this method as inverted error signal of the axis module
 ExecuteProcess := NOT fbAxis.Error;
 ```
-##### Function block FB_Sub:
+##### Function block FB_Extended:
 ```ìecst
-FUNCTION_BLOCK FB_Sub EXTENDS FB_Base
+FUNCTION_BLOCK FB_Extended EXTENDS FB_Base
 VAR
 END_VAR
 ```
 
-##### Method FB_Sub.ExecuteProcess:
+##### Method FB_Extended.ExecuteProcess:
 
-> *n'existe pas, FB_Sub utilisera la méthode de FB_Base*
+> *n'existe pas, FB_Extended utilisera la méthode de FB_Base*
 
 ---
 
 ### Overwrite
 
-- Condition requise : par rapport à la classe de base, la sous-classe requiert des instructions complètement différentes dans la méthode.
-- Implémentation : dans ce cas, la méthode de la sous-classe est créée et remplie avec d'autres instructions dans la partie implémentation. Par rapport à la méthode de la classe de base, seule la partie implémentation diffère – la partie déclaration doit être identique.
-- Conséquence : la sous-classe utilise sa propre implémentation de la méthode. La sous-classe a écrasé la méthode de la classe de base.
+- Condition requise : par rapport à la classe de base, la sous-classe requiert des instructions complètement différentes dans la méthode.
+- Implémentation : dans ce cas, la méthode de la sous-classe est créée et remplie avec d'autres instructions dans la partie implémentation. Par rapport à la méthode de la classe de base, seule la partie implémentation diffère – la partie déclaration doit être identique.
+- Conséquence : la sous-classe utilise sa propre implémentation de la méthode. La sous-classe a écrasé la méthode de la classe de base.
 
-#### Exemple :
+#### Exemple :
   - La classe de base doit contrôler un axe pour exécuter un processus.
   - En revanche, la sous-classe ne doit pas contrôler un axe mais un cylindre pendant l'exécution du processus.
   - Dans ce cas, la méthode ``ExecuteProcess`` est créée pour la sous-classe. La partie implémentation de la méthode est programmée avec les instructions requises, qui ont un effet complètement différent par rapport à l'implémentation de base.
@@ -879,19 +901,19 @@ classDiagram
         +ExecuteProcess(bExecuteProcess : BOOL) BOOL
     }
     
-    class FB_Sub {
+    class FB_Extended {
         fbCylinder : FB_Cylinder
         +ExecuteProcess(bExecuteProcess : BOOL) BOOL
     }
 
-    FB_Base <|-- FB_Sub
+    FB_Base <|-- FB_Extended
 
-note for FB_Sub "La nouvelle méthode de FB_Sub écrase celle de FB_Base"
+note for FB_Extended "La nouvelle méthode de FB_Extended écrase celle de FB_Base"
 note for FB_Base "Il n'est pas obligatoire de représenter tous les blocs, ici FB_Axis"  
 ```
 </div>
 
-##### Bloc fonctionnel FB_Base :
+##### Bloc fonctionnel FB_Base :
 ```iecst
 FUNCTION_BLOCK FB_Base
 VAR
@@ -915,15 +937,15 @@ fbAxis.Execute(bExecute := bExecuteProcess);
 ExecuteProcess := NOT fbAxis.Error;
 ```
 
-##### Function block FB_Sub:
+##### Function block FB_Extended:
 ```iecst
-FUNCTION_BLOCK FB_Sub EXTENDS FB_Base
+FUNCTION_BLOCK FB_Extended EXTENDS FB_Base
 VAR
     fbCylinder  : FB_Cylinder;
 END_VAR
 ```
 
-##### Method FB_Sub.ExecuteProcess:
+##### Method FB_Extended.ExecuteProcess:
 ```iecst
 METHOD ExecuteProcess : BOOL
 VAR_INPUT
@@ -959,14 +981,14 @@ classDiagram
         +ExecuteProcess(bExecuteProcess : BOOL) BOOL
     }
     
-    class FB_Sub {
+    class FB_Extended {
         fbCylinder : FB_Cylinder
         +ExecuteProcess(bExecuteProcess : BOOL) BOOL
     }
 
-    FB_Base <|-- FB_Sub
+    FB_Base <|-- FB_Extended
 
-note for FB_Sub "Le diagramme est le même que dans le cas précédent,
+note for FB_Extended "Le diagramme est le même que dans le cas précédent,
 la structure est la même, mais le comportement change"  
 ```
 
@@ -995,15 +1017,15 @@ ExecuteProcess := NOT fbAxis.Error;
 ```
 
 
-##### Function block FB_Sub:
+##### Function block FB_Extended:
 ```iecst
-FUNCTION_BLOCK FB_Sub EXTENDS FB_Base
+FUNCTION_BLOCK FB_Extended EXTENDS FB_Base
 VAR
     fbCylinder  : FB_Cylinder;
 END_VAR
 ```
 
-##### Method FB_Sub.ExecuteProcess:
+##### Method FB_Extended.ExecuteProcess:
 ```iecst
 METHOD ExecuteProcess : BOOL
 VAR_INPUT
@@ -1018,6 +1040,7 @@ fbCylinder.Execute(bExecute := bExecuteProcess);
 // Setting the return value of this method as inverted error signal of the cylinder module PLUS calling the base method and analyzing its return value 
 ExecuteProcess := NOT fbCylinder.Error AND SUPER^.ExecuteProcess(bExecuteProcess := bExecuteProcess);
 ```
+
 ---
 
 # Abstract
@@ -1094,7 +1117,7 @@ Les classes non abstraites dérivées de la classe de base sont implémentées p
 METHOD Execute
 ```
 
-## Différences entre un FB abstrait et une interface
+## Différences entre un FB abstrait, ``Abstract`` et une interface
 
 |                            |Interface	|Abstract FB|
 |----------------------------|----------|-----------|
@@ -1106,6 +1129,93 @@ METHOD Execute
 |applicable with array	|+	|only via POINTER|
 
 Source: [Stefan Henneken](https://stefanhenneken.net/2020/12/13/iec-61131-3-abstract-fb-vs-interface/)
+
+# Super^
+``SUPER`` est une variable spéciale utilisée pour la programmation orientée objet.
+
+``SUPER`` est le pointeur d'un bloc fonctionnel vers l'instance de bloc fonctionnel de base à partir de laquelle le bloc fonctionnel a été créé. Le pointeur SUPER permet ainsi également d'accéder à l'implémentation des méthodes du bloc fonctionnel de base (classe de base). Un pointeur ``SUPER`` est automatiquement disponible pour chaque bloc fonctionnel.
+
+Vous ne pouvez utiliser ``SUPER^`` **que dans les implémentations de méthodes et les implémentations de blocs fonctionnels associés**.
+
+#### Exemple
+
+```iecst
+// Call of FB-Code of the base class
+SUPER^();
+// Call of method M_ExtendedAlgo that is implemented in base class
+SUPER^.M_ExtendedAlgo();       
+```
+
+### Using the SUPER and THIS pointers:
+
+#### Function block FB_Base:
+```iecst
+FUNCTION_BLOCK FB_Base
+VAR_OUTPUT
+    iCounter : INT;
+END_VAR
+```
+
+#### Method FB_Base.M_Count:
+
+```ìecst
+METHOD M_Count : BOOL
+```
+
+```ìecst
+iCounter := iCounter + 1;
+```
+#### Function Block FB_BaseExtended
+
+```iecst
+FUNCTION_BLOCK FB_BaseExtended EXTENDS FB_Base
+VAR_OUTPUT
+    iExtendedCounter: INT;
+END_VAR
+```
+
+#### Method FB_BaseExtended.M_Count:
+
+```ìecst
+METHOD M_Count : BOOL
+```
+
+```ìecst
+iExtendedCounter := iExtendedCounter - 1;
+```
+
+#### Code of Function Block FB_BaseExtended
+
+```iecst
+SUPER^.M_Count();
+THIS^.M_Count();
+```
+
+> Result ?
+
+# THIS^
+``THIS^`` est une variable spéciale utilisée pour la programmation orientée objet.
+
+``THIS^`` est le pointeur d'un bloc de fonction vers sa propre instance de bloc de fonction. Un pointeur ``THIS^`` est automatiquement disponible pour chaque bloc de fonction.
+
+
+
+> Voir dans [le code ci-dessus](#code-of-function-block-fb_baseextended).
+
+En bref: ``SUPER^`` pointe sur le Function Block de base, alors que ``THIS^`` pointe sur le Function Block en cours.
+
+<strong style="color:red;">Attention !</strong>. **SUPER^** et **THIS^** sont des pointeurs, il y a un gros risque de décallage d'une adresse lors d'une opération de Online Change, ce qui peut impliquer un crash du système, c'est notamment arrivé lors de l'écriture des exemples de ce cours donc:
+- Toujours recharger le programme complet avant de quitter une machine.
+- C'est une des raison qui font que je ne suis pas un chaud partisan de l'héritage, en raison des problèmes de robustesse que peuvent représenter les pointeurs.
+- Je considère la robustesse d'un logiciel IEC-61131 comme prioritaire par rapport à la souplesse que pourrait apporter l'héritage.
+
+<div align="center">
+ <figure>
+  <img src="./img/PointerWithOnlineChange.png"
+     alt="Image lost: PointerWithOnlineChange.png">
+  <figcaption>Pointer with Online Change</figcaption>
+</figure>
+</div>
 
 
 # Référence principale
