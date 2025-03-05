@@ -50,11 +50,15 @@ classDiagram
 
   class I_MeasureDistance{
       + Enable : BOOL
-      + InOperation : BOOL
+      + InOp : BOOL
       + Error  : BOOL
       GetDistance() 
   }
   <<interface>> I_MeasureDistance
+
+  note for I_MeasureDistance "Note Keyword **interface**"
+  note for I_MeasureDistance "Enable, InOp & Error can only be Properties,
+  an interface **has no variables**"
 
   class FB_OptoSensor {
     -register : ARRAY [1..3] OF BYTE
@@ -64,8 +68,8 @@ classDiagram
     -register : ARRAY [1..4] OF BYTE
   }
 
-I_MeasureDistance <|-- FB_OptoSensor
-I_MeasureDistance <|-- FB_SoundSensor
+I_MeasureDistance <|.. FB_OptoSensor
+I_MeasureDistance <|.. FB_SoundSensor
 
 ```
 </div>
@@ -82,7 +86,7 @@ classDiagram
 
   class I_MeasureDistance{
       + Enable : BOOL
-      + InOperation : BOOL
+      + InOp : BOOL
       + Error  : BOOL
       GetDistance() 
       GetAlarm()
@@ -124,12 +128,12 @@ classDiagram
   class FB_OtherSensor {
   }
 
-I_MeasureDistance <|-- FB_OptoSensor
-I_MeasureDistance <|-- FB_SoundSensor
+I_MeasureDistance <|.. FB_OptoSensor
+I_MeasureDistance <|.. FB_SoundSensor
 
-I_Alarm <|-- FB_OptoSensor
-I_Alarm <|-- FB_SoundSensor
-I_Alarm <|-- FB_OtherSensor
+I_Alarm <|.. FB_OptoSensor
+I_Alarm <|.. FB_SoundSensor
+I_Alarm <|.. FB_OtherSensor
 
 ```
 </div>
