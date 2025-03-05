@@ -93,11 +93,13 @@
 - [Super^](#super)
       - [Exemple](#exemple-3)
     - [Using the SUPER and THIS pointers:](#using-the-super-and-this-pointers)
-      - [Function block FB\_Base:](#function-block-fb_base-1)
-      - [Method FB\_Base.M\_Count:](#method-fb_basem_count)
-      - [Function Block FB\_BaseExtended](#function-block-fb_baseextended)
-      - [Method FB\_BaseExtended.M\_Count:](#method-fb_baseextendedm_count)
-      - [Code of Function Block FB\_BaseExtended](#code-of-function-block-fb_baseextended)
+      - [Function block FB\_Count:](#function-block-fb_count)
+      - [Method FB\_Count.M\_Count:](#method-fb_countm_count)
+      - [Function Block FB\_CountExtended](#function-block-fb_countextended)
+      - [Method FB\_CountExtended.M\_Count:](#method-fb_countextendedm_count)
+      - [Code of Function Block FB\_CountExtended](#code-of-function-block-fb_countextended)
+      - [PRG\_Count Header](#prg_count-header)
+      - [PRG\_Count Core](#prg_count-core)
 - [THIS^](#this)
 - [Référence principale](#référence-principale)
 - [Autres références](#autres-références)
@@ -1148,15 +1150,36 @@ SUPER^.M_ExtendedAlgo();
 
 ### Using the SUPER and THIS pointers:
 
-#### Function block FB_Base:
+<div align="center">
+
+```mermaid
+classDiagram
+    class FB_Count {
+        +INT iCounter
+        M_Count()
+    }
+
+    class FB_CountExtended {
+        +INT iExtendedCounter
+        Execute()
+        M_Count()
+    }
+
+    FB_Count <|-- FB_CountExtended
+
+```
+
+</div>
+
+#### Function block FB_Count:
 ```iecst
-FUNCTION_BLOCK FB_Base
+FUNCTION_BLOCK FB_Count
 VAR_OUTPUT
     iCounter : INT;
 END_VAR
 ```
 
-#### Method FB_Base.M_Count:
+#### Method FB_Count.M_Count:
 
 ```ìecst
 METHOD M_Count : BOOL
@@ -1165,16 +1188,16 @@ METHOD M_Count : BOOL
 ```ìecst
 iCounter := iCounter + 1;
 ```
-#### Function Block FB_BaseExtended
+#### Function Block FB_CountExtended
 
 ```iecst
-FUNCTION_BLOCK FB_BaseExtended EXTENDS FB_Base
+FUNCTION_BLOCK FB_CountExtended EXTENDS FB_Count
 VAR_OUTPUT
     iExtendedCounter: INT;
 END_VAR
 ```
 
-#### Method FB_BaseExtended.M_Count:
+#### Method FB_CountExtended.M_Count:
 
 ```ìecst
 METHOD M_Count : BOOL
@@ -1184,14 +1207,34 @@ METHOD M_Count : BOOL
 iExtendedCounter := iExtendedCounter - 1;
 ```
 
-#### Code of Function Block FB_BaseExtended
+#### Code of Function Block FB_CountExtended
 
 ```iecst
 SUPER^.M_Count();
 THIS^.M_Count();
 ```
 
-> Result ?
+> Result ? Que fait le programme ci-dessous ?
+
+#### PRG_Count Header
+```iecst
+PROGRAM PRG_Count
+VAR
+	fbCountExtended	: FB_CountExtended;
+	
+	iTestOne		: INT;
+	iTestTwo		: INT;
+END_VAR
+```
+
+#### PRG_Count Core
+```iecst
+fbCountExtended();
+
+iTestOne := fbCountExtended.iCounter;
+iTestTwo := fbCountExtended.iExtendedCounter;
+```
+
 
 # THIS^
 ``THIS^`` est une variable spéciale utilisée pour la programmation orientée objet.

@@ -1,0 +1,159 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<project xmlns="http://www.plcopen.org/xml/tc6_0200">
+  <fileHeader companyName="Rexroth" productName="ctrlX PLC Engineering" productVersion="ctrlX PLC 1.20.12" creationDateTime="2025-03-04T16:25:23.2374387" />
+  <contentHeader name="TestUml.project" modificationDateTime="2025-03-04T16:13:03.9525114">
+    <coordinateInfo>
+      <fbd>
+        <scaling x="1" y="1" />
+      </fbd>
+      <ld>
+        <scaling x="1" y="1" />
+      </ld>
+      <sfc>
+        <scaling x="1" y="1" />
+      </sfc>
+    </coordinateInfo>
+    <addData>
+      <data name="http://www.3s-software.com/plcopenxml/projectinformation" handleUnknown="implementation">
+        <ProjectInformation />
+      </data>
+    </addData>
+  </contentHeader>
+  <types>
+    <dataTypes />
+    <pous>
+      <pou name="FB_Count" pouType="functionBlock">
+        <interface>
+          <outputVars>
+            <variable name="iCounter">
+              <type>
+                <INT />
+              </type>
+            </variable>
+          </outputVars>
+        </interface>
+        <body>
+          <ST>
+            <xhtml xmlns="http://www.w3.org/1999/xhtml" />
+          </ST>
+        </body>
+        <addData>
+          <data name="http://www.3s-software.com/plcopenxml/method" handleUnknown="implementation">
+            <Method name="M_Count" ObjectId="3687c192-0a40-4466-8c81-664f0c061f4a">
+              <interface>
+                <returnType>
+                  <BOOL />
+                </returnType>
+              </interface>
+              <body>
+                <ST>
+                  <xhtml xmlns="http://www.w3.org/1999/xhtml">iCounter := iCounter + 1;</xhtml>
+                </ST>
+              </body>
+              <addData />
+            </Method>
+          </data>
+          <data name="http://www.3s-software.com/plcopenxml/objectid" handleUnknown="discard">
+            <ObjectId>97830577-6d38-4a6d-84ed-eed510eb1a99</ObjectId>
+          </data>
+        </addData>
+      </pou>
+      <pou name="FB_CountExtended" pouType="functionBlock">
+        <interface>
+          <outputVars>
+            <variable name="iExtendedCounter">
+              <type>
+                <INT />
+              </type>
+            </variable>
+          </outputVars>
+          <addData>
+            <data name="http://www.3s-software.com/plcopenxml/pouinheritance" handleUnknown="implementation">
+              <Inheritance>
+                <Extends>FB_Count</Extends>
+              </Inheritance>
+            </data>
+          </addData>
+        </interface>
+        <body>
+          <ST>
+            <xhtml xmlns="http://www.w3.org/1999/xhtml">SUPER^.M_Count();
+THIS^.M_Count();</xhtml>
+          </ST>
+        </body>
+        <addData>
+          <data name="http://www.3s-software.com/plcopenxml/method" handleUnknown="implementation">
+            <Method name="M_Count" ObjectId="caadcb27-6a33-4724-8a34-c2fe692bad39">
+              <interface>
+                <returnType>
+                  <BOOL />
+                </returnType>
+              </interface>
+              <body>
+                <ST>
+                  <xhtml xmlns="http://www.w3.org/1999/xhtml">iExtendedCounter := iExtendedCounter - 1;</xhtml>
+                </ST>
+              </body>
+              <addData />
+            </Method>
+          </data>
+          <data name="http://www.3s-software.com/plcopenxml/objectid" handleUnknown="discard">
+            <ObjectId>56cab17e-05ea-49a0-8185-32b2a1e7ef2e</ObjectId>
+          </data>
+        </addData>
+      </pou>
+      <pou name="PRG_Count" pouType="program">
+        <interface>
+          <localVars>
+            <variable name="fbCountExtended">
+              <type>
+                <derived name="FB_CountExtended" />
+              </type>
+            </variable>
+            <variable name="iTestOne">
+              <type>
+                <INT />
+              </type>
+            </variable>
+            <variable name="iTestTwo">
+              <type>
+                <INT />
+              </type>
+            </variable>
+          </localVars>
+        </interface>
+        <body>
+          <ST>
+            <xhtml xmlns="http://www.w3.org/1999/xhtml">fbCountExtended();
+
+iTestOne := fbCountExtended.iCounter;
+iTestTwo := fbCountExtended.iExtendedCounter;</xhtml>
+          </ST>
+        </body>
+        <addData>
+          <data name="http://www.3s-software.com/plcopenxml/objectid" handleUnknown="discard">
+            <ObjectId>6dfaaab8-e5d1-4f94-aa8c-5af22c6b0499</ObjectId>
+          </data>
+        </addData>
+      </pou>
+    </pous>
+  </types>
+  <instances>
+    <configurations />
+  </instances>
+  <addData>
+    <data name="http://www.3s-software.com/plcopenxml/projectstructure" handleUnknown="discard">
+      <ProjectStructure>
+        <Folder Name="PRG_Count">
+          <Object Name="FB_Count" ObjectId="97830577-6d38-4a6d-84ed-eed510eb1a99">
+            <Object Name="M_Count" ObjectId="3687c192-0a40-4466-8c81-664f0c061f4a" />
+          </Object>
+          <Object Name="FB_CountExtended" ObjectId="56cab17e-05ea-49a0-8185-32b2a1e7ef2e">
+            <Object Name="M_Count" ObjectId="caadcb27-6a33-4724-8a34-c2fe692bad39" />
+          </Object>
+          <Object Name="PRG_Count" ObjectId="6dfaaab8-e5d1-4f94-aa8c-5af22c6b0499" />
+        </Folder>
+      </ProjectStructure>
+    </data>
+  </addData>
+</project>

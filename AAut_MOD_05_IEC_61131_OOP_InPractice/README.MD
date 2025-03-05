@@ -133,4 +133,11 @@ I_Alarm <|-- FB_OtherSensor
 
 ```
 </div>
-# Un exemple d'héritage
+
+# Un exemple d'héritage simple
+Nous avons un exemple d'héritage pour expliquer les mots clés [THIS et SUPER dans le module précédent](../AAut_MOD_04_IEC_61131_OOP_TOOLS/README.md#using-the-super-and-this-pointers).
+
+# Un exemple d'héritage pas très heureux
+Le programme [PRG_Operation en annexe](PRG_Operation.md), fournit un exemple de Function Block dont l'héritage n'est pas très heureux.
+
+# Un cas particulier

@@ -48,8 +48,62 @@ stateDiagram-v2
         Done --> [*]
 ```
 
+## Structure du code
+```mermaid
+classDiagram
+    class PRG_Operation {
+        FB_BaseAlgo fbBaseAlgo
+        FB_BaseAlgoExtended fbBaseExtended
+        ST_TestAlgo stTestAlgo
+        DINT diResultBase
+        DINT diResultExtend
+        FB_UseFB_Base fbUseFB_Base_1
+        FB_UseFB_Base fbUseFB_Base_2
+    }
 
-## FB_Base Header
+    class FB_BaseAlgo {
+        BOOL Enable
+        DINT FirstValue
+        DINT SecondeValue
+        BOOL Add_1_2
+        BOOL Sub_1_2
+        BOOL Mul_1_2
+        BOOL Div_1_2
+        DINT Result
+        BOOL Error
+        BOOL Done
+        E_Operation eSelectOp
+        BOOL testZero
+    }
+
+    class FB_BaseAlgoExtended {
+        BOOL Square
+    }
+
+    class ST_TestAlgo {
+        BOOL Enable
+        DINT FirstValue
+        DINT SecondeValue
+        BOOL Add_1_2
+        BOOL Sub_1_2
+        BOOL Mul_1_2
+        BOOL Div_1_2
+    }
+
+    class FB_UseFB_Base {
+        FB_BaseAlgo fb
+        INT iMyLoop
+        DINT diMyResult
+    }
+
+    FB_BaseAlgoExtended --|> FB_BaseAlgo
+    PRG_Operation *-- FB_BaseAlgo
+    PRG_Operation *-- FB_BaseAlgoExtended
+    PRG_Operation *-- ST_TestAlgo
+    PRG_Operation *-- FB_UseFB_Base
+```
+
+## FB_BaseAlgo Header
 ```iecst
 FUNCTION_BLOCK FB_BaseAlgo
 VAR_INPUT
@@ -74,7 +128,7 @@ END_VAR
 
 ```
 
-## FB_Base Core
+## FB_BaseAlgo Core
 ```iecst
 IF Enable THEN
     IF Add_1_2 THEN
@@ -149,9 +203,9 @@ SUPER^();
 // On option is to rewrite the core of FB_BaseAlgo...
 ```
 
-<h3 align="center"><strong style="color:red;">Problème: le code de FB_Base ne convient pas à l'héritage!</strong></h3>
+<h3 align="center"><strong style="color:red;">Problème: le code de FB_BaseAlgo ne convient pas à l'héritage!</strong></h3>
 
-> Il faudrait réécrir le code la machine d'état, ou réécrir le code de base.
+> Il faudrait réécrire le code la machine d'état, ou réécrir le code de base.
 
 ## PRG_Operation, header
 ```ìecst
