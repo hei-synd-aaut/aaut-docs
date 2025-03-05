@@ -262,8 +262,8 @@ I_Motion : GetPosition() LREAL
   }
 note for FB_WithInOut "You can define as many interfaces that you need"
 
-I_Motion <|-- FB_WithInOut
-I_Alarm <|-- FB_WithInOut
+I_Motion <|.. FB_WithInOut
+I_Alarm <|.. FB_WithInOut
 
 ```
 </div>
