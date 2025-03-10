@@ -72,3 +72,54 @@ classDiagram
     <figcaption>UI Gripper</figcaption>
   </figure>
 </div>
+
+### IEC 61131-3 Interface
+
+#### I_Gripper
+```iecst
+INTERFACE I_Gripper
+```
+####  M_EnableDevice
+```iecst
+METHOD M_EnableDevice : BOOL
+VAR_INPUT
+	Enable	: BOOL;
+END_VAR
+```
+#### M_SetOpen
+```iecst
+METHOD M_SetOpen : BOOL
+VAR_INPUT
+	rLimitOpen_mm	: REAL;
+	udiTimeOut_ms	: UDINT;
+END_VAR
+```
+
+#### M_SetClose
+```iecst
+METHOD M_SetClose : BOOL
+VAR_INPUT
+	rLimitClosed_mm	: REAL;
+	udiTimeOut_ms	: UDINT;	
+END_VAR
+```
+
+#### M_GetStatus
+```iecst
+METHOD M_GetStatus : BOOL
+VAR_OUTPUT
+	// DL : bool8, JS : boolean
+	xInOp				: BOOL;
+	// DL : bool8, JS : boolean
+	xDone				: BOOL;
+	// DL : bool8, JS : boolean
+	xError				: BOOL;	
+	
+	// DL : bool8, JS : boolean
+	rIsPostion			: REAL;
+	// DL : bool8, JS : boolean
+	xIsOpen				: BOOL;
+	// DL : float, JS : number
+	xIsClosed			: BOOL;	
+END_VAR
+```
