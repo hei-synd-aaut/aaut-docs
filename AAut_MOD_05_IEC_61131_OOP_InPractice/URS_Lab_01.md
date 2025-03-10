@@ -123,3 +123,8 @@ VAR_OUTPUT
 	xIsClosed			: BOOL;	
 END_VAR
 ```
+#### Link with hardware
+```iecst
+hwSensor := GVL_Abox.uaAboxInterface.uaSchunk;
+hwActuator := GVL_Abox.uaAboxInterface.uaSchunkGripper;
+```
