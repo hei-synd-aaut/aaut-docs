@@ -37,7 +37,7 @@
 *3 informations pour chaque élément ci-dessous*
 
 •	Décrire la FS en décrivant les éléments présents dans le laboratoire.
-•	Décrire les tests OP de votre FS.
+•	Décrire les tests OP de votre FS :.
 •	Décrire la HDS du système.
 •	Décrire les tests IQ du système.
 
