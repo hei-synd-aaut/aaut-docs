@@ -229,7 +229,8 @@ Selon les domaines d'activité, on trouve aussi les définitions suivantes:
 
 <div align="center">
   <figure>
-    <img src="./img/URS_V_Diagram.png" alt="Image lost: URS_V_Diagram.png">
+    <img src="./img/URS_V_Diagram.png" 
+         alt="Image lost: URS_V_Diagram.png">
     <figcaption>V-Diagram</figcaption>
   </figure>
 </div>

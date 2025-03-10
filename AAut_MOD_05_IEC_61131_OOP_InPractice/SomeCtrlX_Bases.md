@@ -10,6 +10,8 @@
 
 # AAut Module 06 /  Some CtrlX Help
 
+<p style="color:red; font-weight:bold;">For information only, futur use</p>
+
 ## Error Code, ``ENUM``
 
 | Name                   | Initial | Comment                          |
