@@ -145,3 +145,4 @@ Nous avons un exemple d'héritage pour expliquer les mots clés [THIS et SUPER d
 Le programme [PRG_Operation en annexe](PRG_Operation.md), fournit un exemple de Function Block dont l'héritage n'est pas très heureux.
 
 # Un cas particulier
+Présentation du labo du 12 mars

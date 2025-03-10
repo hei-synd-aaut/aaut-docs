@@ -22,3 +22,6 @@ Ce module traite de la norme **ISA-88** pour la modélisation et la gestion des 
 
 # AAut [Module 04, IEC 61131-3 OOP Tools](./AAut_MOD_04_IEC_61131_OOP_TOOLS/README.md)
 Ce module propose une synthèse de tous les outils, extensions de langages, disponibles via IEC-61131-3 pour les fonctions spécifigues OOP, Object-Oriented Programming. **Une partie seulement sera traitée en détail dans ce cours**.
+
+# AAut [Module 05, IEC 61131-3 OOP practice](./AAut_MOD_05_IEC_61131_OOP_InPractice/README.MD)
+Présentation du labo du 12 mars.
