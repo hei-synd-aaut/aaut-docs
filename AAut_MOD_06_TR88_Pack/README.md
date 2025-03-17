@@ -210,6 +210,7 @@ Ci-dessous, les états minimaux selon PackML:
       <figcaption>PackML Minimum State Machine, source: Beckhoff USA.</figcaption>
   </figure>
 </div>
+<br>
 
 De manière générale, pendant un **Wait state**, rien ne se passe, ou du moins, il n’y a pas d’action de la machine au niveau **Procedural**. Cependant, rien n’empêche qu’une bande d’alimentation continue à avancer, et même qu’elle s’arrête, si la commande d’arrêt est interne au module qui la contrôle.
 
