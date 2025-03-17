@@ -25,3 +25,7 @@ Ce module propose une synthèse de tous les outils, extensions de langages, disp
 
 # AAut [Module 05, IEC 61131-3 OOP practice](./AAut_MOD_05_IEC_61131_OOP_InPractice/README.MD)
 Présentation du labo du 12 mars.
+
+
+# AAut [Module 06, PackML](./AAut_MOD_06_TR88_Pack/README.md)
+Une introduction à PackML.
