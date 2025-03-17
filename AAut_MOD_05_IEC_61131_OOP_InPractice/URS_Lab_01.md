@@ -128,3 +128,4 @@ END_VAR
 hwSensor := GVL_Abox.uaAboxInterface.uaSchunk;
 hwActuator := GVL_Abox.uaAboxInterface.uaSchunkGripper;
 ```
+
