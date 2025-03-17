@@ -128,7 +128,9 @@ Les modules Pick and Place sont équipés de bras robotiques ou de mécanismes s
       <figcaption>Exemple d'un robot Pick and Place, source Linmot</figcaption>
   </figure>
 </div>
- 
+
+<br>
+
 Un autre example de machine, ici, un palettiseur / dépalettiseur. Cette machine sert à envoyer des composants sur une ligne d'assemblage à partir de composants situés sur la droite, puis quand ces composants sont assemblés, on les ressort de la machine sur la gauche. Un robot au mileu permet de charger ou décharger les composants qui seront envoyés vers la machine via un convoyeur.
 
 On notera l'intérêt ici d'une construction modulaire. Le module central peut être utilisé en toute indépendance comme simple Pick and Place. Il peux être accompagné soit du module de droite, soit du module de gauche, soit des deux.
