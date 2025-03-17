@@ -75,11 +75,11 @@ elle facilite la communication entre machines ce qui facilite leur intégration.
     <figcaption>PackML production Line, source OPC-UA</figcaption>
   </figure>
 </div>
-
+<br>
 
 ##	PackML State Machine
 
-###	Identifier unne Unit/Machine (rappel et extension)
+###	Identifier une Unit/Machine (rappel et extension)
 -   Une **Unit** / machine, est définie comme un ensemble d'équipements physiques et de fonctions de commande qui exécutent une ou plusieurs fonctions de traitement majeures.
   
 
@@ -94,6 +94,7 @@ elle facilite la communication entre machines ce qui facilite leur intégration.
     <figcaption>Bumotec S1000C, on identifie souvent une machine/unité à son HMI, source Bumotec</figcaption>
   </figure>
 </div>
+<br>
 
 Il est sans doute plus simple de chercher à comprendre les différents equipements d'une machine à partir de quelques exemples tirés de l'industrie.
 
@@ -142,7 +143,7 @@ On notera l'intérêt ici d'une construction modulaire. Le module central peut �
       <figcaption>Palettiseur / dépalettiseur, source Mikron</figcaption>
   </figure>
 </div>
-
+<br>
 
 ##	The PackML interface State Model
 La syntaxe du PackML State Model
@@ -269,7 +270,7 @@ La différence entre **Held** et **Suspended** est surtout à comprendre du poin
       <figcaption>Held vs Suspended</figcaption>
   </figure>
 </div>
-
+<br>
 
 Dans le cas du **Suspended**, la machine est en attente de conditions externes. Par exemple, alimentation en produit, machine en amont ou en aval pas prête. Cela signifie que quand on analyse la performance de la machine, même si la machine passe 50% de son temps en Suspended, la machine, l’unité elle-même n’est pas en cause.
 
@@ -289,6 +290,7 @@ State Type: <span style="color:red; font-weight:bold">Wait</span>
       <figcaption>PackML State Aborted, Source of base image: Beckhoff USA.</figcaption>
   </figure>
 </div>
+<br>
 
 Cet état conserve les informations sur l'état de la machine relatives à la condition d'abandon. La machine ne peut sortir de l'état ABORTED qu'après une commande Clear explicite, puis une intervention manuelle pour corriger et réinitialiser les défauts machine détectés.
 
@@ -303,6 +305,7 @@ Initié par une commande d'état pour effacer les défauts qui ont pu se produir
       <figcaption>PackML State Clearing, Source of base image: Beckhoff USA.</figcaption>
   </figure>
 </div>
+<br>
 
 > Remarque : dans le cas de commandes d’entrainement électriques, l’état **Aborted** signifie souvent que les moteurs sont mis hors couple, **STO**, **Safe Torque Off** qui signifie une absence de couple, donc de courant, par le circuit de sécurité. Une des activité de la commande **Clearing** peut être de remettre les moteurs sous tension.
 
@@ -318,6 +321,7 @@ Initié par une commande d'état pour effacer les défauts qui ont pu se produir
       <figcaption>PackML State Stopped, Source of base image: Beckhoff USA.</figcaption>
   </figure>
 </div>
+<br>
 
 La machine est alimentée et stationnaire après avoir terminé l'état **STOPPING**. Toutes les communications avec les autres systèmes fonctionnent, le cas échéant. Une commande **RESET** provoquera une sortie de **STOPPED** à l'état **RESETTING**.
 
@@ -331,6 +335,7 @@ State Type: <span style="color:green; font-weight:bold">Acting</span>
       <figcaption>PackML State Resetting, Source of base image: Beckhoff USA.</figcaption>
   </figure>
 </div>
+<br>
 
 Cet état est le résultat d'une commande **Reset** à partir de l'état **Stopped** ou **Complete**. **Resetting** amènera généralement une machine générer un signal visuel ou sonore et à placer la machine dans un état où les composants sont sous tension en attendant une commande **Start**.
 
@@ -345,6 +350,7 @@ Cet état est le résultat d'une commande **Reset** à partir de l'état **Stopp
       <figcaption>PackML Resetting, source www.icm-automation.com</figcaption>
   </figure>
 </div>
+<br>
 
 ###	Idle
 State Type: <span style="color:red; font-weight:bold">Wait</span>
@@ -356,6 +362,7 @@ State Type: <span style="color:red; font-weight:bold">Wait</span>
       <figcaption>PackML State Idle, Source of base image: Beckhoff USA.</figcaption>
   </figure>
 </div>
+<br>
 
 C'est un état qui indique que la **RESETTING** est terminée. Cet état maintient les conditions de la machine qui ont été atteintes pendant l'état de **RESETTING** et effectue les opérations requises lorsque la machine est au repos.
 
@@ -369,6 +376,7 @@ C'est un état qui indique que la **RESETTING** est terminée. Cet état maintie
       <figcaption>PackML State Starting, Source of base image: Beckhoff USA.</figcaption>
   </figure>
 </div>
+<br>
 
 Cet état fournit les étapes nécessaires pour passer dans l'état final **EXECUTE** et est le résultat d'une commande de type de **STARTING**, locale ou distante. Suite à cette commande, la machine commencera à s'exécuter.
 
@@ -382,6 +390,7 @@ State Type: <span style="color:green; font-weight:bold">Acting</span>
       <figcaption>PackML State Execute, Source of base image: Beckhoff USA.</figcaption>
   </figure>
 </div>
+<br>
 
 Une fois que la machine traite des composants, elle est considérée comme étant en cours d'exécution ou dans l'état **EXECUTE**. Différents modes de la machine entraîneront des types spécifiques d'activités **EXECUTE**. Par exemple, si la machine est en mode Production, **EXECUTE** entraînera la production de produits, tandis qu'en mode Clean Out, l'état **EXECUTE** se réfère à l'action de nettoyage de la machine.
 
@@ -395,6 +404,7 @@ State Type: <span style="color:green; font-weight:bold">Acting</span>
       <figcaption>PackML State Holding, Source of base image: Beckhoff USA.</figcaption>
   </figure>
 </div>
+<br>
 
 Il s'agit principalement d'une cause interne à la machine qui ne nécessite pas de la stopper, pour résoudre le problème.
 
@@ -412,6 +422,7 @@ State Type: <span style="color:red; font-weight:bold">Wait</span>
       <figcaption>PackML State Held, Source of base image: Beckhoff USA.</figcaption>
   </figure>
 </div>
+<br>
 
 L'état **Hold** maintient le fonctionnement de la machine pendant que les blocages de matériau sont éliminés, ou pour arrêter le débit pendant qu'un problème en aval est résolu, ou pour permettre la correction sûre d'un défaut d'équipement avant que la production puisse reprendre.
 
@@ -425,6 +436,7 @@ State Type: <span style="color:green; font-weight:bold">Acting</span>
       <figcaption>PackML State Unholding, Source of base image: Beckhoff USA.</figcaption>
   </figure>
 </div>
+<br>
 
 L'état **Unholding** est une réponse à une commande d'opérateur pour reprendre l'état **Execute**. L'émission de la commande **Unhold** récupérera les points de consigne enregistrés et renverra les conditions d'état pour préparer la machine à revenir à l'état **Execute** normal.
 
@@ -440,6 +452,7 @@ State Type: <span style="color:green; font-weight:bold">Acting</span>
       <figcaption>PackML State Suspending, Source of base image: Beckhoff USA.</figcaption>
   </figure>
 </div>
+<br>
 
 Cet état est le résultat d'un changement des conditions surveillées en raison des conditions ou des facteurs **externes** à la machine. L'événement déclencheur entraînera une suspension temporaire de l'état **EXECUTE**.
 **SUSPENDING** est généralement le résultat de la privation de matières en amont, alimentation du conteneur, alimentation en boisson, alimentation en couronne, alimentation en lubrifiant.
@@ -454,6 +467,7 @@ State Type: <span style="color:red; font-weight:bold">Wait</span>
       <figcaption>PackML State Suspended, Source of base image: Beckhoff USA.</figcaption>
   </figure>
 </div>
+<br>
 
 Dans certains cas, la machine peut continuer à fonctionner, *presque* comme en **EXECUTE**, mais ne produit rien.
 
@@ -467,6 +481,7 @@ State Type: <span style="color:green; font-weight:bold">Acting</span>
       <figcaption>PackML State Unsuspending, Source of base image: Beckhoff USA.</figcaption>
   </figure>
 </div>
+<br>
 
 Cet état est le résultat d'une demande de type machine depuis l'état SUSPENDED pour revenir à l'état EXECUTE. Les actions de cet état peuvent inclure l'accélération des vitesses, la mise en marche des aspirateurs et le réengagement des embrayages. Cet état est effectué avant l'état EXECUTE et prépare la machine à l'état EXECUTE.
 
@@ -558,7 +573,9 @@ Pour rappel, dans une machine, chaque alarme doit posséder un numéro d’ident
 |Clear	|9|
 
 
-###	PACKML STATE MODEL, EXEMPLE DE BOUTONS DE COMMANDE
+###	PACKML STATE MODEL
+
+### Exemple de boutons de commandes
 
 Les boutons sont un exemple d’extension, ils sont par exemple présents dans l’implémentation Siemens. Ces boutons sont simplement l’équivalent de commandes PackML
 - Vert	Start
@@ -623,7 +640,7 @@ Le mode manuel n’est pas un mode « Debug », il permet d’exécuter des proc
  
 <div style="text-align: center;"> 
   <figure>
-      <img src="./img/Beckhoff_PackMLFullStateMachine_Manual.png.png"
+      <img src="./img/Beckhoff_PackMLFullStateMachine_Manual.png"
           alt="Image of Bekhoff Beckhoff_PackMLFullStateMachine_Manual.png">
       <figcaption>PackML Mode Manual, Source of base image: Beckhoff USA.</figcaption>
   </figure>
@@ -670,9 +687,3 @@ Product, aperçu
  
 Figure 42 PackTag Product Overview
 
-##	OPC UA
-On se réfèrera pour une description détaillée à : 
-Part 2: Standard Representation of PackTags in an OPC UA Server
-(Disponible sur le site de OMAC)
-
-# PackML à la sauce HEVS.
