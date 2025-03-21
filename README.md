@@ -29,3 +29,8 @@ Présentation du labo du 12 mars.
 
 # AAut [Module 06, PackML](./AAut_MOD_06_TR88_Pack/README.md)
 Une introduction à PackML.
+
+# AAut [Module 07, PackML](./AAut_MOD_07_Pack_Components/README.md)
+Ce document détaille l'implémentation de la norme PackML 2022 pour la gestion des états et des modes d'une machine industrielle, en utilisant des blocs fonctionnels IEC-61131-3.
+Il présente les concepts clés tels que les transitions d'états, les commandes, les alarmes, et les modes, tout en fournissant des exemples de code et des outils comme Node-RED pour la visualisation.
+L'objectif est de simplifier le développement de machines complexes tout en assurant leur configurabilité et leur conformité aux normes industrielles.
