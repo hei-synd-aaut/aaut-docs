@@ -67,7 +67,6 @@
     - [Command](#command-1)
       - [Use of command parameters](#use-of-command-parameters)
 - [Conclusion](#conclusion)
-- [Lien](#lien)
 
 
 ## Ce qu'il faut retenir
@@ -100,6 +99,8 @@ L'implémentation HEVS est complète et fonctionnelle basée sur la version 2022
         <figcaption>PackML State machine 2022, source Beckhoff USA</figcaption>
     </figure>
 </div>
+
+<br>
 
 Pour rappel, selon la norme 2022, seuls les états Aborted, Stopped, Idle et Execute sont obligatoires.
 
@@ -441,6 +442,8 @@ Nous reproduisons ci-dessous une image tirée de la documentation de Beckhoff:
         <figcaption>State Mode Manager, Source: Beckhoff.</figcaption>
     </figure>
 </div>
+
+<br>
 
 -   L'image représente 3 modes différents avec la liste des états existants pour chaque mode.
 -   Les flèches bleues représentent les états à partir desquels les changement de mode sont autorisés.
@@ -1046,6 +1049,8 @@ Cependant, on peut très bien utiliser un serveur OPC-UA pour faire le même tra
     </figure>
 </div>
 
+<br>
+
 **Affichage avec** [Node-RED](https://nodered.org/) et [FlowFuse](https://flowfuse.com/Node).
 
 <div align="center">
@@ -1055,6 +1060,8 @@ Cependant, on peut très bien utiliser un serveur OPC-UA pour faire le même tra
     </figure>
 </div>
 
+<br>
+
 **Stop Reason**
 <div align="center">
     <figure>
@@ -1062,6 +1069,8 @@ Cependant, on peut très bien utiliser un serveur OPC-UA pour faire le même tra
         <figcaption>Display of FlowFuse Table.</figcaption>
     </figure>
 </div>
+
+<br>
 
 ### Status
 **Contain**
