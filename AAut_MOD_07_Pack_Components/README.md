@@ -18,53 +18,54 @@
 -   Etat et changement d'état.
 
 ## Table des matières
-- [Module 07 / Pack Components](#module-07--pack-components)
-    - [Aperçu](#aperçu)
-    - [Ce qu'il faut retenir](#ce-quil-faut-retenir)
-        - [Parutions scientifiques](#parutions-scientifiques)
-        - [Documentations de fournisseurs](#documentations-de-fournisseurs)
+- [Module 07 /  Pack Components](#module-07---pack-components)
+  - [Aperçu](#aperçu)
+  - [Table des matières](#table-des-matières)
+  - [Ce qu'il faut retenir](#ce-quil-faut-retenir)
+    - [Parutions scientifiques.](#parutions-scientifiques)
+    - [Documentations de fournisseurs.](#documentations-de-fournisseurs)
 - [Les états](#les-états)
-    - [Pour simplifier](#pour-simplifier)
-    - [Notion de sécurité](#notion-de-sécurité)
-        - [Aborted](#aborted)
-        - [Stopped](#stopped)
+  - [Pour simplifier](#pour-simplifier)
+  - [Notion de sécurité](#notion-de-sécurité)
+    - [Aborted](#aborted)
+    - [Stopped](#stopped)
 - [Les transitions](#les-transitions)
-    - [SC, State Complete](#sc-state-complete)
-        - [Exemple de codage clearing](#exemple-de-codage-clearing)
-        - [Explication](#explication)
-    - [Command](#command)
-        - [E_PackCmd](#e_packcmd)
-        - [Les activations par l'opérateur](#les-activations-par-lopérateur)
-        - [Les activations par les alarmes](#les-activations-par-les-alarmes)
-            - [Les événements](#les-événements)
-            - [Warning](#warning)
-            - [Alarm](#alarm)
-            - [Exemple de codage](#exemple-de-codage)
+  - [SC, State Complete](#sc-state-complete)
+    - [Exemple de codage clearing](#exemple-de-codage-clearing)
+      - [Explication](#explication)
+  - [Command](#command)
+    - [E\_PackCmd](#e_packcmd)
+    - [Les activations par l'opérateur,](#les-activations-par-lopérateur)
+    - [Les activations par les alarmes](#les-activations-par-les-alarmes)
+      - [Les événements](#les-événements)
+      - [Warning](#warning)
+      - [Alarm](#alarm)
+      - [Exemple de codage.](#exemple-de-codage)
 - [Les modes](#les-modes)
-    - [Exemple pour HEVS_Pack_2022](#exemple-pour-hevs_pack_2022)
-- [Implémentation HEVS_CtrlX_Pack](#implémentation-hevs_ctrlx_pack)
-    - [Configuration](#configuration)
-    - [FB_PackMasterState](#fb_packmasterstate)
-    - [FB_PackMasterMode](#fb_packmastermode)
-    - [Fonctions auxiliaires](#fonctions-auxiliaires)
-        - [FB_HEVS_StopReason](#fb_hevs_stopreason)
-        - [FB_GetActualBoolState](#fb_getactualboolstate)
-        - [FB_PackStateCmdBoolInterface](#fb_packstatecmdboolinterface)
-        - [FB_PackModeBoolInterface](#fb_packmodeboolinterface)
-        - [FB_PackStatistic](#fb_packstatistic)
-    - [PRG_PackModule_Template](#prg_packmodule_template)
-        - [PLC_PACK](#plc_pack)
-        - [The template](#the-template)
-            - [Template header](#template-header)
-            - [Template Core](#template-core)
+- [Implémentation HEVS\_CtrlX\_Pack](#implémentation-hevs_ctrlx_pack)
+  - [Configuration](#configuration)
+      - [Exemple pour HEVS\_Pack\_2022](#exemple-pour-hevs_pack_2022)
+  - [FB\_PackMasterState](#fb_packmasterstate)
+  - [FB\_PackMasterMode](#fb_packmastermode)
+  - [Fonctions auxiliaires](#fonctions-auxiliaires)
+    - [FB\_HEVS\_StopReason](#fb_hevs_stopreason)
+    - [FB\_GetActualBoolState](#fb_getactualboolstate)
+    - [FB\_PackStateCmdBoolInterface](#fb_packstatecmdboolinterface)
+    - [FB\_PackModeBoolInterface](#fb_packmodeboolinterface)
+    - [FB\_PackStatistic](#fb_packstatistic)
+- [PRG\_PackModule\_Template](#prg_packmodule_template)
+  - [PLC\_PACK](#plc_pack)
+  - [The template](#the-template)
+    - [Template header](#template-header)
+    - [Template Core](#template-core)
 - [PackTag](#packtag)
-    - [Aperçu Général](#aperçu-général)
-        - [Admin](#admin)
-            - [Display of Alarms](#display-of-alarms)
-        - [Status](#status)
-            - [Use of Status Parameters](#use-of-status-parameters)
-        - [Command](#command)
-            - [Use of command parameters](#use-of-command-parameters)
+  - [Aperçu Général](#aperçu-général)
+    - [Admin](#admin)
+      - [Display of Alarms](#display-of-alarms)
+    - [Status](#status)
+      - [Use of Status Parameters](#use-of-status-parameters)
+    - [Command](#command-1)
+      - [Use of command parameters](#use-of-command-parameters)
 - [Conclusion](#conclusion)
 - [Lien](#lien)
 
@@ -75,18 +76,18 @@
 -   PackML peut permettre de gagner plusieurs semaines de travail pour le développement d'une nouvelle machine. C'est un des objectifs de la norme.
 
 ### Parutions scientifiques.
-Il existe bien quelques parutions scientifiques, mais elles sont relativement pauvres. Elles ne sont en outre pas tout à fait à jour, dans la mesure où elles se réfèrent à la version PackML de 2015
+Il existe bien quelques parutions scientifiques, mais elles sont relativement pauvres. Elles ne sont en outre pas tout à fait à jour, dans la mesure où elles se réfèrent à la version PackML de 2015.
 
-[A PackML-based Design Pattern for Modular PLC Code](https://www.sciencedirect.com/science/article/pii/S2405896315009957)
-[A low-cost PackML-based control solution for a modular production line](https://www.sciencedirect.com/science/article/pii/S2405896315009969)
+-   [A PackML-based Design Pattern for Modular PLC Code](https://www.sciencedirect.com/science/article/pii/S2405896315009957)
+-   [A low-cost PackML-based control solution for a modular production line](https://www.sciencedirect.com/science/article/pii/S2405896315009969)
 
-Il existe un ouvrage intéressant, probablement plus édité: [Applying ISA-88 in Discrete and Continuous Manufacturing], ISBN: 160650200X / 9781606502006, 2011
+Il existe un ouvrage intéressant, probablement plus édité: Applying ISA-88 in Discrete and Continuous Manufacturing: *ISBN: 160650200X / 9781606502006, 2011*.
 
 ### Documentations de fournisseurs.
 Il existe de nombreuses implémentations basée sur la norme révisée de 2022. Nous en citons deux car elles sont complète, bien documentées et directement uilisables, l'une dans le monde Siemens, l'autre dans le monde Codesys.
 
-SIMATIC OMAC PackML V2022 Mode&State Management and Machine Data Interface
-Schneider Electric EcoStruxure Machine Expert PackML Library Guide
+-   SIMATIC OMAC PackML V2022 Mode&State Management and Machine Data Interface.
+-   Schneider Electric EcoStruxure Machine Expert PackML Library Guide
 
 
 L'implémentation HEVS est complète et fonctionnelle basée sur la version 2022, elle est disponible via les projets fournit en exemple pour les travaux pratique, la documentation est en cours. Elle offre l'avantage d'être complètement ouverte.
@@ -445,7 +446,7 @@ Nous reproduisons ci-dessous une image tirée de la documentation de Beckhoff:
 -   Les flèches bleues représentent les états à partir desquels les changement de mode sont autorisés.
 
 #### Exemple pour HEVS_Pack_2022
-Les configurations sont regroupées dans une Action ACT_SetDefaultSettings qui est exécutée une seule fois au démarrage du code.
+Les configurations sont regroupées dans une **Action** ACT_SetDefaultSettings qui est exécutée une seule fois au démarrage du code.
 
 ```iecst
 IF NOT defaultSettingsDone THEN
@@ -1197,17 +1198,5 @@ Si nécessaire, les outils équivalents sont disponibles chez les principaux fou
 
 ---
 
-<h1 style="color:red;">A comlpléter au 21 mars 2025</h1>
-
--   La notion de TimeOut sur SC.
--   La notion d'affichage des états interne des CASE..OF des états du Pack.
--   La notion de log sur Node-RED pour les alarmes et le modifications des paramètres.
--   La notion de sauvgarde des paramètres avec Node-RED.
--   Etc...
-
----
-
-# Lien
-On trouve le code source mentionné dans ce document, format Codesys pour CtrlX Core PLC 1.20 dans le répertoire suivant: [Aaut-lab-01_2025](https://github.com/hei-synd-aaut/Aaut-lab-01_2025).
 
 <!--End of file-->
