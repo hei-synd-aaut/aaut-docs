@@ -1042,6 +1042,7 @@ Avec le protocole ADS Beckhoff et Node-RED, il est très facile d'afficher des *
 Cependant, on peut très bien utiliser un serveur OPC-UA pour faire le même travail.
 
 **Dans Node-RED**
+
 <div align="center">
     <figure>
         <img src="./img/Node-RED_Pack_Alarms_And_Warnings.jpg" alt="Image lost: RED_Pack_Alarms_And_Warnings.png">
@@ -1063,6 +1064,7 @@ Cependant, on peut très bien utiliser un serveur OPC-UA pour faire le même tra
 <br>
 
 **Stop Reason**
+
 <div align="center">
     <figure>
         <img src="./img/Node-RED_Pack_Error.jpg" alt="Image lost: RED_Pack_Error.png">
@@ -1130,7 +1132,8 @@ PackTag.Status.Parameter_Real[1].Unit := '%RH';
 PackTag.Status.Parameter_Real[1].Value := PRG_DeviceManager.fb_RH_1_ModbusRTU_Vaisala.reRelativeHumidity;
 ```
 
-Il est tout autant simple avec Node-RED, FlowFuse et Beckhoff ADS d'afficher une liste de paramètres.
+Il est tout autant simple avec Node-RED, FlowFuse et Beckhoff ADS d'afficher une liste de paramètres:
+
 <div align="center">
     <figure>
         <img src="./img/Node-RED_Pack_Parameters.jpg" alt="Image lost: Node-RED_Pack_Parameters.png">
@@ -1138,7 +1141,8 @@ Il est tout autant simple avec Node-RED, FlowFuse et Beckhoff ADS d'afficher une
     </figure>
 </div>
 
-Et finalement l'affichage avec FlowFuse
+Et finalement l'affichage avec FlowFuse:
+
 <div align="center">
     <figure>
         <img src="./img/Node-RED_StatusRealParameters.jpg" alt="Image lost: Node-RED_StatusRealParameters.png">
