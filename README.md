@@ -35,5 +35,5 @@ Ce document détaille l'implémentation de la norme PackML 2022 pour la gestion 
 Il présente les concepts clés tels que les transitions d'états, les commandes, les alarmes, et les modes, tout en fournissant des exemples de code et des outils comme Node-RED pour la visualisation.
 L'objectif est de simplifier le développement de machines complexes tout en assurant leur configurabilité et leur conformité aux normes industrielles.
 
-# AAut[Module 10, PackSafety](./AAut_MOD_10_Pack_Safety/)
+# AAut [Module 10, PackSafety](./AAut_MOD_10_Pack_Safety/)
 Ce document explore les principes de sécurité des machines, en mettant l'accent sur les normes ISO 12100 et ISO 13489 pour l'évaluation et la réduction des risques. Il aborde également des concepts tels que la sécurité intrinsèque, les zones ATEX, et l'utilisation de technologies comme Ethernet-APL pour les environnements dangereux. Enfin, des exemples pratiques et des questions permettent d'appliquer ces notions à des cas concrets.

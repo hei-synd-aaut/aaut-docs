@@ -360,7 +360,7 @@ Les points suivants doivent être pris en compte :
 
 <div align="center">
     <img src="./img/General_principles_ISO_12100.png" alt="General_principles_ISO_12100"  width="600"/>
-    <p>General principle of ISO 12100, Source: <a href="[www.zvei.org/automation](https://www.iso.org/standard/51528.html)"> ISO 12100:2010 Safety of machinery — General principles for design — Risk assessment and risk reduction</a></p>
+    <p>General principle of ISO 12100, Source: <a href="https://www.iso.org/standard/51528.html"> ISO 12100:2010 Safety of machinery — General principles for design — Risk assessment and risk reduction</a></p>
 </div>
 
 
@@ -370,6 +370,12 @@ Les limites de la machine dans toutes les phases du cycle de vie doivent être d
 - au niveau de la machine. les personnes liées au processus
 - environnement de la machine
 - associés aux produits liés à la machine
+
+<div align="center">
+    <img src="./img/ISO 12100 Selon ChatGPT pour les limites d_une_machine_appliquée_a_un_robot.png" alt="ISO 12100 Selon ChatGPT pour les limites d_une_machine_appliquée_a_un_robot"  width="400"/>
+    <p>Les limites d'une machine selon ISO 12100, Source: <a href="https://chatgpt.com/"> ChatGPT</a></p>
+</div>
+
 ####	Limites d'utilisation dans toutes les phases de vie et modes de fonctionnement
 - l'utilisation prévue
 - mauvaise utilisation prévisible
@@ -558,7 +564,7 @@ La norme reconnaît quatre niveaux :
 - Moyen : de 90 à 99 % des pannes dangereuses sont détectées
 - Faible : de 60 à 90 % des pannes dangereuses sont détectées
 - Aucune : moins de 60 % des pannes dangereuses sont détectées
-- 
+
 ###	Que signifie MTTFd ?
 Mean Time To Dangerous Failure
 
@@ -773,3 +779,4 @@ En annexe:
 </div>
 
 <!-- End of file -->
+
