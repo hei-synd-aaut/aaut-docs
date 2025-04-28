@@ -24,7 +24,7 @@ Les différents états de fonctionnement permettent de bien définir ce qui est 
   - La deuxième condition sera que l'opérateur utilise une commande de type poignée homme mort.
   - La troisième condition sera que les éléments mobiles, typiquement les axes électriques soient équipés d'un système de sécurité de type **SLS**, **Safe Low Speed**, qui garanti que les éléments mobiles ne pourront pas excéder une certaines limite, typiquement de l'ordre de 2 mètres par minute.
 
-L'absence de gestion claire et stricte des états et des modes de fonctionnement peut pasablement compliquer la mise en oeuvre de la sécurité, voir rendre la machine dangereuse.
+L'absence de gestion claire et stricte des états et des modes de fonctionnement peut passablement compliquer la mise en oeuvre de la sécurité, voir rendre la machine dangereuse.
 
 ## Sommaire
 
