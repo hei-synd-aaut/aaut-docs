@@ -8,6 +8,8 @@
 
 [Cédric Lenoir](mailto:cedric.lenoir@hevs.ch)
 
+<span style="color: red; font-weight: bold;">To be revised from french version, July 7, 2025</span>
+
 # Modul 01 / System Engineering
 
 ## Überblick

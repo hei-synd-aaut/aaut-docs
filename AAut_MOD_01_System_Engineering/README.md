@@ -79,10 +79,21 @@ Les extensions utilisées dans ce cours sur VScode sont les suivantes:
 # [Mermaid Flowchart](https://mermaid.js.org/syntax/flowchart.html)
 Ce type de diagramme doit être principalement vu comme un diagramme de communication. Il permet de valider le fonctionnement d'un processus avant de passer au codage.
 
+
+## Exemple avec une pince, *gripper*.
+Dans ce cas, le digramme sert principalement à formaliser un langage standard, du type:
+
+> Lorsque le système est à l'état de repos, *Idle*, il vérifie si la pince, *Gripper* est ouverte. Si la pince n'est pas ouverte, le système procède à l'ouverture de la pince, puis vérifie le capteur de la pince. Une fois cette vérification effectuée, le système descend vers la position suivante. Si la pince est déjà ouverte, le système descend directement sans ouvrir la pince.
+
+
+
+<div align="center">
+  <figure>
+
 ```mermaid
 
 ---
-title: Below the minimum notation you should be able to use
+title: Gripper sequence
 ---
 
 flowchart TD
@@ -92,6 +103,16 @@ flowchart TD
     Check --> Ready[Move Down]
     StateGripper -- Yes ----> Ready[Move Down]
 ```
+   </figure>
+</div>
+
+
+## Exemple avec un PLC
+
+### PLC avec une seule tâche.
+
+<div align="center">
+  <figure>
 
 ```mermaid
 ---
@@ -105,6 +126,19 @@ flowchart TD
     CyclicProgram --> WriteOoutput(Write Outputs)
     
 ```
+   </figure>
+</div>
+
+
+### PLC avec plusieurs tâches
+
+
+Ici, on symbolise la lecture des entrées, puis ProgramOne avec un temps de cycle de 10[ms], ProgramTwo et ProgramMotion avec un temps de cycle de 1[ms] et finalement l'écriture des sorties.
+
+> On notera que le diagramme ci-dessous sera compliqué à générer sans l'aide d'une AI.
+
+<div align="center">
+  <figure>
 
 ```mermaid
 ---
@@ -133,6 +167,15 @@ flowchart TD
     ProgramMotion --> WriteOoutput(Write Outputs)
 ```
 
+   </figure>
+</div>
+
+## La confiture de fraise.
+On est dans le cas de la formalisation d'un processus.
+
+<div align="center">
+  <figure>
+
 ```mermaid
 ---
 title: Fabrication de Confiture de Fraise
@@ -147,6 +190,20 @@ flowchart TD
     F --> G[Stérilisation des Pots]
     G --> H[Étiquetage et Stockage]
 ```
+
+   </figure>
+</div>
+
+## Résumé d'un diagramme d'activité
+Il y a une différence fondamentale entre un diagramme d'état tel que déjà vu dans le cour d'automatisation de base, et rappelé ci-dessous et le diagramme d'activité.
+
+### Le diagramme d'activité ou Flow Chart
+Sert à modéliser la réalité.
+
+### Le diagramme d'état...
+Sert à modéliser le programme.
+
+> Dans le cas de la recette de confiture, on pourra utiliser le diagramme d'activité pour réaliser un digramme d'état.
 
 # [Class Diagram](https://mermaid.js.org/syntax/classDiagram.html)
 Ce type de diagramme permet de représenter l'architecture du programme.
@@ -165,6 +222,8 @@ classO .. classP : Link(Dashed)
 ```
 
 ## Les liens suivants sont à connaitre
+<div align="center">
+  <figure>
 
 ```mermaid
 classDiagram
@@ -174,11 +233,43 @@ classE --o classF : Aggregation
 classM ..|> classN : Realization
 
 ```
+</figure>
+</div>
+
+### Pour rappel
+-   **Inheritance**, ou héritage, la **classe A** reprend les éléments de la **classe B** et la complète.
+-   **Composition**, c'est typiquement le cas d'un Function Block qui est composé de un ou plusieurs autres Function Block, ici, une **pince D** serait composée au minimum d'un **actionnneur pneumatique C**.
+-   **Aggregation**, c'est le cas du passage par référence, la classe E existe en mémoire à l'extérieur de la classe F, mais est utilisée par celle-ci. En IEC 61131-3, le ``VAR_IN_OUT``.
+
+Les trois éléments précédents ont déjà été vus en Automatisatin de Base, ce que l'on ajoute cette année, c'est la notion de **Realization**.
+
+### Lien entre interface et réalisation
+
+Une **interface** définit un contrat ou un ensemble de méthodes que les classes concrètes doivent implémenter. La **réalisation**, ou implémentation, est la classe concrète qui fournit le code effectif pour chaque méthode de l'interface.
+
+En UML, ce lien est représenté par une flèche en trait plein avec un triangle vide pointant vers l'interface :
+
+<div align="center">
+  <figure>
+
+```mermaid
+classDiagram
+    class IExample {
+        <<interface>>
+        +methode()
+    }
+    class Realisation
+    Realisation ..|> IExample : réalise
+```
+</figure>
+</div>
+
+Cela signifie que `Realisation` implémente l'interface `IExample`.
 
 ```mermaid
 
 ---
-title: The link can be written in both directions
+title: Motor Interface
 ---
 classDiagram
 
@@ -188,6 +279,9 @@ class iMotor
 class iMotor{
     +BOOL     PowerOn
     +E_STATUS eStatus
+    +SetPowerOn()
+    +SetPowerOff()
+    +Stop()
     }
 
 class LinearMotor{
@@ -208,8 +302,24 @@ DirectMotor <|-- TorqueMotor
 VFDMotor : +REAL SetFrequency_Hz
 ```
 
+- **iMotor** est une interface qui définit deux propriétés : `PowerOn`, de type BOOL et `eStatus`, de type E_STATUS.
+- Trois classes implémentent cette interface : **DirectMotor**, **StarDeltaMotor** et **VFDMotor**.
+    - **VFDMotor** possède une propriété supplémentaire : `SetFrequency_Hz`, de type REAL. Une note indique que VFDMotor correspond à un "Variable_FrequencyDrive".
+- **DirectMotor** est une classe de base pour deux classes dérivées :
+    - **LinearMotor**, qui ajoute la propriété `Position_mm`, position en millimètres, de type REAL, hérite de **DirecMotor**.
+    - **TorqueMotor**, qui ajoute la propriété `Position_deg`, position en degrés, de type REAL, hérite de **DirectMotor**.
+
+Ce diagramme illustre une hiérarchie d’héritage où différents types de moteurs partagent une interface commune, certains ayant des propriétés spécifiques selon leur type.
+
+-   En particulier, l'inteface définit trois méthodes, **SetPowerOn()**, **SetPowerOff()** et **Stop()** qui seront à implémenter quel que soit le type de moteur. Ceci offre un avantage au niveau de l'interface utilisateur, car il ne sera possible de définir une interface sans se soucier du type de moteur qui sera mis sous tension ou arrêté depuis l'interface.
+-   De même, on donnera la garantie que quelque soit le type de moteur implémenté dans le programme, il doit pouvoir recevoir ces trois commandes.
+
 # [State Diagram](https://mermaid.js.org/syntax/stateDiagram.html)
 Ce type de diagramme permet de représenter le comportement interne du programme, principalement l'utilisation du code de type IEC-61131-3 ``CASE..OF``.
+
+
+<div align="center">
+  <figure>
 
 ```mermaid
 ---
@@ -230,8 +340,14 @@ stateDiagram-v2
 
 ```
 
+</figure>
+</div>
+
 ## On peut ajouter les transitions
 L'exemple ci-dessous n'est pas complet, c'est un extrait.
+
+<div align="center">
+  <figure>
 
 ```mermaid
 ---
@@ -253,6 +369,8 @@ stateDiagram-v2
     ERROR_OR_READY_STEP --> WAIT_RISING_EDGE : Not Enable
 
 ```
+</figure>
+</div>
 
 # Markdown
 
