@@ -382,8 +382,8 @@ Markdown est un langage de balisage léger qui permet de formater du texte en ut
 - **Texte en gras** : Entourez le texte avec `**` ou `__`. Par exemple, `**texte en gras**`.
 - **Texte en italique** : Entourez le texte avec `*` ou `_`. Par exemple, `*texte en italique*`.
 - **Listes** : Utilisez `-` ou `*` pour les listes à puces, et des chiffres suivis d'un point pour les listes numérotées.
-- **Liens** : Utilisez `[texte du lien](URL)`. Par exemple, `[Google](https://www.google.com)`.
-- **Images** : Utilisez `![texte alternatif](URL de l'image)`. Par exemple, `![Logo](https://example.com/logo.png)`.
+- **Liens** : Utilisez `[texte du lien](URL)`. Par exemple, [PLCopen](https://plcopen.org).
+- **Images** : Utilisez `![texte alternatif](URL de l'image)`. Par exemple, ![Logo](https://example.com/logo.png).
 - **Blocs de code** : Utilisez des accents graves triples (\`\`\`) pour les blocs de code.
 
 Markdown est largement supporté par de nombreuses plateformes et outils, ce qui en fait un choix populaire pour la documentation et la rédaction de contenu en ligne.
