@@ -44,3 +44,9 @@ Voici une explication textuelle du diagramme de classes présenté :
 
 Ce diagramme illustre une hiérarchie d’héritage où différents types de moteurs partagent une interface commune, certains ayant des propriétés spécifiques selon leur type.
 
+Dans un diagramme d'états (state diagram) UML :
+
+- Le **rond noir** au départ représente l’**état initial** (ou "initial node"). Il indique le point de départ du système ou du processus modélisé.
+- Le **rond avec un point au milieu** à la fin représente l’**état final** (ou "final node"). Il marque la fin du processus ou du cycle de vie de l’objet.
+
+Ces symboles permettent de visualiser clairement où commence et où se termine le comportement décrit par le diagramme.

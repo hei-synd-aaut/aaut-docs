@@ -315,6 +315,11 @@ Ce diagramme illustre une hiérarchie d’héritage où différents types de mot
 -   De même, on donnera la garantie que quelque soit le type de moteur implémenté dans le programme, il doit pouvoir recevoir ces trois commandes.
 
 # [State Diagram](https://mermaid.js.org/syntax/stateDiagram.html)
+Le state diagram ne contient que deux types d'objet. On fait abstraction du point noir de départ et le rond avec un point à la fin.
+- Le point noir au départ concerne le démarrage du programme lors du premier cycle. Dans certains automates, on peut définir un dernir cycle lors de la coupure de l'automate. Les points de départ et de fin ne sont pas des états, par contre, ils peuvent définir l'état initial, ci-dessous, le premier état,
+- Un **état** correspond à une valeur unique d'un ``Enum ``dans un ``CASE..OF``.
+- Une **transition** correspond à une condition pour passer d'un état à un autre.
+
 Ce type de diagramme permet de représenter le comportement interne du programme, principalement l'utilisation du code de type IEC-61131-3 ``CASE..OF``.
 
 
