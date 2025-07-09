@@ -61,7 +61,8 @@ Un des thèmes clé de ISA-88 est une séparation entre l'aspect procedure, une 
 <div align="center">
   <figure>
     <img src="./img/Résumé des différents niveaux d&apos;automatisation.webp"
-       alt="Image lost: Résumé des différents niveaux d&apos;automatisation.webp">
+       alt="Image lost: Résumé des différents niveaux d&apos;automatisation.webp"
+       width="400">
     <figcaption>Résumé des différents niveaux d&apos;automatisation, Source: 
     www.erp-information.com</figcaption>
   </figure>
@@ -88,7 +89,8 @@ Il ne s’agit pas de rentrer en détail dans les différents types de processus
 <div align="center">
 <figure>
   <img src="./img/Batch vs Continuous Manufacturing.jpg"
-     alt="Image lost: Batch vs Continuous Manufacturing.jpg">
+     alt="Image lost: Batch vs Continuous Manufacturing.jpg"
+     width="400">
   <figcaption>Batch vs Continuous Manufacturing, Source: www.researchgate.net</figcaption>
 </figure>
 </div>
@@ -107,7 +109,8 @@ Dans un processus de fabrication de pièces discrètes, les produits sont class�
 <div align="center">
 <figure>
   <img src="./img/Discrete Batch High-precision assembly systems for medical devices..webp"
-     alt="Image lost: Discrete Batch High-precision assembly systems for medical devices..webp">
+     alt="Image lost: Discrete Batch High-precision assembly systems for medical devices..webp"
+     width="400">
   <figcaption>Discrete Batch High-precision assembly systems for medical devices  Source: www.pharmaceutical-technology.com</figcaption>
   </div>
 
@@ -118,9 +121,11 @@ discret ni continus ; cependant, ils présentent les deux caractéristiques.
 > L'expérience montre qu'il est parfaitement possible d'utiliser le modèle ISA-88 pour les différents types de processus.
 
 #	Machine
-Dans la suite de ce cours, nous allons souvent retrouver le terme « machine ». Voici la définition d’une machine selon la directives européenne (DIRECTIVE 2006/42/CE) qui est généralement appliquée en Suisse.
+Dans la suite de ce cours, nous allons souvent retrouver le terme « machine ». Voici la définition d’une machine selon la directives européenne. DIRECTIVE 2006/42/CE qui est généralement appliquée en Suisse.
 
-*Une vérification faite en janvier 2025 montre que cette norme est toujours d'actualité*
+> La norme DIRECTIVE 2006/42/CE, directive Machines, sera remplacée par le **Règlement (UE) 2023/1230** relatif aux machines. Ce nouveau règlement a été adopté en juin 2023 et entrera en application à partir du 20 janvier 2027. Contrairement à une directive, un règlement européen s’applique directement dans tous les États membres sans transposition nationale.
+
+> Au moment de la revue de ce cours, au 9 juillet 2025, aucune information sur les implications au niveau Suisse.
 
 ##	Article 2
 - a)	« Machine » :
@@ -208,7 +213,8 @@ Exemple d'une unité de remplissage de container de l'entreprise [Burgener AG à
 <div align="center">
  <figure>
   <img src="./img/Small Container Filling Machine for Endless Liner.png"
-     alt="Image lost: Small Container Filling Machine for Endless Liner.png">
+     alt="Image lost: Small Container Filling Machine for Endless Liner.png"
+     width="300">
   <figcaption>Small Container Filling Machine for Endless Liner, Souce: www.burgener-ag.ch</figcaption>
 </figure>
 </div>
@@ -542,7 +548,8 @@ Utilisez un digramme de classe Mermaid pour décrire [Un exemple de modélisatio
 <div align="center">
   <figure>
     <img src="./img/Automation_Pyramid_752K9D7VCA_1300.avif"
-       alt="Image lost: Automation_Pyramid_752K9D7VCA_1300.avif">
+       alt="Image lost: Automation_Pyramid_752K9D7VCA_1300.avif"
+       width="400">
     <figcaption>Source: Katti, Badarinath. (2020). Ontology-Based Approach to Decentralized Production Control in the Context of Cloud Manufacturing Execution Systems. 10.13140/RG.2.2.11486.46402</figcaption>
   </figure>
 </div>

@@ -50,3 +50,6 @@ Dans un diagramme d'états (state diagram) UML :
 - Le **rond avec un point au milieu** à la fin représente l’**état final** (ou "final node"). Il marque la fin du processus ou du cycle de vie de l’objet.
 
 Ces symboles permettent de visualiser clairement où commence et où se termine le comportement décrit par le diagramme.
+
+La norme DIRECTIVE 2006/42/CE (directive Machines) sera remplacée par le **Règlement (UE) 2023/1230** relatif aux machines. Ce nouveau règlement a été adopté en juin 2023 et entrera en application à partir du 20 janvier 2027. Contrairement à une directive, un règlement européen s’applique directement dans tous les États membres sans transposition nationale.
+
