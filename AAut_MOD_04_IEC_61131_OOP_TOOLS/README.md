@@ -100,6 +100,8 @@
       - [Code of Function Block FB\_CountExtended](#code-of-function-block-fb_countextended)
       - [PRG\_Count Header](#prg_count-header)
       - [PRG\_Count Core](#prg_count-core)
+      - [Autre cas, direct](#autre-cas-direct)
+      - [Avec VAR\_IN\_OUT](#avec-var_in_out)
 - [THIS^](#this)
 - [Référence principale](#référence-principale)
 - [Autres références](#autres-références)
@@ -1235,6 +1237,50 @@ iTestOne := fbCountExtended.iCounter;
 iTestTwo := fbCountExtended.iExtendedCounter;
 ```
 
+#### Autre cas, direct
+Supposont le Function Block suivant:
+```iecst
+FUNCTION_BLOCK FB_Count
+VAR_OUTPUT
+    iCounter : INT;
+END_VAR
+```
+Avec une implémentation simple:
+
+```iecst
+    iCounter : iCounter + 1;
+```
+
+Si on veut que le function bloc qui hérite de FB_Count exécute cette incrémentation, il faudra appeler le function bloc parent lors de l'exécution.
+
+```iecst
+FUNCTION_BLOCK FB_CountWithOption EXTENDS FB_Count
+VAR
+
+END_VAR
+```
+
+```iecst
+SUPER^();                 // Call of FB-body of base class
+```
+
+#### Avec VAR_IN_OUT
+Si le function bloc parent contient des variables par référence, il faudra aussi passer ces références lors de l'appel de ``SUPER``.
+
+```iecst
+FUNCTION_BLOCK FB_Device
+VAR_IN_OUT
+    hw : HW_InOut;
+END_VAR
+```
+
+```iecst
+FUNCTION_BLOCK FB_DeviceWithOption EXTENDS FB_Device;
+```
+
+```iecst
+SUPER^(hw := hw);
+```
 
 # THIS^
 ``THIS^`` est une variable spéciale utilisée pour la programmation orientée objet.
