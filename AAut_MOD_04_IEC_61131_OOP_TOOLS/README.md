@@ -1134,6 +1134,8 @@ METHOD Execute
 
 Source: [Stefan Henneken](https://stefanhenneken.net/2020/12/13/iec-61131-3-abstract-fb-vs-interface/)
 
+> Une interface ne peut à priorie que proposer des méthodes publiques. **A vérifier**.
+
 # Super^
 ``SUPER`` est une variable spéciale utilisée pour la programmation orientée objet.
 
