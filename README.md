@@ -25,6 +25,7 @@ Les lignes directrices de ce cours sont la **robustesse** et l'**optimisation du
 
 ## AAut [MOD 01 System Engineering](./AAut_MOD_01_System_Engineering/README.md)
 Fournit une liste d'outils pour l'aide à la conception d'un programme d'automation.
+Permet de reprendre en main les éléments vus dans le [cours AutB du 4ème semestre](https://github.com/hei-synd-autb/autb-docs).
 
 
 ## AAut [MOD 02 Specification](/AAut_MOD_02_Specification/README.md)
