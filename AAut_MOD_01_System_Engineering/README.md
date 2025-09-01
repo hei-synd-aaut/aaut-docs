@@ -11,16 +11,16 @@
 # Module 01 /  System Engineering
 
 ## Aperçu
-Ce module présente les outils de base de modélisation d'un sytème d'automation à l'aide de SysML.
-Il présente aussi une série d'outils Open Source qui permette de mettre en application la théorie en utilisant des outils actuels et disponibles librement dans le cadre des cours dispensés par la HEVS.
+Ce module présente les outils de base de modélisation d'un sytème d'automation inspiré par [SysML](https://sysml.org/).
+Il présente aussi une série d'outils Open Source qui permettent de mettre en application la théorie en utilisant des outils actuels et disponibles librement dans le cadre des cours dispensés par la HEVS.
 
 
 ## Ce qu'il faut retenir
 Ce cours présente une méthode de travail qui permet de:
 - modéliser une partie du code en adaptant certains outils standards aux spécificités du PLC.
-- générer une partie du code à l'aide d'une AI générative, en l'occurence ici Copilot.
-- documenter le code, en particulier à l'aide des outils Mermaid.js
-- on présentera aussi Node-RED dont la palette [Dashboard 2.0](https://dashboard.flowfuse.com/) permet d'intégrer de la documentation sous forme Markdown directement dans l'interace utilisateur.
+- générer une partie du code à l'aide d'une AI générative, en l'occurence ici Copilot dans [Visual Studio Code](https://code.visualstudio.com/).
+- documenter le code, en particulier à l'aide des outils [Mermaid.js](https://mermaid.js.org/)
+- on présentera aussi Node-RED dont la palette [Dashboard 2.0](https://dashboard.flowfuse.com/) permet d'intégrer de la documentation sous forme [Markdown](https://www.markdownguide.org) directement dans l'interace utilisateur.
 
 > Les outils présentés ici ne se substituent pas aux environnements de développement classiques fournis par les fabricants de PLC, mais ils les complémentent.
 
@@ -42,6 +42,13 @@ Dans le cadre des cours d'automation, ces outils seront principalement utilisés
 L'ensemble des outils sont sélectionnés d'une part car:
 - ils sont Open Source et peuvent être utilisés sans coûts pour les étudiants,
 - ils sont disponibles sur les platformes Windows, OSx et Linux,
+
+## L'automation industrielle en évolution
+L'automation industrielle est en phase transitoire. En 2025, plusieurs environnements de développement des principaux fournisseurs proposent des évolutions vers des environnements qui permettent de s'affranchir des IDE traditionnels essentiellement graphiques pour évoluer vers des environement orientés texte afin de faciliter l'utilisation des systèmes de gestion du code de type GIT.
+
+Au moment de la rédaction de se paragraphe, le nouvel environnement Simatic AX est encore en version réservée à quelques clients tests. [Simatic AX](https://github.com/simatic-ax).
+Je garde le pari du code IEC 61131-3 car la norme a été revue en 2025 et reste un standard d'actualité qui sera très probablement encore présent à l'horizon 2035.
+
 
 ## Mots clés
 -   Un **[State Diagram](https://mermaid.js.org/syntax/stateDiagram.html)** (ou diagramme d'état) est utilisé pour représenter les différents états d'un système ainsi que les transitions entre ces états. Il est particulièrement utile pour modéliser le comportement dynamique d'un système, comme les machines à états finis, où le système peut être dans un état à un moment donné et passer à un autre état en réponse à des événements ou des conditions spécifiques.
@@ -74,7 +81,7 @@ Les extensions utilisées dans ce cours sur VScode sont les suivantes:
 
 - [Markdown Preview Mermaid Support](https://marketplace.visualstudio.com/items?itemName=bierner.markdown-mermaid): This extension adds support for rendering Mermaid diagrams in the Markdown preview, allowing you to visualize flowcharts, sequence diagrams, and more directly within VS Code.
 
-- [Structured Text Language Support](https://marketplace.visualstudio.com/items?itemName=stkb.restructuredtext): This extension provides syntax highlighting, IntelliSense, and other language support features for Structured Text, a programming language used in industrial automation.
+- [Structured Text Language Support](https://marketplace.visualstudio.com/items?itemName=Serhioromano.vscode-st): This extension provides syntax highlighting, IntelliSense, and other language support features for Structured Text, a programming language used in industrial automation.
 
 # [Mermaid Flowchart](https://mermaid.js.org/syntax/flowchart.html)
 Ce type de diagramme doit être principalement vu comme un diagramme de communication. Il permet de valider le fonctionnement d'un processus avant de passer au codage.
@@ -376,48 +383,6 @@ stateDiagram-v2
 ```
 </figure>
 </div>
-
-# Markdown
-
-## Résumé de Markdown selon Copilot
-
-Markdown est un langage de balisage léger qui permet de formater du texte en utilisant une syntaxe simple et lisible. Il est couramment utilisé pour rédiger des documents, des notes, des fichiers README, et des blogs. Voici quelques éléments de base de Markdown :
-
-- **Titres** : Utilisez `#` pour les titres. Par exemple, `# Titre 1`, `## Titre 2`, etc.
-- **Texte en gras** : Entourez le texte avec `**` ou `__`. Par exemple, `**texte en gras**`.
-- **Texte en italique** : Entourez le texte avec `*` ou `_`. Par exemple, `*texte en italique*`.
-- **Listes** : Utilisez `-` ou `*` pour les listes à puces, et des chiffres suivis d'un point pour les listes numérotées.
-- **Liens** : Utilisez `[texte du lien](URL)`. Par exemple, [PLCopen](https://plcopen.org).
-- **Images** : Utilisez `![texte alternatif](URL de l'image)`. Par exemple, ![Logo](https://example.com/logo.png).
-- **Blocs de code** : Utilisez des accents graves triples (\`\`\`) pour les blocs de code.
-
-Markdown est largement supporté par de nombreuses plateformes et outils, ce qui en fait un choix populaire pour la documentation et la rédaction de contenu en ligne.
-
-## On ajoutera les éléments suivants:
--   Markdown est l'éditeur utilisé pour tous les cours d'automation en S4 et S6.
--   Il supporte les fichiers Mermaid.JS mentionnés ci-dessus.
--   Il est supporté par l'interface utilisateur UI - Node-RED que nous utiliserons dans le cours d'automation, ce qui permet de fournir de la documentation directement dans l'interface utilisateur.
--   C'est le format de fichier utilisé pour la documentation dans GitHub et GitLab.
--   Accessoirement, c'est le format de fichier utilisé par ChatGPT, ce qui vous permet de coler directement le contenu dans un fichier Mardown.
-
-## Ci-dessous, la réponse de ChatGPT à la question de savoir ce qu'est Node-RED.
-
-> Le contenu est copié/collé dans le fichier Markdown sans mise en forme.
-
-Node-RED est un outil de développement open-source basé sur **Node.js**, conçu pour faciliter la création d'applications en connectant des **blocs fonctionnels** (appelés *nœuds*) via une interface graphique. Il est particulièrement utilisé pour l’**automatisation**, l’**IoT (Internet des objets)**, l’**intégration d’API** et la **domotique**.
-
-### 🚀 **Principales utilisations de Node-RED :**  
-✅ **Automatisation de flux de données** : Permet d'automatiser des tâches entre différents services et appareils.  
-✅ **IoT et domotique** : Intègre facilement des capteurs, des actionneurs et des plateformes cloud (MQTT, Home Assistant, etc.).  
-✅ **Intégration d'API et services web** : Connecte facilement des API REST, bases de données et services cloud.  
-✅ **Surveillance et alertes** : Peut être utilisé pour surveiller des systèmes en temps réel et générer des notifications.  
-
-### 🛠 **Comment ça fonctionne ?**  
-1. Interface graphique **drag-and-drop** pour créer des **flux**.  
-2. Connexion de **nœuds** représentant des entrées, traitements et sorties (ex: MQTT, HTTP, WebSocket, etc.).  
-3. Déploiement en un clic, exécution sur serveur, Raspberry Pi, ou cloud.  
-
-C'est un excellent outil pour ceux qui veulent automatiser des tâches sans coder en profondeur. Tu veux un exemple d’utilisation concrète ? 😊
 
 # Votre Job
 Installer Visual Studio Code ainsi que les extensions [mentionnées ci-dessus](#les-extensions-utilisées-pour-visual-studio-code) et vous familiariser avec l'utilisation de Markdown et Mermaid.
