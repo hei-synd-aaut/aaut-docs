@@ -69,8 +69,8 @@ We therefore present advanced automation as a trilogy that includes
 
 # Liste des modules
 
-## AAut [MOD 01 Object Oriented Programming](./AAut_MOD_01_System_Engineering/README.md)
-Une introduction a IEC 61131-3 tel que nécessaire pour la compréhension du cours. Une approche détaillée nécessiterait plus de temps.
+## AAut [MOD 01 Object Oriented Programming](./AAut_MOD_01_IEC_61131_OOP_Introduction/README.md)
+An introduction to IEC 61131-3 is necessary for understanding the course. A detailed approach would require more time.
 
 
 ## AAut [MOD 02 Specification](/AAut_MOD_02_Specification/README.md)
