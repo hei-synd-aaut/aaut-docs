@@ -8,7 +8,7 @@
 
 [Cédric Lenoir](mailto:cedric.lenoir@hevs.ch)
 
-# AAut Module 02 Process Specification
+# AAut Module 06 Process Specification
 
 - [Introduction](#introduction)
 - [GMP](#gmp)

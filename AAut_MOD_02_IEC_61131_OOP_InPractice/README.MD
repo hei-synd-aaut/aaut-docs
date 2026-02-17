@@ -10,7 +10,7 @@
 
 <strong style="color:red;">A revoir</strong>.
 
-# AAut Module 03 /  OOP in Practice
+# AAut Module 02 /  OOP in Practice
 
 Nous avons vu dans le module précédent que IEC 61131-3 propose tous les outils standard liés à la programmation orienté objet. Faut-il dès lors nécessairement passer à la programmation orienté objet?
 

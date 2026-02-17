@@ -8,7 +8,7 @@
 
 [Cédric Lenoir](mailto:cedric.lenoir@hevs.ch)
 
-# Module 07 /  Pack Components
+# Module 04 /  Pack Components
 
 
 ## Aperçu
@@ -18,7 +18,7 @@
 -   Etat et changement d'état.
 
 ## Table des matières
-- [Module 07 /  Pack Components](#module-07---pack-components)
+- [Module 04 /  Pack Components](#module-04---pack-components)
   - [Aperçu](#aperçu)
   - [Table des matières](#table-des-matières)
   - [Ce qu'il faut retenir](#ce-quil-faut-retenir)

@@ -8,7 +8,7 @@
 
 [Cédric Lenoir](mailto:cedric.lenoir@hevs.ch)
 
-# Module 06 /  Pack Model
+# Module 03 /  Pack Model
 
 ## Aperçu
 La conception d'une unité au sens ISA-88, ou d'une machine du point de vue logicielle est un processus complexe. Partir d'une feuille blanche est un pari risqué, même pour un ingénieur expérimenté. L'idée est donc de partir d'un modèle.

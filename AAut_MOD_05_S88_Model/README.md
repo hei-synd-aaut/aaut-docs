@@ -8,7 +8,7 @@
 
 [Cédric Lenoir](mailto:cedric.lenoir@hevs.ch)
 
-# AAut Module 03 /  S88 Process Model
+# AAut Module 05 /  S88 Process Model
 
 - [Introduction](#introduction)
 - [S-88 & PackML, Classes de processus industriels](#s-88--packml-classes-de-processus-industriels)
