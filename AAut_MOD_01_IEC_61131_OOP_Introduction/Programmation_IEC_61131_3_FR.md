@@ -77,6 +77,7 @@ classDiagram
   }
 
   class I_Axis
+  <<interface>> I_Axis  
 
   class FB_BoschRexroth
 
@@ -84,9 +85,9 @@ classDiagram
 
   class FB_Linmot
 
-  I_Axis <|-- FB_BoschRexroth
-  I_Axis <|-- FB_Etel
-  I_Axis <|-- FB_Linmot
+  I_Axis <|.. FB_BoschRexroth
+  I_Axis <|.. FB_Etel
+  I_Axis <|.. FB_Linmot
 
   FB_Robot *-- FB_BoschRexroth
   FB_Robot *-- FB_Etel

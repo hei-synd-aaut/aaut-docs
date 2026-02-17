@@ -28,7 +28,7 @@
     - [Condition de la programmation orientée objet](#condition-de-la-programmation-orientée-objet)
   - [La base, le Function Block](#la-base-le-function-block)
     - [La structure, STRUCT](#la-structure-struct)
-- [Ce qui nous intéresse](#ce-qui-nous-intéresse)
+- [Les machines d'état type ISA-88](#les-machines-détat-type-isa-88)
 - [Module Type Package and PackML](#module-type-package-and-packml)
   - [Le concept](#le-concept)
     - [P\&ID schema](#pid-schema)
@@ -47,6 +47,8 @@
     - [Méthodes cycliques](#méthodes-cycliques)
       - [Core of Function Block when Extended](#core-of-function-block-when-extended)
       - [Le cas particulier de VAR\_IN\_OUT](#le-cas-particulier-de-var_in_out)
+      - [Le lien avec les machines d'état.](#le-lien-avec-les-machines-détat)
+      - [Héritage et surchage de méthode](#héritage-et-surchage-de-méthode)
     - [Méthodes asynchrones](#méthodes-asynchrones)
 - [Notion de Abstract](#notion-de-abstract)
 - [Exemples d'apprentissage](#exemples-dapprentissage)
@@ -171,7 +173,7 @@ END_VAR
 ```
 ---
 
-# Ce qui nous intéresse
+# Les machines d'état type ISA-88
 
 Il faut revenir à l'introduction, ce qui nous intéresse, c'est l'automation modulaire. Que ce soit pour MTP, ou PackML, la machine d'état est similaire.
 
@@ -209,7 +211,7 @@ PackML se base sur la structure de ISA-88.
   <figure>
     <img src="./img/S88_PI_D_Drink Processing.svg" 
          alt="Image lost: S88_PI_D_Drink Processing"
-         width="400">
+         width="500">
     <figcaption>Unit in P&ID represenation</figcaption>
   </figure>
 </div>
@@ -688,7 +690,8 @@ On a vu, et c'est l'un de ses avantage, que l'écriture ``VAR_IN_OUT`` **impose*
 
 :interrobang: en supposant que le core du programme de ``CM_ValveSensor`` reste le même, est-ce que cela va fonctionner ?
 
-```FUNCTION_BLOCK CM_ValveSensor
+```iecst
+FUNCTION_BLOCK CM_ValveSensor
 // Header....
 
 // Core
@@ -702,23 +705,296 @@ FUNCTION_BLOCK CM_ValveSensor
 // Header....
 
 // Core
-// Does it work ?????
+// It works
 SUPER^(io := hwValve);
 ```
 
 :bulb: l'utilisation systématique d'une varialble de boucle du type ``uliCountValve := uliCountValve + 1``; même si pas formellement requis peut s'avérer utile en programmation orienté objet. Cela permettra de vérifier rapidement si le Function Block parent est appelé, ou pas.
 
+#### Le lien avec les machines d'état.
+Nous avons mentionné en tout début de module les machines d'état. **Quel est le lien ?**
+
+Prenons une machine d'état minimum selon PackML.
+
+```mermaid
+---
+title: PackML State Machine Simplified
+---
+stateDiagram-v2
+  [*] --> Aborted
+  Aborted --> Stopped: Clear
+  Stopped --> Idle: Reset
+  Idle --> Execute: Start
+  Execute --> Aborted: Abort
+  Execute --> Stopped: Stop
+  Idle --> Stopped: Stop
+```
+
+Ce que nous dit PackML, c'est que chaque équipement, ainsi que la machine ne peuvent se trouver que dans un seul état à la fois, et oblitoirement dans ces états.
+
+Reprenons pour cette exemple une partie du [diagramme P&ID ci-dessus](#pid-schema). Un équipement constitué d'une pompe et d'une vanne.
+
+<div align="center">
+  <figure>
+    <img src="./img/EM_PumpGroup.png" 
+         alt="Image lost: EM_PumpGroup"
+         width="400">
+    <figcaption>EM_PumpGroup</figcaption>
+  </figure>
+</div>
+
+```mermaid
+---
+title: EM_ValveGroup with 4 base states   
+---
+classDiagram
+    class EM_PumpGroup {
+        -StateComplete BOOL
+        -M_Aborted()
+        -M_Stopped()
+        -M_Idle()
+        -M_Execute()
+    }
+```
+
+Une programme simplifié de cet équipement nous donne:
+
+```iecst
+FUNCTION_BLOCK EM_PumpGroup
+VAR
+  ePackState  : E_PackState;
+END_VAR
+
+// Core
+CASE ePackState OF
+  E_PackState.Aborted:
+    M_Aborted();
+
+  E_PackState.Stopped:
+    M_Stopped();
+
+  E_PackState.Idle:
+    M_Idle()
+  
+  E_PackState.Execute:
+    M_Execute()
+END_CASE
+```
+
+Il suffit ensuite de coder chaqune des méthodes pour que l'équipement fasse ce qu'il est sensé faire dans chacun des états.
+
+#### Héritage et surchage de méthode
+C'est sous cette forme que l'on trouve le principal avantage des méthodes que j'appelle **cycliques**, c'est à dire qui peuvent être appelées en continu par l'objet lui-même. Noter le préfixe **-** dans le schéma UML, ce qui indique que **la méthode est privée**.
+
+Supposons maintenant qu'il soit nécessaire de créer une nouvelle version de cette pompe, mais uniquement pour l'état **Execute**. Nous pouvons simplement hériter de la première version pour en créer une deuxième.
+
+```mermaid
+---
+title: EM_PumpGroup version 2  
+---
+classDiagram
+    class EM_PumpGroup {
+        -StateComplete BOOL
+        -M_Aborted()
+        -M_Stopped()
+        -M_Idle()
+        -M_Execute()
+    }
+    class EM_PumpGroup_V2 {
+        -M_Execute()
+    }    
+
+    EM_PumpGroup <|-- EM_PumpGroup_V2
+```
+
+En language IEC 61131-3
+
+```iecst
+FUNCTION_BLOCK PUBLIC EM_PumpGroup_V2 EXTENDS EM_PumpGroup
+```
+
+La surchage de la méthode se fait via l'IDE en copiant/collant la méthode M_Execute de EM_PumpGroup vers EM_PumpGroup_V2.
+
+<div align="center">
+  <figure>
+    <img src="./img/EM_PumpGroup_V2_Icon.png" 
+         alt="Image lost: EM_PumpGroup_V2_Icon"
+         width="400">
+    <figcaption>Surcharge de la méthode M_Execute</figcaption>
+  </figure>
+</div>
+
+C'est à mon avis, le meilleur exemple d'utilisation de l'héritage que l'on puisse faire en IEC 61131-3. La suite passe par la [notion d'abstraction](#notion-de-abstract).
+
 ### Méthodes asynchrones
+Ce que j'appelle une méthode asynchrone, c'est une méthode de type single-shot qui permet d'appeler une fonction particulière à un moment donné pour le Function Block.
+
+Reprenons l'exemple de CM Valve vu ci-dessus, mais remplaçons les deux entrées ``Open`` et ``Close`` par des méthodes. 
+
+```mermaid
+---
+title: CM_ValveSensor Extends CM_Valve   
+---
+classDiagram
+    class CM_ValveSensor {
+        +Open(tTimeOut : TIME) BOOL;
+        +Close(tTimeOut : TIME) BOOL;
+        -tonTimeOut : TIME;
+        +Sensor     : BOOL;
+        +Error      : BOOL;
+    }
+
+    class CM_Valve {
+        +IsOpen   : BOOL;
+        +IsClosed : BOOL;
+    }
+
+    CM_Valve <|-- CM_ValveSensor
+```
+
+L'avantage de ces méthodes est que:
+1.  Il est plus simple de modifier uniquement une partie de CM_ValveSensor en modifiant uniquement les méthodes et pas une autre partie cyclique qui, par exemple gérerai des alarmes.
+2.  On peut facilement accéder manuellement à ce Function Block via un protocole comme OPC-UA.
+
+Exemple d'utilisation
+
+```iecst
+// If Open is TRUE, then execute something
+IF Open(tTimeOut := #T500ms) THEN
+  your code here....
+END_IF
+```
 
 ---
 
 # Notion de Abstract
+La encore, il ne s'agit pas de rentrer dans les détails de la notion d'abstraction.
+
+L'idée est de montrer ce que l'on peut en faire dans le cadre d'une programmation modulaire.
+
+En IEC 61131-3, il existe la notion d'interface. En quelque mots, une interface permet de faire la liste des méthodes et propriétés qu'un Function Block **doit absolument** implémenter. La particularité de l'interface, c'est qu'elle est purement virtuelle, aucun code n'existe.
+
+```mermaid
+---
+title: Interface I_Valve   
+---
+classDiagram
+    class I_Valve {
+        +Open(tTimeOut : TIME) BOOL;
+        +Close(tTimeOut : TIME) BOOL;
+    }
+
+    class CM_Valve {
+        +Error;
+    }
+
+    class CM_ValveSensor {
+        +IsOpen   : BOOL;
+        +IsClosed : BOOL;
+    }
+
+    I_Valve <|.. CM_Valve
+    I_Valve <|.. CM_ValveSensor
+```
+
+**Ce qui nous intéresse vraiment ici**, c'est un chemin intermédiaire entre l'interface et le *vrai* Function Block, on le dit **Abstract**.
+
+Un Fonction Block abstrait contient déjà du code, mais il est incomplet, c'est un peu comme si on livrait uniquement un chassis pour une voiture. Concrètement, cela signfie qu'**il n'est pas possible d'instancier un Function Block abstrait**.
+
+Nous reprenons l'exemple [EM_PumpGroup ci-dessus](#héritage-et-surchage-de-méthode) avec surchage de méthode. Simplement nous partons de l'idée que nous auront plusieur Equipment Modules qui partagent la même base.
+
+```mermaid
+---
+title: EM_Abstract  
+---
+classDiagram
+    class EM_Abstract {
+        -StateComplete BOOL
+        -M_Aborted()
+        -M_Stopped()
+        -M_Idle()
+        -M_Execute()
+    }
+    <<Abstract>> EM_Abstract
+
+    class EM_PumpGroup {
+        -M_Idle()
+        -M_Execute()
+    }    
+
+    class EM_Agitator {
+        -M_Execute()
+    }    
+
+    class EM_PrepareProduct {
+        -M_Execute()
+    }    
+
+    EM_Abstract <|-- EM_PumpGroup
+    EM_Abstract <|-- EM_Agitator
+    EM_Abstract <|-- EM_PrepareProduct
+```
+
+Notre Function Bloc Abstract ressemble plus ou moins à ceci:
+
+```iecst
+//
+//	www.hevs.ch
+//	Institut Systemes Industriels
+//	Project: 	HEVS Pack 2022
+//	Author:		Cedric Lenoir
+//	Date:		2025 July 17
+//	
+//	Summary:	Control Module Abstract.
+//				Cannot be used directly because of no internal logic 
+FUNCTION_BLOCK ABSTRACT EM_Abstract
+VAR_INPUT
+END_VAR
+VAR_IN_OUT
+  Status_StateCurrent     : DINT;   // has to take the PackTag Status.  StateCurrent
+  Status_ModeCurrent      : DINT;   // has to take the PackTag Status ModeCurrent
+END_VAR
+VAR_OUTPUT
+END_VAR
+VAR
+  // Equipment Module identification.
+  uiUniqueId             : USINT;	
+  // To be set at init with FB_init, Example:
+  usiEquipmentModuleId   : USINT (1..100);
+
+  strEquipmentModuleName : STRING := 'Equipment Module xx';	
+
+  // This Flag is used as result on SC State complete.
+  setSC                  : BOOL;
+  stActing               : ST_Acting;
+  //...
+END_VAR
+```
+
+Cela signifie qu'il n'est pas possible d'instancier directement ``EM_Abstract``.
+Par contre dans ``EM_Absract`` on aura inséré une logique de base qui appelle les différentes méthodes en fonction des états, mais nous créons des méthodes qui ne font rien.
+
+Ensuite, il nous suffit de déclarer nos equipements et de compléter les méthodes des états qui nous intéressent.
+
+```iecst
+FUNCTION_BLOCK EM_Agitator EXTENDS EM_Abstract
+VAR_INPUT
+END_VAR
+VAR_OUTPUT
+END_VAR
+VAR
+  uliEmExampleLoop	: ULINT;	
+END_VAR
+```
 
 ---
 
 # Exemples d'apprentissage
+Au labo nous allons prendre un ou plusieurs exemples basés sur un Control Module ou un Equipment Module de type Abstract.
 
 ---
+
+Pour plus de détails, on peut se référer au [document de référence](./README%20Reference.md) ou aux liens qu'il contient.
 
 
 <!-- Fin du fichier README.md -->
