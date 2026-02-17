@@ -8,7 +8,9 @@
 
 [Cédric Lenoir](mailto:cedric.lenoir@hevs.ch)
 
-# AAut Module 05 /  OOP in Practice
+<strong style="color:red;">A revoir</strong>.
+
+# AAut Module 03 /  OOP in Practice
 
 Nous avons vu dans le module précédent que IEC 61131-3 propose tous les outils standard liés à la programmation orienté objet. Faut-il dès lors nécessairement passer à la programmation orienté objet?
 
@@ -30,8 +32,6 @@ Pour du code pour une machine unique, ou une diffusion limitée, la réponse est
 *On admettra que VAR_IN_OUT n'offre pas autant de souplesse que l'interface.*
 
 1. L'**abstraction**: voir l'héritage, la réponse est <strong style="color:red;">non</strong>.
-
-> Même si **c'est un avis personnel**, seul la notion d'Interface est réellement utile.
 
 # Un cas simple d'interface
 Le principe de l'interface est de définir une seule fois l'interaction qu'un bloc fonctionnel aurra avec un autre.
