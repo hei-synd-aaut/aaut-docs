@@ -1,45 +1,71 @@
-
 ```iecst
-METHOD Method1 : BOOL
+FUNCTION_BLOCK CM_Valve
 VAR_INPUT
-    nIn1  : INT;
-    bIn2  : BOOL;
+    Open     : BOOL;
+    Close    : BOOL;
 END_VAR
 VAR_OUTPUT
-    fOut1 : REAL;
-    sOut2 : STRING;
+    IsOpen   : BOOL;
+    IsClosed : BOOL;
 END_VAR
-// <method implementation code>
-PROGRAM MAIN
-VAR
-    fbSample      : FB_Sample;
-    bReturnValue  : BOOL;
-    nLocalInput1  : INT;
-    bLocalInput2  : BOOL;
-    fLocalOutput1 : REAL;
-    sLocalOutput2 : STRING;
-END_VAR
+```
+En voulant ajouter un capteur qui vérifie l'état de la vanne.
 
-bReturnValue := fbSample.Method1(nIn1  := nLocalInput1,
-                                 bIn2  := bLocalInput2,
-                                 fOut1 => fLocalOutput1,
-                                 sOut2 => sLocalOutput2);
+```iecst
+FUNCTION_BLOCK CM_ValveSensor EXTENDS CM_Valve
+VAR_INPUT
+    Sensor   : BOOL;
+END_VAR
+VAR_OUTPUT
+    Error    : BOOL;
+END_VAR
 ```
 
 ```mermaid
-    classDiagram
-        class FB_Sample {
-            BOOL Method1(INT nIn1, BOOL bIn2) : (REAL fOut1, STRING sOut2)
-        }
-
-    class MAIN {
-        FB_Sample fbSample
-        BOOL bReturnValue
-        INT nLocalInput1
-        BOOL bLocalInput2
-        REAL fLocalOutput1
-        STRING sLocalOutput2
+---
+title: CM_ValveSensor Extends CM_Valve   
+---
+classDiagram
+    class CM_ValveSensor {
+        +Sensor   : BOOL;
+        +Error    : BOOL;
     }
 
-    MAIN --> FB_Sample : uses
+    class CM_Valve {
+        +Open     : BOOL;
+        +Close    : BOOL;
+        +IsOpen   : BOOL;
+        +IsClosed : BOOL;
+    }
+
+    CM_Valve <|-- CM_ValveSensor
+```
+
+:bulb: Comme pour la structure, nous aurions pu bien sur utiliser la composition pour créer une nouvelle structure du type:
+
+```iecst
+FUNCTION_BLOCK CM_ValveCompose
+VAR_INPUT
+    Sensor   : BOOL;
+END_VAR
+VAR_OUTPUT
+    Error    : BOOL;
+END_VAR
+VAR
+    cmValve  : CM_Valve;
+END_VAR
+```
+
+Mais au prix d'une certaine lourdeur au moment de l'utilisation.
+
+```iecst
+// Header
+  xIsOpen        : BOOL;
+  cmValveSensor  : CM_ValveSensor;
+  cmValveCompose : CM_ValveCompose;
+
+// Core case Extend
+  xIsOpen := cmValveSensor.IsOpen;
+// Core case Compose (no OO)
+  xIsOpen := cmValveCompose.cmValve.IsOpen;
 ```
