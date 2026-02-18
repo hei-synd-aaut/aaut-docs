@@ -585,7 +585,7 @@ IsCounter := IsCounter + 1;
 :heavy_check_mark: La variable ``uliCountValve`` **s'incrémente** à la vitesse du temps de cycle du programme.
 :x: La variable ``uliCountValveSensor`` **reste à 0**.
 
-> D'une certaine manière, quand j'appele un Function Block à chaque cycle, j'appelle sa méthode interne, comme ``cmValve()`` qui l'exécute.
+> D'une certaine manière, quand j'appelle un Function Block à chaque cycle, j'appelle sa méthode interne, comme ``cmValve()`` qui l'exécute.
 
 > Si je veux que `CM_ValveSensor` utilise la méthode interne de `CM_Valve` **il faut le préciser explicitement**. C'est la première relative complexité de l'orienté objet.
 
@@ -807,13 +807,13 @@ classDiagram
     EM_PumpGroup <|-- EM_PumpGroup_V2
 ```
 
-En language IEC 61131-3
+En langage IEC 61131-3
 
 ```iecst
 FUNCTION_BLOCK PUBLIC EM_PumpGroup_V2 EXTENDS EM_PumpGroup
 ```
 
-La surchage de la méthode se fait via l'IDE en copiant/collant la méthode M_Execute de EM_PumpGroup vers EM_PumpGroup_V2.
+La surcharge de la méthode se fait via l'IDE en copiant/collant la méthode M_Execute de EM_PumpGroup vers EM_PumpGroup_V2.
 
 <div align="center">
   <figure>
@@ -935,7 +935,7 @@ classDiagram
     EM_Abstract <|-- EM_PrepareProduct
 ```
 
-Notre Function Bloc Abstract ressemble plus ou moins à ceci:
+Notre Function Block Abstract ressemble plus ou moins à ceci:
 
 ```iecst
 //

@@ -72,6 +72,8 @@ We therefore present advanced automation as a trilogy that includes
 ## AAut [MOD 01 Object Oriented Programming](./AAut_MOD_01_IEC_61131_OOP_Introduction/README.md)
 Une introduction à la programmation IEC 61131-3 OO dans le cas de l'automatisation modulaire.
 
+### [Mod 01 OOP Deutsche Version](./AAut_MOD_01_IEC_61131_OOP_Introduction/README_DE.md)
+
 ## AAut [Module 02, IEC 61131-3 OOP practice](./AAut_MOD_05_IEC_61131_OOP_InPractice/README.MD)
 Cas pratiques de l'utilisation de IEC 61131-3, FB_Init...
 
