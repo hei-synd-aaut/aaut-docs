@@ -8,9 +8,14 @@
 
 [Cédric Lenoir](mailto:cedric.lenoir@hevs.ch)
 
-<strong style="color:red;">A revoir</strong>.
+<strong style="color:red;">Nécessaire pour le lab 01 AAut:</strong>.
+- Properties et Methods in an Interface.
+- An abstract Function Block using a basic Interface for a device.
+- La possibilité de faire une liste d'interfaces. I_Device, ARRAY OF I_Device
+- Et la suite du module 1 pour hériter d'un Abstract Control Module.
 
 # AAut Module 02 /  OOP in Practice
+
 
 Nous avons vu dans le module précédent que IEC 61131-3 propose tous les outils standard liés à la programmation orienté objet. Faut-il dès lors nécessairement passer à la programmation orienté objet?
 
