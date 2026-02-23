@@ -273,17 +273,17 @@ In UML, this link is represented by a solid arrow with an empty triangle pointin
 
 ```mermaid
 classDiagram
-    class IExample {
+    class I_Example {
         <<interface>>
         +methode()
     }
     class Realisation
-    Realisation ..|> IExample : réalise
+    Realisation ..|> I_Example : réalise
 ```
 </figure>
 </div>
 
-This means that `Realisation` implements the `IExample` interface.
+This means that `Realisation` implements the `I_Example` interface.
 
 ```mermaid
 
@@ -292,28 +292,28 @@ title: Motor Interface
 ---
 classDiagram
 
-class iMotor
-<<Interface>> iMotor
+class I_Motor
+<<Interface>> I_Motor
 
-class iMotor{
-    +BOOL     PowerOn
-    +E_STATUS eStatus
+class I_Motor{
+    +PowerOn : BOOL     
+    +eStatus : E_STATUS 
     +SetPowerOn()
     +SetPowerOff()
     +Stop()
     }
 
 class LinearMotor{
-    +REAL Position_mm
+    +rPosition_mm : REAL 
 }
 
 class TorqueMotor{
-    +REAL Position_deg
+    +rPosition_deg : REAL 
 }
 
-iMotor <|.. DirectMotor
-iMotor <|.. StarDeltaMotor
-iMotor <|.. VFDMotor
+I_Motor <|.. DirectMotor
+I_Motor <|.. StarDeltaMotor
+I_Motor <|.. VFDMotor
 note for VFDMotor "Variable_FrequencyDrive"
 DirectMotor <|-- LinearMotor
 DirectMotor <|-- TorqueMotor
@@ -321,7 +321,7 @@ DirectMotor <|-- TorqueMotor
 VFDMotor : +REAL SetFrequency_Hz
 ```
 
-- **iMotor** is an interface that defines two properties: `PowerOn`, of type BOOL, and `eStatus`, of type E_STATUS.
+- **I_Motor** is an interface that defines two properties: `PowerOn`, of type BOOL, and `eStatus`, of type E_STATUS.
 
 - Three classes implement this interface: **DirectMotor**, **StarDeltaMotor**, and **VFDMotor**.
 
@@ -415,3 +415,5 @@ Visual Studio Code natively allows you to load and save data to GitHub, provided
 
 ## Option 2
 For the automation lab, we will use Node-RED. [Installation takes a few minutes](https://nodered.org/docs/getting-started/local).
+
+<!--End of this document -->

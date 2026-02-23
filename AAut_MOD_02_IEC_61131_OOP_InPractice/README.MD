@@ -14,8 +14,7 @@
 - La possibilité de faire une liste d'interfaces. I_Device, ARRAY OF I_Device
 - Et la suite du module 1 pour hériter d'un Abstract Control Module.
 
-# AAut Module 02 /  OOP in Practice
-
+# AAut Module 02 /  OOP en pratique
 
 Nous avons vu dans le module précédent que IEC 61131-3 propose tous les outils standard liés à la programmation orienté objet. Faut-il dès lors nécessairement passer à la programmation orienté objet?
 
@@ -143,11 +142,6 @@ I_Alarm <|.. FB_OtherSensor
 ```
 </div>
 
-# Un exemple d'héritage simple
-Nous avons un exemple d'héritage pour expliquer les mots clés [THIS et SUPER dans le module précédent](../AAut_MOD_04_IEC_61131_OOP_TOOLS/README.md#using-the-super-and-this-pointers).
-
-# Un exemple d'héritage pas très heureux
-Le programme [PRG_Operation en annexe](PRG_Operation.md), fournit un exemple de Function Block dont l'héritage n'est pas très heureux.
 
 # Un cas particulier
 Présentation du labo du 12 mars

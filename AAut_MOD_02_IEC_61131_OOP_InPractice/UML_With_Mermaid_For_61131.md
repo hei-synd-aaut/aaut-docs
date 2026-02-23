@@ -8,7 +8,19 @@
 
 [Cédric Lenoir](mailto:cedric.lenoir@hevs.ch)
 
-# AAut Module 05 /  UML Basis for this course
+# IEC 61131-3 UML base
+This document provides the necessary foundation for representing IEC 61131-3 object-oriented diagrams in UML, particularly using the Mermaid tool in VS Code.
+
+The document below proposes a method for representing IEC 61131-3 programming using UML diagrams in the simplest yet most precise way possible. It's important to note that certain concepts, such as the IN, OUT, and IN_OUT notations, are specific to IEC 61131-3. For example, unlike most other languages, IEC 61131-3 does not allow dynamic instantiation.
+
+## The type, before or after the variable?
+
+You sometimes find UML diagrams with the type before the variable. This is partly because it corresponds to the practice in Java, C, etc.
+
+The official UML syntax states: **the type after the attribute or parameter name**. It turns out that this corresponds to the practice of IEC 61131-3. Therefore:
+
+We write <b style="color:red;">the variable before the type.</b>
+*It is possible that a few examples may exist here and there with the opposite; these will be corrected progressively.*
 
 ## List of UML relations from Mermaid.js
 ```mermaid
@@ -32,23 +44,23 @@ classO .. classP : Link(Dashed)
 - **Realization** : for **interfaces**.
 - **Dashed Link** : some link...
 
-### Exemples
+### Examples
 
 <div align="center">
 
 ```mermaid
 classDiagram
-class FB_HEVS {
-    + ARRAY[1..10] OF FB_Student P6
-    + FB_ClassRoom 23.N411
+class FB_Building_23 {
+    +P6 : ARRAY[1..10] OF FB_Student 
+    +23_N411 : FB_ClassRoom 
 }
 class FB_Student
 
-FB_HEVS o-- FB_Student
-FB_HEVS *-- FB_ClassRoom
+FB_Building_23 o-- FB_Student
+FB_Building_23 *-- FB_ClassRoom
 
-note for FB_Student "FB_Student existe indépendamment de FB_HEVS"
-note for FB_ClassRoom "Si on supprime, on supprime 23.N411"
+note for FB_Student "FB_Student exists independently of FB_Building_23"
+note for FB_ClassRoom "If we delete the building, we delete 23_N411"
 
 class FB_ClassRoom
 
@@ -72,7 +84,7 @@ classDiagram
     BOOL xBoolParam
     STRING strDeviceName
   }
-note for ST_TestDevice "From na UML point of view, a **STRUCT** is a class as a Function Block"
+note for ST_TestDevice "From an UML point of view, a **STRUCT** is a class as a Function Block"
 
 ```
 </div>
@@ -81,11 +93,11 @@ note for ST_TestDevice "From na UML point of view, a **STRUCT** is a class as a 
 ```iecst
 TYPE ST_TestDevice :
 STRUCT
-	udiDeviceId		: UDINT;
-	reRealParam		: REAL;
-	diDintParam		: DINT;
-	xBoolParam		: BOOL;
-	strDeviceName	: STRING;
+  udiDeviceId   : UDINT;
+  reRealParam   : REAL;
+  diDintParam   : DINT;
+  xBoolParam    : BOOL;
+  strDeviceName : STRING;
 END_STRUCT
 END_TYPE
 ```
@@ -94,20 +106,20 @@ END_TYPE
 ```iecst
 FUNCTION_BLOCK FB_WithInOut
 VAR_INPUT
-	Enable		  : BOOL;
+  Enable      : BOOL;
 END_VAR
 VAR_IN_OUT
-	ioDevice	  : ST_TestDevice;
+  ioDevice    : ST_TestDevice;
 END_VAR
 VAR_OUTPUT
-	Done		    : BOOL;
-	Active		  : BOOL;
-	Error		    : BOOL;
-	ErrorID		  : ERROR_CODE;
-	ErrorIdent	: ERROR_STRUCT;
+  Done        : BOOL;
+  Active      : BOOL;
+  Error       : BOOL;
+  ErrorID     : ERROR_CODE;
+  ErrorIdent  : ERROR_STRUCT;
 END_VAR
 VAR
-	eMyStates	  : E_MyStates;
+  eMyStates   : E_MyStates;
   _position   : LREAL;
 END_VAR
 ```
@@ -116,15 +128,15 @@ END_VAR
 ```mermaid
 classDiagram
   class FB_WithInOut {
-    BOOL Enable
-    ST_TestDevice ioDevice
-    BOOL Done
-    BOOL Active
-    BOOL Error
-    ERROR_CODE ErrorID
-    ERROR_STRUCT ErrorIdent
-    - E_MyStates eMyStates
-    - LREAL _position
+    +Enable : BOOL
+    +ioDevice : ST_TestDevice
+    +Done : BOOL
+    +Active : BOOL
+    +Error : BOOL
+    +ErrorID : ERROR_CODE
+    +ErrorIdent : ERROR_STRUCT
+    -eMyStates : E_MyStates 
+    -_position : LREAL 
   }
 note for FB_WithInOut "Note that standart UML does not support IN, OUT or IN_OUT defintion"
 
@@ -167,11 +179,11 @@ title: Composition
 ---
 classDiagram
     class FB_Gripper{
-      FB_Valve fbValve
-      FB_Sensor fbSensor
-      ST_Parameters stParameters
-        +open() done<BOOL>
-        +close() done<BOOL>      
+      fbValve : FB_Valve
+      fbSensor : FB_Sensor 
+      stParameters : ST_Parameters 
+      +open() BOOL
+      +close() BOOL      
     }
     note for FB_Gripper "A FUNCTION BLOCK can be composed of other FUNCTION BLOCK and/or STRUCT"
     class FB_Valve{
@@ -250,15 +262,15 @@ I_Motion : SetPosition(TIME timeOut)
 I_Motion : GetPosition() LREAL
 
   class FB_WithInOut {
-    + BOOL Enable
-    ST_TestDevice ioDevice
-    + BOOL Done
-    + BOOL Active
-    + BOOL Error
-    - ERROR_CODE _ErrorID
-    - ERROR_STRUCT _ErrorIdent
-    - E_MyStates _eMyStates
-    - LREAL _position
+    +Enable : BOOL 
+    +ioDevice : ST_TestDevice 
+    +Done : BOOL 
+    +Active : BOOL 
+    +Error : BOOL 
+    -_ErrorID : ERROR_CODE 
+    -_ErrorIdent : ERROR_STRUCT 
+    -_eMyStates : E_MyStates 
+    -_position : LREAL 
   }
 note for FB_WithInOut "You can define as many interfaces that you need"
 
@@ -274,11 +286,11 @@ I_Alarm <|.. FB_WithInOut
 ```iecst
 TYPE ST_TestDevice :
 STRUCT
-	udiDeviceId		: UDINT;
-	reRealParam		: REAL;
-	diDintParam		: DINT;
-	xBoolParam		: BOOL;
-	strDeviceName	: STRING;
+  udiDeviceId   : UDINT;
+  reRealParam   : REAL;
+  diDintParam   : DINT;
+  xBoolParam    : BOOL;
+  strDeviceName : STRING;
 END_STRUCT
 END_TYPE
 ```
@@ -286,9 +298,9 @@ END_TYPE
 ```iecst
 TYPE ST_TestDeviceMoreParam EXTENDS ST_TestDevice :
 STRUCT
-	xMoreBoolParam	: BOOL;
-	reMoreRealParam	: REAL;
-	dtElapsedTime	: TIME;
+  xMoreBoolParam  : BOOL;
+  reMoreRealParam : REAL;
+  dtElapsedTime   : TIME;
 END_STRUCT
 END_TYPE
 ```
@@ -297,17 +309,17 @@ END_TYPE
 ```mermaid
 classDiagram
   class ST_TestDevice {
-    UDINT udiDeviceId
-    REAL reRealParam
-    DINT diDintParam
-    BOOL xBoolParam
-    STRING strDeviceName
+    udiDeviceId : UDINT 
+    reRealParam : REAL 
+    diDintParam : DINT 
+    xBoolParam : BOOL 
+    strDeviceName : STRING 
   }
 
   class ST_TestDeviceMoreParam {
-    BOOL xMoreBoolParam
-    REAL reMoreRealParam
-    TIME dtElapsedTime
+    xMoreBoolParam : BOOL 
+    reMoreRealParam : REAL 
+    dtElapsedTime : TIME 
   }
 
   ST_TestDevice <|-- ST_TestDeviceMoreParam
@@ -324,11 +336,11 @@ Variant of Inheritance
 {attribute 'strict'}
 TYPE E_MyStates :
 (
-	IDLE 	:= 999,
-	INIT	:= 10,
-	INOP	:= 20,
-	DONE	:= 30,
-	ERROR	:= 40
+  IDLE 	:= 999,
+  INIT	:= 10,
+  INOP	:= 20,
+  DONE	:= 30,
+  ERROR	:= 40
 ) WORD := IDLE;
 END_TYPE
 ```
@@ -348,3 +360,4 @@ classDiagram
 
 </div>
 
+<!--End of this document -->

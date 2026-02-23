@@ -252,7 +252,7 @@ Consider a variable of type ``VAR_IN_OUT`` used for hardware access.
 ```iecst
 FUNCTION_BLOCK PUBLIC FB_U300_D50 IMPLEMENTS I_DeviceMeasureLength
 VAR_IN_OUT
-	hw		: UA_U300_D50;
+  hw : UA_U300_D50;
 END_VAR
 ```
 Accessing a variable of ``hw`` via a method will cause a compiler *Warning*.
@@ -297,12 +297,12 @@ classDiagram
   }
 
 class PRG_MAIN {
-  -FB_Sample fbSample
-  -BOOL bReturnValue
-  -INT nLocalInput1
-  -BOOL bLocalInput2
-  -REAL fLocalOutput1
-  -STRING sLocalOutput2
+  -fbSample : FB_Sample 
+  -bReturnValue : BOOL 
+  -iLocalInput1 : INT 
+  -xLocalInput2 : BOOL 
+  -fLocalOutput1 : REAL 
+  -sLocalOutput2 : STRING 
   }
 
   PRG_MAIN *-- FB_Sample
@@ -332,9 +332,9 @@ When creating the method via the IDE, the following pragma is added: *{warning '
 PROGRAM PRG_MAIN
 VAR
     fbSample      : FB_Sample;
-    bReturnValue  : BOOL;
+    xReturnValue  : BOOL;
     nLocalInput1  : INT;
-    bLocalInput2  : BOOL;
+    xLocalInput2  : BOOL;
     fLocalOutput1 : REAL;
     sLocalOutput2 : STRING;
 END_VAR
@@ -342,9 +342,9 @@ END_VAR
 
 ```iecst
 bReturnValue := fbSample.Method(nIn1  := nLocalInput1,
-                                 bIn2  := bLocalInput2,
-                                 fOut1 => fLocalOutput1,
-                                 sOut2 => sLocalOutput2);
+                                xIn2  := bLocalInput2,
+                                fOut1 => fLocalOutput1,
+                                sOut2 => sLocalOutput2);
 ```
 
 
@@ -607,12 +607,12 @@ Extending a function block relies on the concept of inheritance in object-orient
 ```mermaid
 classDiagram
   class BaseSynchronousMotor {
-    +REAL nominalCurrent
+    +reNominalCurrent : REAL 
     +getCurrent() REAL
   }
 
   class LinearMotor {
-    +REAL nominalForce
+    +reNominalForce : REAL 
     +getForce() REAL
   }
 
@@ -744,13 +744,13 @@ These three use cases are explained below using the **Method** element as an exa
 ```mermaid
 classDiagram
     class FB_Base {
-        +FB_Axis fbAxis
-        +BOOL ExecuteProcess(BOOL bExecuteProcess)
+        +fbAxis : FB_Axis 
+        +ExecuteProcess(BOOL bExecuteProcess) BOOL
     }
 
     class FB_Axis {
-        +BOOL Execute(BOOL bExecute)
-        +BOOL Error
+        +Execute(bExecute : BOOL) BOOL
+        +xError : BOOL
     }
 
     class FB_Extended {
@@ -1006,7 +1006,7 @@ It is useful to implement basic functions or common features of different classe
 ```mermaid
 classDiagram
     class FB_System_Base {
-        UINT nSystemID
+        uiSystemID UINT 
         <<Abstract>> Execute()
     }
     <<Abstract>> FB_System_Base
@@ -1087,12 +1087,12 @@ SUPER^.M_ExtendedAlgo();
 ```mermaid
 classDiagram
     class FB_Count {
-        +INT iCounter
+        +iCounter : INT 
         M_Count()
     }
 
     class FB_CountExtended {
-        +INT iExtendedCounter
+        +iExtendedCounter : INT 
         Execute()
         M_Count()
     }
