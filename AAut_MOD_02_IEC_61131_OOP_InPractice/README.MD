@@ -142,6 +142,13 @@ I_Alarm <|.. FB_OtherSensor
 ```
 </div>
 
+## Pour OO en pratique,
+
+Il faut préciser qu'il n'est possible de faire un array seulement avec une interface.
+
+De même, il n'est possible de faire de l'héritage multiple que avec une interface.
+
+### Expliquer le mécanisme de FB_Init, et en exemple, comment faire pour lui donner un nom au moment de l'instanciation.
 
 # Un cas particulier
 Présentation du labo du 12 mars
