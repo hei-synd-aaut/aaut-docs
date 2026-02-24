@@ -16,139 +16,238 @@
 
 # AAut Module 02 /  OOP en pratique
 
-Nous avons vu dans le module précédent que IEC 61131-3 propose tous les outils standard liés à la programmation orienté objet. Faut-il dès lors nécessairement passer à la programmation orienté objet?
+L'objectif de ce module est de présenter une mise en pratique de la programmation orientée objet dans la perspective IEC 61131-3, en particulier par rapport à une programmation classique VAR_INPUT, VAR_OUTPUT, VAR_IN_OUT et adaptée au comportement purement cyclique d'un programme PLC.
 
-Le mieux est d'aborder la réponse par les 5 piliers de la programmation orienté objet avec la lorgnette du PLC.
+Avec la programmation objet, tous les principes de la programmation objet que l'on retrouve dans d'autres langages de haut niveau tels que C, C++ ou C# sont disponibles, à l'exception de l'allocation dynamique. L'allocation dynamique ne fait toutefois pas partie des principes de base de la programmation orientée objet que sont: **Encapsulation**, **Inheritance**, and **Polymorphism**.
 
-## Les 5 piliers de la programmation orientée objet
-Cette notion n'est pas révolutionnaire, puisque elle date des années 90, avec entre autre précurseur Grady Booch.
+On peut résumer ainsi:
+  - Encapsulataion :arrow_right: **Function Block**.
+  - Inheritance :arrow_right: **Function_Block_Child** ``EXTENDS`` **Function_Block_Child**.
+  - Polymorphism :arrow_right: **Method** or **Property** overriding. C'est ce que nous avons vu dans le cas des méthodes cycliques.
+  
+---
 
-1.  L'**objet** : c'est un des piliers du IEC 61131-3, le Function Block. Extension OOP ou pas. la réponse est <strong style="color:green;">oui</strong>.
+# Notion d'interface
 
-2. **Encapsulation**: l'Encapsulation se justifie dès lors qu'il y a création d'une librairie qui a pu être testée dans les détails pour une large diffusion, dans ce cas <strong style="color:green;">oui</strong>, mais cela dépasse le cadre de ce cours.
-Pour du code pour une machine unique, ou une diffusion limitée, la réponse est **non**, il faut avoir accès rapidement au code pour des raisons de maintenance.
+## Interface d'objet
 
-3. **Héritage**: l'héritage rend le code plus complexe et n'améliore pas la robustesse, ce sera souvent l'inverse. la réponse est <strong style="color:red;">non</strong>, on préférera la composition.
+Une interface est un outil de programmation orientée objet. L'objet Interface décrit un ensemble de prototypes de `Method` et de `Property`. Dans ce contexte, le prototype signifie que la `Method` et la `Property` contiennent uniquement des déclarations, sans implémentation.
 
-> C'est surtout au niveau du comportement, c'est à dire utilisé avec un bloc fonctionnel, que l'héritage peut devenir complexe, c'est pourquoi nous décrirons un petit exemple ci-dessous et que nous décrirons un exemple en travaux pratique. Par contre, l'utilisation pour une structure est simple à coder et à utiliser.
+Ainsi, vous pouvez utiliser différents blocs de fonction avec des propriétés communes de la même manière.
 
-4. **Polymorphisme**: dans le cas du IEC 61131-3, l'Interface peut permettre de simplifier le code et de simplifier sa modularité. La réponse est <strong style="color:green;">oui</strong>. Avec une nuance, on oublie qu'il est en grande partie possible de remplacer une interface par des structures, voir des blocs fonctionnels passés via des variables **VAR_IN_OUT**.
-*On admettra que VAR_IN_OUT n'offre pas autant de souplesse que l'interface.*
+Une interface est une représentation **sans codage**, mais aussi **sans variable** statique, des entrées et sorties d'un Function Block. *On fera ici abstraction d'un programme, puisque l'on ne peut pas hériter d'un autre programme*.
 
-1. L'**abstraction**: voir l'héritage, la réponse est <strong style="color:red;">non</strong>.
-
-# Un cas simple d'interface
-Le principe de l'interface est de définir une seule fois l'interaction qu'un bloc fonctionnel aurra avec un autre.
-
-Prenons l'exemple d'un capteur de distance, nous avons dans le laboratoire 2 capteurs de distance relativement similiaire, mais leur technologie est différente.
-
-- Le premier est basé sur une technologie optique.
-- Le deuxième est basé sur une technologie ultrason.
-
-En interne, les registres des deux capteurs doivent être traités différement, par contre, du point de vue de l'interaction avec l'extérieur, la seule chose qui nous importe, est la mesure de la longueur.
-
-<div align="center">
-
-```mermaid
-classDiagram
-
-  class I_MeasureDistance{
-      + Enable : BOOL
-      + InOp : BOOL
-      + Error  : BOOL
-      GetDistance() 
-  }
-  <<interface>> I_MeasureDistance
-
-  note for I_MeasureDistance "Note Keyword **interface**"
-  note for I_MeasureDistance "Enable, InOp & Error can only be Properties,
-  an interface **has no variables**"
-
-  class FB_OptoSensor {
-    -register : ARRAY [1..3] OF BYTE
-  }
-
-  class FB_SoundSensor {
-    -register : ARRAY [1..4] OF BYTE
-  }
-
-I_MeasureDistance <|.. FB_OptoSensor
-I_MeasureDistance <|.. FB_SoundSensor
-
-```
-</div>
-
-Nous pourrions compléter nos Function Blocks de mesure de distance avec une interface pour traiter les alarmes. En théorie, il serait possible de traiter ou combiner plusieurs interface en une seule de ce type:
+- Une **interface** contient des **propriétés** et des **méthodes**.
+- Une interface peut **hériter** et **être héritée** d'autres interfaces.
+- Un Function Block peut hériter d'**une ou plusieurs interfaces**.
+- On peut créer des **tableaux d'interfaces**.
 
 <div align="center">
 
 ```mermaid
 ---
-title: Bad Interface
+title: UML Schema for simple interface.
 ---
 classDiagram
+    
+    class I_Sensor{ 
+        +GetName : STRING
+        mSensorEnable(enable : BOOL) BOOL
+    }
+    <<interface>> I_Sensor
 
-  class I_MeasureDistance{
-      + Enable : BOOL
-      + InOp : BOOL
-      + Error  : BOOL
-      GetDistance() 
-      GetAlarm()
-  }
-  <<interface>> I_MeasureDistance
+    class I_DistanceSensor{ 
+        +GetDistance : STRING
+        +SetScale : LREAL
+    }
+    <<interface>> I_DistanceSensor
 
+    class I_ColorSensor{ 
+        +GetColor : STRING
+    }
+    <<interface>> I_ColorSensor
+
+    I_Sensor <|-- I_DistanceSensor
+    I_Sensor <|-- I_ColorSensor
 ```
+
 </div>
 
-> L'interface ci-dessus n'est pas très heureux, car il mélange deux choses différentes, la mesure et l'alarme. Nous aurons intérêt à traiter l'alarme comme une entité séparée qui puisse être utilisée pour différents types de mesures.
+
+
+## Propriété d'objet, ``Property``
+
+Une propriété est une extension de la norme CEI 61131-3 et un outil de programmation orientée objet. Elle comprend les méthodes d'accès `Get` et `Set`.
+
+Une Property contient un header et un corp.
+C'est le corp qui décrit comment la Property pourra accéder à la variable interne du Function Block
+
+```iecst
+{attribute 'monitoring' := 'call'}
+PROPERTY GetDistance : LREAL
+```
+
+:bulb: ``{attribute 'monitoring' := 'call'}`` is not a programming language, that is an information to the compiler to ask him to generate artificially a static variable. This is for debug purpose in a watch window.
+
+
+```iecst
+// _lrDistance is the static internal variable of the Function Block
+// optional underscore to indicate that the variable is used for set/get access.
+GetDistance := _lrDistance;
+```
+
+:bulb: d'une certaine manière, une Property est une équivalence plus évoluée d'une variable ``VAR_OUTPUT``. De plus, il est possible de définir plusieurs niveaux d'accès, tels que ``PRIVATE``, ``PROTECTED``, ``PUBLIC``...
+
+Si un Get peut être associé à une variable ``VAR_OUTPUT``, une variable Set peut être associée à une variable ``VAR_INPUT``.
+
+```iecst
+{attribute 'monitoring' := 'call'}
+PROPERTY SetScale : LREAL
+```
+
+```iecst
+// _Scale is the static variable of the function bloc
+_Scale := SetScale;
+```
+
+Pour plus de détail, on peut se référer à la [documentation de référence du module 01](../AAut_MOD_01_IEC_61131_OOP_Introduction/Programmation_IEC_61131_3_FR.md).
+
+### Use
+
+- On créer un Function Block qui utilise une interface.
+- L'implémentation des méthodes ne peut se faire que dans le Function Block qui implémente l'interface, ce qui est logique, puisque encore une fois, **une interface ne contient pas de variable statique**.
+
+```iecst
+FUNCTION_BLOCK FB_Sensor IMPLEMENTS I_DistanceSensor
+VAR
+  _lrDistance : LREAL;
+  _Scale      : LREAL;
+END_VAR
+```
+
+```iecst
+PROGRAM Lab_01_AAut
+VAR
+  mySensor      : FB_Sensor;
+  lrPrgDistance : LREAL;
+END_VAR
+```
+
+```iecst
+mySensor.SetScale := 0.2;
+lrPrgDistance := mySensor.GetDistance;
+```
 
 <div align="center">
 
 ```mermaid
+---
+title: UML Schema for simple interface.
+---
 classDiagram
+    
+    class I_DistanceSensor{ 
+        +GetDistance : STRING
+        +SetScale : LREAL
+    }
+    <<interface>> I_DistanceSensor
 
-  class I_MeasureDistance{
-      + Enable : BOOL
-      + InOperation : BOOL
-      + Error  : BOOL
-      GetDistance() 
-  }
-  <<interface>> I_MeasureDistance
+    class FB_Sensor{
+        -_lrDistance : LREAL
+        -_Scale      : LREAL
+    }
 
-    class I_Alarm{
+    note "UML does not differentiate 
+          between Variable and Property."
 
-      GetAlarm() 
-  }
-  <<interface>> I_Alarm
-
-  class FB_OptoSensor {
-    register : ARRAY [1..3] OF BYTE
-  }
-
-  class FB_SoundSensor {
-    register : ARRAY [1..4] OF BYTE
-  }
-
-  class FB_OtherSensor {
-  }
-
-I_MeasureDistance <|.. FB_OptoSensor
-I_MeasureDistance <|.. FB_SoundSensor
-
-I_Alarm <|.. FB_OptoSensor
-I_Alarm <|.. FB_SoundSensor
-I_Alarm <|.. FB_OtherSensor
-
+    I_DistanceSensor <|.. FB_Sensor
 ```
+
 </div>
 
-## Pour OO en pratique,
+## Méthode d'objet
 
-Il faut préciser qu'il n'est possible de faire un array seulement avec une interface.
+Les méthodes sont une extension de la norme IEC 61131-3 et un outil de programmation orientée objet utilisé pour l'encapsulation des données. Une méthode contient une déclaration et une implémentation. Cependant, contrairement à une fonction, une méthode n'est pas un bloc de programmation indépendant, mais est subordonnée à un bloc de fonction ou à un programme. Une méthode peut accéder à toutes les variables valides du bloc de programmation de niveau supérieur.
 
-De même, il n'est possible de faire de l'héritage multiple que avec une interface.
+Nous avons déjà introduit la notion de [Méthodes dans le module 01](../AAut_MOD_01_IEC_61131_OOP_Introduction/README.md#méthodes). Comme les propriétés, les méthodes peuvent être ``PRIVATE``, ``PUBLIC``, etc...
 
-### Expliquer le mécanisme de FB_Init, et en exemple, comment faire pour lui donner un nom au moment de l'instanciation.
+Pour les détails, on peut se référer au [paragraphe méthodes de la documentation de référence](../AAut_MOD_01_IEC_61131_OOP_Introduction/Programmation_IEC_61131_3_FR.md#object-method).
+
+## Scope of interface
+
+:warning: les méthodes et propriétés d'une interface, ou ``Interface Method`` et ``Interface Property``, sont **obligatoirement publiques**.
+
+> Autrement dit, si la portée des méthodes ou des interfaces d'un bloc fonctionnel doit être limitée à un usage interne, elles ne peuvent pas être implémentées à partir d'une interface.
+
+---
+
+# Notion de abstract
+Un Fonction Block peut être noté comme Abstract si il n'est pas destiné à être instancié. C'est, le terme est à prendre avec des pincettes, une sorte d'intermédiaire entre l'interface et le Function Block.
+
+Voici un exemple
+
+<div align="center">
+
+```mermaid
+---
+title: Example of abstraction  
+---
+classDiagram
+    class I_Pack {
+        +GetState;
+        +GetMode;
+        +SetState(state : DINT) BOOL
+        +SetMode(mode : DINT) BOOL
+    }
+    <<interface>> I_Pack
+
+    class CM_ControlModule {
+        +GetControlModuleID USINT;
+        #mClearing() BOOL
+        #mResetting() BOOL
+        #mStopping() BOOL
+        #mAborting() BOOL
+        #mExecute() BOOL
+    }
+    <<abstract>> CM_ControlModule
+
+    note for CM_ControlModule "# means protected"
+
+    class CM_Gripper {
+        +IsOpen   : BOOL;
+        +IsClosed : BOOL;
+        +SetOpen(time_s : DINT) BOOL;
+        +SetClose(time_s : DINT) BOOL;
+        #mExecute() BOOL
+    }
+
+    I_Pack <|.. CM_ControlModule
+    CM_ControlModule <|-- CM_Gripper
+```
+
+</div>
+
+> Symbol <b style='color:red;'>#</b> Protected : l'accès à la méthode est restreint au bloc de fonctions et à ses dérivées.
+
+Pour revenir a l'exemple ci-dessus. On suppose dans le contexte de PackML qu'un Control Module doit obligatoirement pouvoir réagir en fonction de l'état ou le mode de la machine.
+
+- Il implémente une interface ``I_Pack``.
+- Les méthodes et les propriétés de cette interface seront publique.
+- Un Function Block CM_Control Module qui ne contient rien d'autre que le fonctionnement générique via les méthodes : mClearing, mResetting, mExecute etc.. ne sert à rien, il n'est pas lié au harware et ne fournit aucune fonctionnalité, il est déclaré Abstract.
+- Par contre CM_Gripper permet de piloter une pince. Il peut gràce au polymorphisme redéfinir le comportement de certains états comme mExecute.
+
+---
+
+### FB_Init
+FB_Init, comme son nom ne l'indique pas **est une méthode** que le compilateur Codesys OO inclut automatiquement dans chaque Function Block.
+
+Cette méthode, qui peut être surchargée, permet d'initialiser certaines variables internes du bloc fonctionnel au moment de son instanciation.
+
+Cas particulièrement pratique, attribuer un numéro d'identification unique à une alarme au moment de sa déclaration.
+
+---
 
 # Un cas particulier
-Présentation du labo du 12 mars
+Présentation du labo du 5 mars
+
+<!-- Fin du fichier README.md -->

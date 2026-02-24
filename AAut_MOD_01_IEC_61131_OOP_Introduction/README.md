@@ -47,11 +47,9 @@
     - [Méthodes cycliques](#méthodes-cycliques)
       - [Core of Function Block when Extended](#core-of-function-block-when-extended)
       - [Le cas particulier de VAR\_IN\_OUT](#le-cas-particulier-de-var_in_out)
-      - [Le lien avec les machines d'état.](#le-lien-avec-les-machines-détat)
-      - [Héritage et surchage de méthode](#héritage-et-surchage-de-méthode)
+      - [Méthodes et machines d'état](#méthodes-et-machines-détat)
+      - [Héritage et surcharge de méthode](#héritage-et-surcharge-de-méthode)
     - [Méthodes asynchrones](#méthodes-asynchrones)
-- [Notion de Abstract](#notion-de-abstract)
-- [Exemples d'apprentissage](#exemples-dapprentissage)
 
 # Preamble
 There are two parts in this section the first part explain some basic concepts of OO IEC 61131-3 to understand the PackML OO implementation.
@@ -414,6 +412,8 @@ END_STRUCT
 END_TYPE
 ```
 
+<div align="center">
+
 ```mermaid
 ---
 title: ST_DeviceInfoExtended Extends ST_DeviceInfo   
@@ -430,6 +430,8 @@ classDiagram
 
     ST_DeviceInfo <|-- ST_DeviceInfoExtended
 ```
+
+</div>
 
 :bulb: Nous aurions pu bien sur utiliser la composition pour créer une nouvelle structure du type:
 
@@ -481,6 +483,8 @@ VAR_OUTPUT
 END_VAR
 ```
 
+<div align="center">
+
 ```mermaid
 ---
 title: CM_ValveSensor Extends CM_Valve   
@@ -500,6 +504,8 @@ classDiagram
 
     CM_Valve <|-- CM_ValveSensor
 ```
+
+</div>
 
 :bulb: Comme pour la structure, nous aurions pu bien sur utiliser la composition pour créer une nouvelle structure du type:
 
@@ -711,10 +717,12 @@ SUPER^(io := hwValve);
 
 :bulb: l'utilisation systématique d'une varialble de boucle du type ``uliCountValve := uliCountValve + 1``; même si pas formellement requis peut s'avérer utile en programmation orienté objet. Cela permettra de vérifier rapidement si le Function Block parent est appelé, ou pas.
 
-#### Le lien avec les machines d'état.
+#### Méthodes et machines d'état
 Nous avons mentionné en tout début de module les machines d'état. **Quel est le lien ?**
 
 Prenons une machine d'état minimum selon PackML.
+
+<div align="center">
 
 ```mermaid
 ---
@@ -730,6 +738,8 @@ stateDiagram-v2
   Idle --> Stopped: Stop
 ```
 
+</div>
+
 Ce que nous dit PackML, c'est que chaque équipement, ainsi que la machine ne peuvent se trouver que dans un seul état à la fois, et oblitoirement dans ces états.
 
 Reprenons pour cette exemple une partie du [diagramme P&ID ci-dessus](#pid-schema). Un équipement constitué d'une pompe et d'une vanne.
@@ -742,6 +752,8 @@ Reprenons pour cette exemple une partie du [diagramme P&ID ci-dessus](#pid-schem
     <figcaption>EM_PumpGroup</figcaption>
   </figure>
 </div>
+
+<div align="center">
 
 ```mermaid
 ---
@@ -756,6 +768,7 @@ classDiagram
         -M_Execute()
     }
 ```
+</div>
 
 Une programme simplifié de cet équipement nous donne:
 
@@ -783,10 +796,12 @@ END_CASE
 
 Il suffit ensuite de coder chaqune des méthodes pour que l'équipement fasse ce qu'il est sensé faire dans chacun des états.
 
-#### Héritage et surchage de méthode
+#### Héritage et surcharge de méthode
 C'est sous cette forme que l'on trouve le principal avantage des méthodes que j'appelle **cycliques**, c'est à dire qui peuvent être appelées en continu par l'objet lui-même. Noter le préfixe **-** dans le schéma UML, ce qui indique que **la méthode est privée**.
 
 Supposons maintenant qu'il soit nécessaire de créer une nouvelle version de cette pompe, mais uniquement pour l'état **Execute**. Nous pouvons simplement hériter de la première version pour en créer une deuxième.
+
+<div align="center">
 
 ```mermaid
 ---
@@ -806,6 +821,7 @@ classDiagram
 
     EM_PumpGroup <|-- EM_PumpGroup_V2
 ```
+</div>
 
 En langage IEC 61131-3
 
@@ -831,6 +847,8 @@ Ce que j'appelle une méthode asynchrone, c'est une méthode de type single-shot
 
 Reprenons l'exemple de CM Valve vu ci-dessus, mais remplaçons les deux entrées ``Open`` et ``Close`` par des méthodes. 
 
+<div align="center">
+
 ```mermaid
 ---
 title: CM_ValveSensor Extends CM_Valve   
@@ -852,149 +870,30 @@ classDiagram
     CM_Valve <|-- CM_ValveSensor
 ```
 
+</div>
+
 L'avantage de ces méthodes est que:
-1.  Il est plus simple de modifier uniquement une partie de CM_ValveSensor en modifiant uniquement les méthodes et pas une autre partie cyclique qui, par exemple gérerai des alarmes.
-2.  On peut facilement accéder manuellement à ce Function Block via un protocole comme OPC-UA.
+1. Il est plus simple de modifier uniquement une partie de CM_ValveSensor en changeant seulement les méthodes, plutôt qu'une autre partie cyclique qui, par exemple, gère les alarmes.
+
+2. Ce bloc fonctionnel est facilement accessible manuellement via un protocole comme OPC-UA.
 
 Exemple d'utilisation
 
 ```iecst
 // If Open is TRUE, then execute something
 IF Open(tTimeOut := #T500ms) THEN
-  your code here....
+  ; // Some operation here
 END_IF
 ```
 
----
-
-# Notion de Abstract
-La encore, il ne s'agit pas de rentrer dans les détails de la notion d'abstraction.
-
-L'idée est de montrer ce que l'on peut en faire dans le cadre d'une programmation modulaire.
-
-En IEC 61131-3, il existe la notion d'interface. En quelque mots, une interface permet de faire la liste des méthodes et propriétés qu'un Function Block **doit absolument** implémenter. La particularité de l'interface, c'est qu'elle est purement virtuelle, aucun code n'existe.
-
-```mermaid
----
-title: Interface I_Valve   
----
-classDiagram
-    class I_Valve {
-        +Open(tTimeOut : TIME) BOOL;
-        +Close(tTimeOut : TIME) BOOL;
-    }
-
-    class CM_Valve {
-        +Error;
-    }
-
-    class CM_ValveSensor {
-        +IsOpen   : BOOL;
-        +IsClosed : BOOL;
-    }
-
-    I_Valve <|.. CM_Valve
-    I_Valve <|.. CM_ValveSensor
-```
-
-**Ce qui nous intéresse vraiment ici**, c'est un chemin intermédiaire entre l'interface et le *vrai* Function Block, on le dit **Abstract**.
-
-Un Fonction Block abstrait contient déjà du code, mais il est incomplet, c'est un peu comme si on livrait uniquement un chassis pour une voiture. Concrètement, cela signfie qu'**il n'est pas possible d'instancier un Function Block abstrait**.
-
-Nous reprenons l'exemple [EM_PumpGroup ci-dessus](#héritage-et-surchage-de-méthode) avec surchage de méthode. Simplement nous partons de l'idée que nous auront plusieur Equipment Modules qui partagent la même base.
-
-```mermaid
----
-title: EM_Abstract  
----
-classDiagram
-    class EM_Abstract {
-        -StateComplete BOOL
-        -M_Aborted()
-        -M_Stopped()
-        -M_Idle()
-        -M_Execute()
-    }
-    <<Abstract>> EM_Abstract
-
-    class EM_PumpGroup {
-        -M_Idle()
-        -M_Execute()
-    }    
-
-    class EM_Agitator {
-        -M_Execute()
-    }    
-
-    class EM_PrepareProduct {
-        -M_Execute()
-    }    
-
-    EM_Abstract <|-- EM_PumpGroup
-    EM_Abstract <|-- EM_Agitator
-    EM_Abstract <|-- EM_PrepareProduct
-```
-
-Notre Function Block Abstract ressemble plus ou moins à ceci:
-
-```iecst
-//
-//	www.hevs.ch
-//	Institut Systemes Industriels
-//	Project: 	HEVS Pack 2022
-//	Author:		Cedric Lenoir
-//	Date:		2025 July 17
-//	
-//	Summary:	Control Module Abstract.
-//				Cannot be used directly because of no internal logic 
-FUNCTION_BLOCK ABSTRACT EM_Abstract
-VAR_INPUT
-END_VAR
-VAR_IN_OUT
-  Status_StateCurrent     : DINT;   // has to take the PackTag Status.  StateCurrent
-  Status_ModeCurrent      : DINT;   // has to take the PackTag Status ModeCurrent
-END_VAR
-VAR_OUTPUT
-END_VAR
-VAR
-  // Equipment Module identification.
-  uiUniqueId             : USINT;	
-  // To be set at init with FB_init, Example:
-  usiEquipmentModuleId   : USINT (1..100);
-
-  strEquipmentModuleName : STRING := 'Equipment Module xx';	
-
-  // This Flag is used as result on SC State complete.
-  setSC                  : BOOL;
-  stActing               : ST_Acting;
-  //...
-END_VAR
-```
-
-Cela signifie qu'il n'est pas possible d'instancier directement ``EM_Abstract``.
-Par contre dans ``EM_Absract`` on aura inséré une logique de base qui appelle les différentes méthodes en fonction des états, mais nous créons des méthodes qui ne font rien.
-
-Ensuite, il nous suffit de déclarer nos equipements et de compléter les méthodes des états qui nous intéressent.
-
-```iecst
-FUNCTION_BLOCK EM_Agitator EXTENDS EM_Abstract
-VAR_INPUT
-END_VAR
-VAR_OUTPUT
-END_VAR
-VAR
-  uliEmExampleLoop	: ULINT;	
-END_VAR
-```
+:bulb: dans ce cas, la méthode Open(...), retourne TRUE, si la vanne est ouverte, sinon FALSE.
+  - :smiley: Simplicité de codage une fois que CM_ValveSensor existe.
+  - :rage: impossible de visualiser la valeur de Open dans une fenêtre de watch.
 
 ---
 
-# Exemples d'apprentissage
-Au labo nous allons prendre un ou plusieurs exemples basés sur un Control Module ou un Equipment Module de type Abstract.
 
----
-
-Pour plus de détails, on peut se référer au [document de référence](./README%20Reference.md) ou aux liens qu'il contient.
+> Approfondi dans le Module_02 et validé dans le labo LAB_01.
 
 
 <!-- Fin du fichier README.md -->

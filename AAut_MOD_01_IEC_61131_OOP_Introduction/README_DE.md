@@ -47,11 +47,9 @@
     - [Zyklische Methoden](#zyklische-methoden)
       - [Core of Function Block when Extended](#core-of-function-block-when-extended)
       - [Der Sonderfall von VAR\_IN\_OUT](#der-sonderfall-von-var_in_out)
-      - [Der Zusammenhang mit Zustandsautomaten.](#der-zusammenhang-mit-zustandsautomaten)
+      - [Methoden und Zustandsautomaten.](#methoden-und-zustandsautomaten)
       - [Methodenvererbung und Überladung](#methodenvererbung-und-überladung)
     - [Asynchrone Methoden](#asynchrone-methoden)
-- [Das Konzept der Abstraktion](#das-konzept-der-abstraktion)
-- [Lernbeispiele](#lernbeispiele)
 
 
 
@@ -248,6 +246,8 @@ PackML basiert auf der **ISA-88**-Architektur.
 ### UML in ISA-88
 We have Unit, EM Equipement Module and CM Control Module
 
+<div align="center">
+
 ```mermaid
 ---
 title: ISA-88 Unit, abstract.
@@ -280,7 +280,11 @@ title: ISA-88 Unit, abstract.
 
 ```
 
+</div>
+
 PackML verwendet die ISA-88-Struktur, definiert Zustände und Betriebsmodi, die ISA-88 ähnlich sind, sowie eine Datenstruktur, PackTag, die eine Struktur für den Zugriff auf Maschineninformationen, einschließlich des Alarmsystems, standardisiert.
+
+<div align="center">
 
 ```mermaid
 ---
@@ -310,6 +314,8 @@ title: PackML PackTag Abstract.
     Admin *-- Alarm_typ
 
 ```
+
+</div>
 
 Zusammenfassend lässt sich sagen, dass PackTag, das wir im weiteren Verlauf des Kurses entwickeln und einsetzen werden, die Überwachung unabhängiger Maschinen ermöglicht, idealerweise über das OPC-UA-Protokoll. PackTag ist zudem in OPC-UA standardisiert (https://reference.opcfoundation.org/PackML/v101/docs/), welches eine standardisierte Beschreibung von PackTag bereitstellt.
 
@@ -447,6 +453,8 @@ END_STRUCT
 END_TYPE
 ```
 
+<div align="center">
+
 ```mermaid
 ---
 title: ST_DeviceInfoExtended Extends ST_DeviceInfo   
@@ -463,6 +471,8 @@ classDiagram
 
     ST_DeviceInfo <|-- ST_DeviceInfoExtended
 ```
+
+</div>
 
 :bulb: Wir hätten natürlich auch die Komposition nutzen können, um eine neue Struktur des folgenden Typs zu erstellen:
 
@@ -514,6 +524,8 @@ VAR_OUTPUT
 END_VAR
 ```
 
+<div align="center">
+
 ```mermaid
 ---
 title: CM_ValveSensor Extends CM_Valve   
@@ -533,6 +545,8 @@ classDiagram
 
     CM_Valve <|-- CM_ValveSensor
 ```
+
+</div>
 
 :bulb: Wie bei der Struktur hätten wir natürlich auch die Komposition nutzen können, um eine neue Struktur des folgenden Typs zu erstellen:
 
@@ -744,11 +758,13 @@ SUPER^(io := hwValve);
 
 :bulb: Die systematische Verwendung einer Schleifenvariablen vom Typ ``uliCountValve := uliCountValve + 1`` kann sich, auch wenn sie formal nicht erforderlich ist, in der objektorientierten Programmierung als nützlich erweisen. Dies ermöglicht eine schnelle Überprüfung, ob der übergeordnete Funktionsblock aufgerufen wird oder nicht.
 
-#### Der Zusammenhang mit Zustandsautomaten.
+#### Methoden und Zustandsautomaten.
 
 Wir haben Zustandsautomaten ganz am Anfang des Moduls erwähnt. **Welcher Zusammenhang besteht?**
 
 Betrachten wir einen minimalen Zustandsautomaten gemäß PackML.
+
+<div align="center">
 
 ```mermaid
 ---
@@ -764,6 +780,8 @@ stateDiagram-v2
   Idle --> Stopped: Stop
 ```
 
+</div>
+
 PackML besagt, dass sich jedes Gerät sowie die Maschine selbst jeweils nur in einem Zustand befinden können und in diesem Zustand verbleiben müssen.
 
 Betrachten wir dazu in diesem Beispiel einen Ausschnitt aus dem [oben stehenden R&I-Fließbild](#pid-schema). Ein Gerät besteht aus einer Pumpe und einem Ventil.
@@ -776,6 +794,8 @@ Betrachten wir dazu in diesem Beispiel einen Ausschnitt aus dem [oben stehenden 
     <figcaption>EM_PumpGroup</figcaption>
   </figure>
 </div>
+
+<div align="center">
 
 ```mermaid
 ---
@@ -790,6 +810,8 @@ classDiagram
         -M_Execute()
     }
 ```
+
+</div>
 
 Ein vereinfachtes Programm für diese Geräte ergibt Folgendes:
 
@@ -822,6 +844,8 @@ Hier liegt der Hauptvorteil sogenannter **zyklischer** Methoden. Diese können v
 
 Angenommen, wir benötigen eine neue Version dieser Pumpe, jedoch nur für den Zustand **Ausführen**. Wir können einfach von der ersten Version erben, um eine zweite zu erstellen.
 
+<div align="center">
+
 ```mermaid
 ---
 title: EM_PumpGroup version 2  
@@ -840,6 +864,8 @@ classDiagram
 
     EM_PumpGroup <|-- EM_PumpGroup_V2
 ```
+
+</div>
 
 En language IEC 61131-3
 
@@ -865,6 +891,8 @@ Eine asynchrone Methode ist eine einmalige Methode, die es ermöglicht, eine bes
 
 Nehmen wir das Beispiel des CM-Ventils von oben, ersetzen wir jedoch die beiden Eingänge „Öffnen“ und „Schließen“ durch Methoden.
 
+<div align="center">
+
 ```mermaid
 ---
 title: CM_ValveSensor Extends CM_Valve   
@@ -885,6 +913,7 @@ classDiagram
 
     CM_Valve <|-- CM_ValveSensor
 ```
+</div>
 
 Der Vorteil dieser Methoden liegt darin:
 
@@ -901,137 +930,15 @@ IF Open(tTimeOut := #T500ms) THEN
 END_IF
 ```
 
----
+:bulb: In diesem Fall gibt die Methode Open(...) TRUE zurück, wenn das Ventil geöffnet ist, andernfalls FALSE.
 
-# Das Konzept der Abstraktion
-Wir werden hier nicht näher auf das Konzept der Abstraktion eingehen.
+- :smiley: Vereinfachte Codierung, sobald CM_ValveSensor existiert.
 
-Es geht vielmehr darum, seine Anwendung im Kontext der modularen Programmierung zu demonstrieren.
-
-In IEC 61131-3 wird das Konzept der Schnittstelle definiert. Kurz gesagt, ermöglicht eine Schnittstelle die Auflistung der Methoden und Eigenschaften, die ein Funktionsbaustein implementieren **muss**. Das definierende Merkmal einer Schnittstelle ist ihre rein virtuelle Natur; es existiert kein Code.
-
-```mermaid
----
-title: Interface I_Valve   
----
-classDiagram
-    class I_Valve {
-        +Open(tTimeOut : TIME) BOOL;
-        +Close(tTimeOut : TIME) BOOL;
-    }
-
-    class CM_Valve {
-        +Error;
-    }
-
-    class CM_ValveSensor {
-        +IsOpen   : BOOL;
-        +IsClosed : BOOL;
-    }
-
-    I_Valve <|.. CM_Valve
-    I_Valve <|.. CM_ValveSensor
-```
-
-**Was uns hier wirklich interessiert**, ist ein Zwischenschritt zwischen der Schnittstelle und dem *eigentlichen* Funktionsbaustein; wir nennen ihn **Abstract**.
-
-Ein abstrakter Funktionsbaustein enthält bereits Code, ist aber unvollständig. Es ist vergleichbar mit der Lieferung eines Autochassis ohne weitere Komponenten. Praktisch bedeutet dies, dass **ein abstrakter Funktionsbaustein nicht instanziiert werden kann**.
-
-Wir werden das Beispiel [EM_PumpGroup](#inheritance-and-method-overriding oben) mit Methodenüberladung erneut betrachten. Wir gehen dabei von der Prämisse aus, dass wir mehrere Gerätemodule haben, die dieselbe zugrundeliegende Struktur teilen.
-
-```mermaid
----
-title: EM_Abstract  
----
-classDiagram
-    class EM_Abstract {
-        -StateComplete BOOL
-        -M_Aborted()
-        -M_Stopped()
-        -M_Idle()
-        -M_Execute()
-    }
-    <<Abstract>> EM_Abstract
-
-    class EM_PumpGroup {
-        -M_Idle()
-        -M_Execute()
-    }    
-
-    class EM_Agitator {
-        -M_Execute()
-    }    
-
-    class EM_PrepareProduct {
-        -M_Execute()
-    }    
-
-    EM_Abstract <|-- EM_PumpGroup
-    EM_Abstract <|-- EM_Agitator
-    EM_Abstract <|-- EM_PrepareProduct
-```
-
-Unser Funktionsblock-Abstract sieht in etwa so aus:
-
-```iecst
-//
-//	www.hevs.ch
-//	Institut Systemes Industriels
-//	Project: 	HEVS Pack 2022
-//	Author:		Cedric Lenoir
-//	Date:		2025 July 17
-//	
-//	Summary:	Control Module Abstract.
-//				Cannot be used directly because of no internal logic 
-FUNCTION_BLOCK ABSTRACT EM_Abstract
-VAR_INPUT
-END_VAR
-VAR_IN_OUT
-  Status_StateCurrent     : DINT;   // has to take the PackTag Status.  StateCurrent
-  Status_ModeCurrent      : DINT;   // has to take the PackTag Status ModeCurrent
-END_VAR
-VAR_OUTPUT
-END_VAR
-VAR
-  // Equipment Module identification.
-  uiUniqueId             : USINT;	
-  // To be set at init with FB_init, Example:
-  usiEquipmentModuleId   : USINT (1..100);
-
-  strEquipmentModuleName : STRING := 'Equipment Module xx';	
-
-  // This Flag is used as result on SC State complete.
-  setSC                  : BOOL;
-  stActing               : ST_Acting;
-  //...
-END_VAR
-```
-
-Das bedeutet, dass ``EM_Abstract`` nicht direkt instanziiert werden kann.
-
-Innerhalb von ``EM_Abstract`` wird jedoch eine grundlegende Logik implementiert, die je nach Zustand verschiedene Methoden aufruft. Diese Methoden sind allerdings zunächst inaktiv.
-
-Anschließend müssen wir lediglich unsere Ausrüstung deklarieren und die Methoden für die relevanten Zustände vervollständigen.
-
-```iecst
-FUNCTION_BLOCK EM_Agitator EXTENDS EM_Abstract
-VAR_INPUT
-END_VAR
-VAR_OUTPUT
-END_VAR
-VAR
-  uliEmExampleLoop	: ULINT;	
-END_VAR
-```
+- :rage: Der Wert von Open kann nicht im Überwachungsfenster angezeigt werden.
 
 ---
 
-# Lernbeispiele
-Im Labor werden wir ein oder mehrere Beispiele anhand eines abstrakten Steuermoduls oder eines Gerätemoduls verwenden.
-
----
-
-Weitere Details finden Sie im [Referenzdokument](./README%20Reference.md) oder in den darin enthaltenen Links.
+> Weiter untersucht in [Modul_02](../AAut_MOD_02_IEC_61131_OOP_InPractice/README_DE.MD) und validiert in Übung LAB_01.
 
 
 <!-- Fin du fichier README.md -->

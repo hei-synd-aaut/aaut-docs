@@ -14,6 +14,33 @@ Le cours de base est maintenant en anglais. Par contre, comme **cette version é
 # Full text of IEC 61131-3 OO programming.
 
 Les extensions OOP du 61131-3. Pour plus de détails, [se référer aux notes tirées de la documentation de Beckhoff](#détails-des-extensions-oop-du-61131-3).
+
+## Table des matières
+
+- [Module en français](#module-en-français)
+- [Full text of IEC 61131-3 OO programming](#full-text-of-iec-61131-3-oo-programming)
+    - [Object Method](#object-method)
+    - [Object Property](#object-property)
+    - [Object Interface](#object-interface)
+    - [Differences in OOP languages](#differences-in-oop-languages)
+    - [Interface](#interface)
+    - [Abstract Function Block](#abstract-function-block)
+    - [Mots clés orientés objet du IEC 61131-3](#mots-clés-orientés-objet-du-iec-61131-3)
+- [Détails des extensions OOP du 61131-3](#détails-des-extensions-oop-du-61131-3)
+    - [Object Method](#object-method-1)
+    - [Object Property](#object-property-1)
+    - [Object Interface](#object-interface-1)
+- [Inheritance](#inheritance)
+    - [Héritage d'un bloc fonctionnel](#héritage-dun-bloc-fonctionnel)
+    - [Principe d'héritage](#principe-dhéritage)
+    - [Use Cases pour l'héritage](#use-cases-pour-lhéritage)
+- [Abstract](#abstract)
+- [Super^](#super)
+- [THIS^](#this)
+- [Référence principale](#référence-principale)
+- [Autres références](#autres-références)
+
+
 ## Object Method 
 Les ``Method`` sont une extension de la norme IEC 61131-3 et un moyen de programmation orientée objet utilisé pour l'encapsulation des données. Une méthode contient une déclaration et une implémentation. Cependant, contrairement à une fonction, une méthode n'est pas un bloc de programmation indépendant, mais est subordonnée à un bloc fonctionnel ou à un programme. Une méthode peut accéder à toutes les variables valides du bloc de programmation de niveau supérieur.
 
