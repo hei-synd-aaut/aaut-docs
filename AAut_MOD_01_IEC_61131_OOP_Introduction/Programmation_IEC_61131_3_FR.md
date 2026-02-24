@@ -786,7 +786,7 @@ la structure est la même, mais le comportement change"
 ```iecst
 FUNCTION_BLOCK FB_Base
 VAR
-    fbAxis  : FB_Axis;
+    fbAxis : FB_Axis;
 END_VAR
 ```
 
@@ -794,7 +794,7 @@ END_VAR
 ```iecst
 METHOD ExecuteProcess : BOOL
 VAR_INPUT
-    xExecuteProcess  : BOOL; 
+    xExecuteProcess : BOOL; 
 END_VAR
 ```
 
@@ -865,7 +865,7 @@ Il est utile d'implémenter des fonctions de base ou des points communs de diff�
 ```mermaid
 classDiagram
     class FB_System_Base {
-        iSystemID UINT 
+        uiSystemID UINT 
         <<Abstract>> Execute()
     }
     <<Abstract>> FB_System_Base

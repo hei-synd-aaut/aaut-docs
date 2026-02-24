@@ -913,8 +913,8 @@ classDiagram
 
     FB_Base <|-- FB_Extended
 
-note for FB_Extended "Le diagramme est le même que dans le cas précédent,
-la structure est la même, mais le comportement change"  
+note for FB_Extended "The diagram is the same as in the previous case;
+the structure is the same, but the behavior changes."  
 ```
 
 ##### Function block FB_Base:
@@ -1027,15 +1027,15 @@ note for FB_System_Base "La notation <> indique que Execute est Abstract"
 FUNCTION_BLOCK ABSTRACT FB_System_Base
 ```
 
-The common features of all system modules are implemented in this abstract base class. It contains the non-abstract property ``nSystemID`` and the abstract method ``Execute`` for this purpose:
+The common features of all system modules are implemented in this abstract base class. It contains the non-abstract property ``uiSystemID`` and the abstract method ``Execute`` for this purpose:
 ```iecst
-PROPERTY nSystemID : UINT
+PROPERTY uiSystemID : UINT
 ```
 ```iecst
 METHOD ABSTRACT Execute
 ```
 
-While the implementation of ``nSystemID`` is the same for all systems, the implementation of the ``Execute` method differs for individual systems. 
+While the implementation of ``uiSystemID`` is the same for all systems, the implementation of the ``Execute` method differs for individual systems. 
 
 > Execute est déclaré ``ABSTRACT``.
 
