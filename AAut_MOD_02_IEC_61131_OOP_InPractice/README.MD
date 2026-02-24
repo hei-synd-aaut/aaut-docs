@@ -74,7 +74,6 @@ classDiagram
 </div>
 
 
-
 ## Propriété d'objet, ``Property``
 
 Une propriété est une extension de la norme CEI 61131-3 et un outil de programmation orientée objet. Elle comprend les méthodes d'accès `Get` et `Set`.
