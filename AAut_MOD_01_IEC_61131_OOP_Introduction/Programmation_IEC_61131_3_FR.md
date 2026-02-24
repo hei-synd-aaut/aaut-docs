@@ -194,16 +194,16 @@ Dans la méthode
 ```mermaid
 classDiagram
   class FB_Sample {
-    Method(INT nIn1, BOOL bIn2) : (REAL fOut1, STRING sOut2) BOOL
+    Method(iIn1 : INT, xIn2 : BOOL) : (reOut1 : REAL , strOut2 : STRING)
   }
 
 class PRG_MAIN {
-  -FB_Sample fbSample
-  -BOOL bReturnValue
-  -INT nLocalInput1
-  -BOOL bLocalInput2
-  -REAL fLocalOutput1
-  -STRING sLocalOutput2
+  -fbSample : FB_Sample 
+  -xReturnValue : BOOL
+  -iLocalInput1 : INT 
+  -xLocalInput2 : BOOL 
+  -reLocalOutput1 : REAL 
+  -strLocalOutput2 : STRING 
   }
 
   PRG_MAIN *-- FB_Sample
@@ -213,12 +213,12 @@ class PRG_MAIN {
 ```iecst
 METHOD Method : BOOL
 VAR_INPUT
-    nIn1  : INT;
-    bIn2  : BOOL;
+    iIn1  : INT;
+    xIn2  : BOOL;
 END_VAR
 VAR_OUTPUT
-    fOut1 : REAL;
-    sOut2 : STRING;
+    reOut1 : REAL;
+    strOut2 : STRING;
 END_VAR
 ```
 
@@ -233,19 +233,19 @@ END_VAR
 PROGRAM PRG_MAIN
 VAR
     fbSample      : FB_Sample;
-    bReturnValue  : BOOL;
-    nLocalInput1  : INT;
-    bLocalInput2  : BOOL;
-    fLocalOutput1 : REAL;
-    sLocalOutput2 : STRING;
+    xReturnValue  : BOOL;
+    iLocalInput1  : INT;
+    xLocalInput2  : BOOL;
+    reLocalOutput1 : REAL;
+    strLocalOutput2 : STRING;
 END_VAR
 ```
 
 ```iecst
-bReturnValue := fbSample.Method(nIn1  := nLocalInput1,
-                                 bIn2  := bLocalInput2,
-                                 fOut1 => fLocalOutput1,
-                                 sOut2 => sLocalOutput2);
+bReturnValue := fbSample.Method(iIn1  := iLocalInput1,
+                                xIn2  := xLocalInput2,
+                                reOut1 => reLocalOutput1,
+                                strOut2 => strLocalOutput2);
 ```
 
 
@@ -492,17 +492,17 @@ L'extension d'un bloc fonctionnel repose sur le concept d'héritage dans la prog
 ```mermaid
 classDiagram
   class BaseSynchronousMotor {
-    +REAL nominalCurrent
+    +reNominalCurrent : REAL 
     +getCurrent() REAL
   }
 
   class LinearMotor {
-    +REAL nominalForce
+    +reNominalForce : REAL
     +getForce() REAL
   }
 
   class TorqueMotor {
-    +REAL nominalTorque
+    +reNominalTorque REAL
     +getTorque() REAL
   }  
 
@@ -617,13 +617,13 @@ Ces trois cas d'utilisation sont expliqués ci-dessous à l'aide de l'exemple de
 ```mermaid
 classDiagram
     class FB_Base {
-        +FB_Axis fbAxis
-        +BOOL ExecuteProcess(BOOL bExecuteProcess)
+        +fbAxis : FB_Axis 
+        +ExecuteProcess(BOOL xExecuteProcess) BOOL 
     }
 
     class FB_Axis {
-        +BOOL Execute(BOOL bExecute)
-        +BOOL Error
+        +Execute(BOOL xExecute) BOOL 
+        +Error : BOOL
     }
 
     class FB_Extended {
@@ -647,13 +647,13 @@ END_VAR
 ```iecst
 METHOD ExecuteProcess : BOOL
 VAR_INPUT
-    bExecuteProcess  : BOOL; 
+    xExecuteProcess : BOOL; 
 END_VAR
 ```
 
 ```iecst
-// Calling axis module by passing input parameter "bExecuteProcess" of this method to the input parameter "bExecute" of method "Execute"
-fbAxis.Execute(bExecute := bExecuteProcess);
+// Calling axis module by passing input parameter "xExecuteProcess" of this method to the input parameter "xExecute" of method "Execute"
+fbAxis.Execute(xExecute := xExecuteProcess);
  
 // Setting the return value of this method as inverted error signal of the axis module
 ExecuteProcess := NOT fbAxis.Error;
@@ -687,13 +687,13 @@ END_VAR
 ```mermaid
 classDiagram
     class FB_Base {
-        fbAxis : FB_Axis
-        +ExecuteProcess(bExecuteProcess : BOOL) BOOL
+        FB_Axis : fbAxis
+        +ExecuteProcess(xExecuteProcess : BOOL) BOOL
     }
     
     class FB_Extended {
         fbCylinder : FB_Cylinder
-        +ExecuteProcess(bExecuteProcess : BOOL) BOOL
+        +ExecuteProcess(xExecuteProcess : BOOL) BOOL
     }
 
     FB_Base <|-- FB_Extended
@@ -715,13 +715,13 @@ END_VAR
 ```iecst
 METHOD ExecuteProcess : BOOL
 VAR_INPUT
-    bExecuteProcess  : BOOL; 
+    xExecuteProcess  : BOOL; 
 END_VAR
 ```
 
 ```iecst
-// Calling axis module by passing input parameter "bExecuteProcess" of this method to the input parameter "bExecute" of method "Execute"
-fbAxis.Execute(bExecute := bExecuteProcess);
+// Calling axis module by passing input parameter "xExecuteProcess" of this method to the input parameter "xExecute" of method "Execute"
+fbAxis.Execute(xExecute := xExecuteProcess);
  
 // Setting the return value of this method as inverted error signal of the axis module
 ExecuteProcess := NOT fbAxis.Error;
@@ -739,13 +739,13 @@ END_VAR
 ```iecst
 METHOD ExecuteProcess : BOOL
 VAR_INPUT
-    bExecuteProcess  : BOOL; 
+    xExecuteProcess  : BOOL; 
 END_VAR
 ```
 
 ```iecst
-// Calling cylinder module by passing input parameter "bExecuteProcess" of this method to the input parameter "bExecute" of method "Execute"
-fbCylinder.Execute(bExecute := bExecuteProcess);
+// Calling cylinder module by passing input parameter "xExecuteProcess" of this method to the input parameter "xExecute" of method "Execute"
+fbCylinder.Execute(xExecute := xExecuteProcess);
  
 // Setting the return value of this method as inverted error signal of the cylinder module
 ExecuteProcess := NOT fbCylinder.Error;
@@ -767,13 +767,13 @@ ExecuteProcess := NOT fbCylinder.Error;
 ```mermaid
 classDiagram
     class FB_Base {
-        fbAxis : FB_Axis
-        +ExecuteProcess(bExecuteProcess : BOOL) BOOL
+        - fbAxis : FB_Axis
+        +ExecuteProcess(xExecuteProcess : BOOL) BOOL
     }
     
     class FB_Extended {
-        fbCylinder : FB_Cylinder
-        +ExecuteProcess(bExecuteProcess : BOOL) BOOL
+        -fbCylinder : FB_Cylinder
+        +ExecuteProcess(xExecuteProcess : BOOL) BOOL
     }
 
     FB_Base <|-- FB_Extended
@@ -794,13 +794,13 @@ END_VAR
 ```iecst
 METHOD ExecuteProcess : BOOL
 VAR_INPUT
-    bExecuteProcess  : BOOL; 
+    xExecuteProcess  : BOOL; 
 END_VAR
 ```
 
 ```iecst
-// Calling axis module by passing input parameter "bExecuteProcess" of this method to the input parameter "bExecute" of method "Execute"
-fbAxis.Execute(bExecute := bExecuteProcess);
+// Calling axis module by passing input parameter "xExecuteProcess" of this method to the input parameter "xExecute" of method "Execute"
+fbAxis.Execute(xExecute := xExecuteProcess);
  
 // Setting the return value of this method as inverted error signal of the axis module
 ExecuteProcess := NOT fbAxis.Error;
@@ -811,7 +811,7 @@ ExecuteProcess := NOT fbAxis.Error;
 ```iecst
 FUNCTION_BLOCK FB_Extended EXTENDS FB_Base
 VAR
-    fbCylinder  : FB_Cylinder;
+    fbCylinder : FB_Cylinder;
 END_VAR
 ```
 
@@ -819,16 +819,16 @@ END_VAR
 ```iecst
 METHOD ExecuteProcess : BOOL
 VAR_INPUT
-    bExecuteProcess    : BOOL; 
+    xExecuteProcess : BOOL; 
 END_VAR
 ```
 
 ```iecst
-// Extension: Calling cylinder module by passing input parameter "bExecuteProcess" of this method to the input parameter "bExecute" of method "Execute"
-fbCylinder.Execute(bExecute := bExecuteProcess);
+// Extension: Calling cylinder module by passing input parameter "xExecuteProcess" of this method to the input parameter "xExecute" of method "Execute"
+fbCylinder.Execute(xExecute := xExecuteProcess);
  
 // Setting the return value of this method as inverted error signal of the cylinder module PLUS calling the base method and analyzing its return value 
-ExecuteProcess := NOT fbCylinder.Error AND SUPER^.ExecuteProcess(bExecuteProcess := bExecuteProcess);
+ExecuteProcess := NOT fbCylinder.Error AND SUPER^.ExecuteProcess(xExecuteProcess := xExecuteProcess);
 ```
 
 ---
@@ -865,7 +865,7 @@ Il est utile d'implémenter des fonctions de base ou des points communs de diff�
 ```mermaid
 classDiagram
     class FB_System_Base {
-        UINT nSystemID
+        iSystemID UINT 
         <<Abstract>> Execute()
     }
     <<Abstract>> FB_System_Base
@@ -886,7 +886,7 @@ note for FB_System_Base "La notation <> indique que Execute est Abstract"
 FUNCTION_BLOCK ABSTRACT FB_System_Base
 ```
 
-Les points communs de tous les modules système sont implémentés dans cette classe de base abstraite. Elle contient la propriété non abstraite ``nSystemID`` et la méthode abstraite ``Execute`` pour cela :
+Les points communs de tous les modules système sont implémentés dans cette classe de base abstraite. Elle contient la propriété non abstraite ``iSystemID`` et la méthode abstraite ``Execute`` pour cela :
 ```iecst
 PROPERTY nSystemID : UINT
 ```
@@ -894,7 +894,7 @@ PROPERTY nSystemID : UINT
 METHOD ABSTRACT Execute
 ```
 
-alors que l'implémentation de ``nSystemID`` est la même pour tous les systèmes, l'implémentation de la méthode ``Execute`` diffère pour les systèmes individuels. 
+alors que l'implémentation de ``iSystemID`` est la même pour tous les systèmes, l'implémentation de la méthode ``Execute`` diffère pour les systèmes individuels. 
 
 > Execute est déclaré ``ABSTRACT``.
 
@@ -945,12 +945,12 @@ SUPER^.M_ExtendedAlgo();
 ```mermaid
 classDiagram
     class FB_Count {
-        +INT iCounter
+        +iCounter : INT 
         M_Count()
     }
 
     class FB_CountExtended {
-        +INT iExtendedCounter
+        +iExtendedCounter : INT 
         Execute()
         M_Count()
     }

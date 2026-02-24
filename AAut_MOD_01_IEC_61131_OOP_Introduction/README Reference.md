@@ -8,11 +8,11 @@
 
 [Cédric Lenoir](mailto:cedric.lenoir@hevs.ch)
 
-# AAut Module 04 Overview /  IEC-61131-3 les outils OOP
+# AAut IEC 61131-3 Programming reference
 
 ## Summary
 
-- [AAut Module 04 Overview /  IEC-61131-3 les outils OOP](#aaut-module-04-overview---iec-61131-3-les-outils-oop)
+- [AAut IEC 61131-3 Programming reference](#aaut-iec-61131-3-programming-reference)
   - [Summary](#summary)
 - [IEC 611313-3 OO programming.](#iec-611313-3-oo-programming)
   - [Object Method](#object-method)
@@ -745,11 +745,11 @@ These three use cases are explained below using the **Method** element as an exa
 classDiagram
     class FB_Base {
         +fbAxis : FB_Axis 
-        +ExecuteProcess(BOOL bExecuteProcess) BOOL
+        +ExecuteProcess(BOOL xExecuteProcess) BOOL
     }
 
     class FB_Axis {
-        +Execute(bExecute : BOOL) BOOL
+        +Execute(xExecute : BOOL) BOOL
         +xError : BOOL
     }
 
@@ -774,13 +774,13 @@ END_VAR
 ```iecst
 METHOD ExecuteProcess : BOOL
 VAR_INPUT
-    bExecuteProcess  : BOOL; 
+    xExecuteProcess  : BOOL; 
 END_VAR
 ```
 
 ```iecst
-// Calling axis module by passing input parameter "bExecuteProcess" of this method to the input parameter "bExecute" of method "Execute"
-fbAxis.Execute(bExecute := bExecuteProcess);
+// Calling axis module by passing input parameter "xExecuteProcess" of this method to the input parameter "xExecute" of method "Execute"
+fbAxis.Execute(xExecute := xExecuteProcess);
  
 // Setting the return value of this method as inverted error signal of the axis module
 ExecuteProcess := NOT fbAxis.Error;
@@ -820,12 +820,12 @@ END_VAR
 classDiagram
     class FB_Base {
         fbAxis : FB_Axis
-        +ExecuteProcess(bExecuteProcess : BOOL) BOOL
+        +ExecuteProcess(xExecuteProcess : BOOL) BOOL
     }
     
     class FB_Extended {
         fbCylinder : FB_Cylinder
-        +ExecuteProcess(bExecuteProcess : BOOL) BOOL
+        +ExecuteProcess(xExecuteProcess : BOOL) BOOL
     }
 
     FB_Base <|-- FB_Extended
@@ -847,13 +847,13 @@ END_VAR
 ```iecst
 METHOD ExecuteProcess : BOOL
 VAR_INPUT
-    bExecuteProcess  : BOOL; 
+    xExecuteProcess  : BOOL; 
 END_VAR
 ```
 
 ```iecst
-// Calling axis module by passing input parameter "bExecuteProcess" of this method to the input parameter "bExecute" of method "Execute"
-fbAxis.Execute(bExecute := bExecuteProcess);
+// Calling axis module by passing input parameter "xExecuteProcess" of this method to the input parameter "xExecute" of method "Execute"
+fbAxis.Execute(xExecute := xExecuteProcess);
  
 // Setting the return value of this method as inverted error signal of the axis module
 ExecuteProcess := NOT fbAxis.Error;
@@ -871,13 +871,13 @@ END_VAR
 ```iecst
 METHOD ExecuteProcess : BOOL
 VAR_INPUT
-    bExecuteProcess  : BOOL; 
+    xExecuteProcess  : BOOL; 
 END_VAR
 ```
 
 ```iecst
-// Calling cylinder module by passing input parameter "bExecuteProcess" of this method to the input parameter "bExecute" of method "Execute"
-fbCylinder.Execute(bExecute := bExecuteProcess);
+// Calling cylinder module by passing input parameter "xExecuteProcess" of this method to the input parameter "xExecute" of method "Execute"
+fbCylinder.Execute(xExecute := xExecuteProcess);
  
 // Setting the return value of this method as inverted error signal of the cylinder module
 ExecuteProcess := NOT fbCylinder.Error;
@@ -903,12 +903,12 @@ ExecuteProcess := NOT fbCylinder.Error;
 classDiagram
     class FB_Base {
         fbAxis : FB_Axis
-        +ExecuteProcess(bExecuteProcess : BOOL) BOOL
+        +ExecuteProcess(xExecuteProcess : BOOL) BOOL
     }
     
     class FB_Extended {
         fbCylinder : FB_Cylinder
-        +ExecuteProcess(bExecuteProcess : BOOL) BOOL
+        +ExecuteProcess(xExecuteProcess : BOOL) BOOL
     }
 
     FB_Base <|-- FB_Extended
@@ -929,13 +929,13 @@ END_VAR
 ```iecst
 METHOD ExecuteProcess : BOOL
 VAR_INPUT
-    bExecuteProcess  : BOOL; 
+    xExecuteProcess  : BOOL; 
 END_VAR
 ```
 
 ```iecst
-// Calling axis module by passing input parameter "bExecuteProcess" of this method to the input parameter "bExecute" of method "Execute"
-fbAxis.Execute(bExecute := bExecuteProcess);
+// Calling axis module by passing input parameter "xExecuteProcess" of this method to the input parameter "xExecute" of method "Execute"
+fbAxis.Execute(xExecute := xExecuteProcess);
  
 // Setting the return value of this method as inverted error signal of the axis module
 ExecuteProcess := NOT fbAxis.Error;
@@ -954,16 +954,16 @@ END_VAR
 ```iecst
 METHOD ExecuteProcess : BOOL
 VAR_INPUT
-    bExecuteProcess    : BOOL; 
+    xExecuteProcess    : BOOL; 
 END_VAR
 ```
 
 ```iecst
-// Extension: Calling cylinder module by passing input parameter "bExecuteProcess" of this method to the input parameter "bExecute" of method "Execute"
-fbCylinder.Execute(bExecute := bExecuteProcess);
+// Extension: Calling cylinder module by passing input parameter "xExecuteProcess" of this method to the input parameter "xExecute" of method "Execute"
+fbCylinder.Execute(xExecute := xExecuteProcess);
  
 // Setting the return value of this method as inverted error signal of the cylinder module PLUS calling the base method and analyzing its return value 
-ExecuteProcess := NOT fbCylinder.Error AND SUPER^.ExecuteProcess(bExecuteProcess := bExecuteProcess);
+ExecuteProcess := NOT fbCylinder.Error AND SUPER^.ExecuteProcess(xExecuteProcess := xExecuteProcess);
 ```
 
 ---
