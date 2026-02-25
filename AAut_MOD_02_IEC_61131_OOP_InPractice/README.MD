@@ -21,8 +21,8 @@ L'objectif de ce module est de présenter une mise en pratique de la programmati
 Avec la programmation objet, tous les principes de la programmation objet que l'on retrouve dans d'autres langages de haut niveau tels que C, C++ ou C# sont disponibles, à l'exception de l'allocation dynamique. L'allocation dynamique ne fait toutefois pas partie des principes de base de la programmation orientée objet que sont: **Encapsulation**, **Inheritance**, and **Polymorphism**.
 
 On peut résumer ainsi:
-  - Encapsulataion :arrow_right: **Function Block**.
-  - Inheritance :arrow_right: **Function_Block_Child** ``EXTENDS`` **Function_Block_Child**.
+  - Encapsulation :arrow_right: **Function Block**.
+  - Inheritance :arrow_right: **Function_Block_Child** ``EXTENDS`` **Function_Block_Parent**.
   - Polymorphism :arrow_right: **Method** or **Property** overriding. C'est ce que nous avons vu dans le cas des méthodes cycliques.
   
 ---
@@ -146,7 +146,7 @@ title: UML Schema for simple interface.
 classDiagram
     
     class I_DistanceSensor{ 
-        +GetDistance : STRING
+        +GetDistance : LREAL
         +SetScale : LREAL
     }
     <<interface>> I_DistanceSensor
