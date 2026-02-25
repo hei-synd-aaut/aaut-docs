@@ -22,9 +22,9 @@ Mit der objektorientierten Programmierung stehen alle Prinzipien der objektorien
 
 Zusammengefasst:
 
-- Kapselung: **Funktionsbaustein**.
+- Kapselung: **Funktion Block**.
 
-- Vererbung: **Funktionsbaustein_Kind** erbt von **Funktionsbaustein_Kind**.
+- Vererbung: **Funktion Block Child** erbt von **Funktion Block Parent**.
 
 - Polymorphismus: Überschreiben von **Methoden** oder **Eigenschaften**. Dies haben wir im Fall von zyklischen Methoden beobachtet.
   
@@ -154,7 +154,7 @@ title: UML Schema for simple interface.
 classDiagram
     
     class I_DistanceSensor{ 
-        +GetDistance : STRING
+        +GetDistance : LREAL
         +SetScale : LREAL
     }
     <<interface>> I_DistanceSensor
