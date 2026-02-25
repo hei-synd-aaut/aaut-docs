@@ -23,6 +23,7 @@
   - [Table des matières](#table-des-matières)
   - [Ce qu'il faut retenir](#ce-quil-faut-retenir)
     - [Parutions scientifiques.](#parutions-scientifiques)
+      - [A propos de Module Type Package](#a-propos-de-module-type-package)
     - [Documentations de fournisseurs.](#documentations-de-fournisseurs)
 - [Les états](#les-états)
   - [Pour simplifier](#pour-simplifier)
@@ -66,7 +67,8 @@
       - [Use of Status Parameters](#use-of-status-parameters)
     - [Command](#command-1)
       - [Use of command parameters](#use-of-command-parameters)
-- [Conclusion](#conclusion)
+  - [Conclusion](#conclusion)
+  - [Documents en annexe](#documents-en-annexe)
 
 
 ## Ce qu'il faut retenir
@@ -82,14 +84,22 @@ Il existe bien quelques parutions scientifiques, mais elles sont relativement pa
 
 Il existe un ouvrage intéressant, probablement plus édité: Applying ISA-88 in Discrete and Continuous Manufacturing: *ISBN: 160650200X / 9781606502006, 2011*.
 
+#### A propos de Module Type Package
+
+> Module Type Package, **MTP**, and **PackML** are both modular automation standards designed to increase flexibility, but they target different industries: MTP focuses on Process Automation, *chemical/pharma*, for plug-and-produce integration, while PackML, *PackML - OMAC*, focuses on Discrete Manufacturing, *packaging*, for standardized machine states and data. 
+
+Source: [Cross-Industry State of the Art Analysis of Modular Automation](./documentation/Cross-Industry_State_of_the_Art_Analysis_of_Modular_Automation.pdf)
+
 ### Documentations de fournisseurs.
 Il existe de nombreuses implémentations basée sur la norme révisée de 2022. Nous en citons deux car elles sont complète, bien documentées et directement uilisables, l'une dans le monde Siemens, l'autre dans le monde Codesys.
 
--   SIMATIC OMAC PackML V2022 Mode&State Management and Machine Data Interface.
--   Schneider Electric EcoStruxure Machine Expert PackML Library Guide
+-   [SIMATIC OMAC PackML V2022 Mode&State Management and Machine Data Interface](./documentation/LPMLV2022_SIMATIC_V1_0_en.pdf).
+-   [Schneider Electric EcoStruxure Machine Expert PackML Library Guide](./documentation/SE_EcoStruxure%20Machine%20Expert_PackML_Library%20Guide.pdf).
 
 
 L'implémentation HEVS est complète et fonctionnelle basée sur la version 2022, elle est disponible via les projets fournit en exemple pour les travaux pratique, la documentation est en cours. Elle offre l'avantage d'être complètement ouverte.
+
+---
 
 # Les états
 
@@ -1197,7 +1207,7 @@ PRG_DeviceManager.fb_MFC_1.M_SetFlowrate(Flowrate := PackTag.Command.Parameter_R
 
 ---
 
-# Conclusion
+## Conclusion
 Avec les outils présentés, il est vrai sans rentrer dans les détails, il est possible de développer une machine complexe pour une application industrielle.
 
 Les principaux éléments sont présents, ou disponibles facilement.
@@ -1211,5 +1221,14 @@ Si nécessaire, les outils équivalents sont disponibles chez les principaux fou
 
 ---
 
+## Documents en annexe
+
+1.   [PackML 3.0-based Programming, Allen-Bradley](./documentation/Allen-Bradley_iasimp-qs018_-en-p.pdf).
+1.   [OMAC PackML V2022 for S7-1200 / S7-1500, Siemens](./documentation/LPMLV2022_SIMATIC_V1_0_en.pdf).
+1.   [A low-cost PackML-based control solution for a modular production line, Gasper Music/ScienceDirect](./documentation/ScienceDirect_A%20low-cost%20PackML-based%20control%20solution.pdf).
+2.   [PackML-based Design Pattern for Modular PLC Code, Giacomo Barbieri, Nicola Battilani, Cesare Fantuzzi](./documentation/ScienceDirect_A%20PackML-based%20Design%20Pattern%20for%20Modular%20PLC%20Code.pdf).
+3.   [EcoStruxure Machine Expert PackML Library Guide, Schneider Electric](./documentation/SE_EcoStruxure%20Machine%20Expert_PackML_Library%20Guide.pdf).
+4.   [Cross-Industry State of the Art Analysis of Modular Automation, Grüner, Hoernicke, Fachinger, Grothff, Cordes, Fay](./documentation/Cross-Industry_State_of_the_Art_Analysis_of_Modular_Automation.pdf).
+5.   Online: [TwinCAT 3 | PLC Library: Tc3_PackML_V3](https://infosys.beckhoff.com/english.php?content=../content/1033/tcplclib_tc3_packml_v3/index.html&id=5453235315081156351).
 
 <!--End of file-->

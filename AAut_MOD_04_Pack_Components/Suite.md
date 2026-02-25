@@ -9,4 +9,8 @@
 ---
 
 # Lien
-On trouve le code source mentionné dans ce document, format Codesys pour CtrlX Core PLC 1.20 dans le répertoire suivant: [Aaut-lab-01_2025](https://github.com/hei-synd-aaut/Aaut-lab-01_2025).
+On trouve le code source mentionné dans ce document, format Codesys pour CtrlX Core PLC 1.20 dans le répertoire suivant: [Aaut-lab-01_2026](https://github.com/hei-synd-aaut/aaut_lab_01_2026).
+
+Lab 02, en cours de révision
+
+Lab 03, revu en temps voulu.
