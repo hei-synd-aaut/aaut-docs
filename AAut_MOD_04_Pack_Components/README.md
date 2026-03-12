@@ -54,11 +54,14 @@
     - [FB\_PackStateCmdBoolInterface](#fb_packstatecmdboolinterface)
     - [FB\_PackModeBoolInterface](#fb_packmodeboolinterface)
     - [FB\_PackStatistic](#fb_packstatistic)
-- [PRG\_PackModule\_Template](#prg_packmodule_template)
   - [PLC\_PACK](#plc_pack)
-  - [The template](#the-template)
-    - [Template header](#template-header)
-    - [Template Core](#template-core)
+- [PRG\_Unit](#prg_unit)
+  - [Module](#module)
+    - [EM/CM header](#emcm-header)
+    - [EM/CM Core](#emcm-core)
+    - [Finally: the unit](#finally-the-unit)
+      - [Header of the unit.](#header-of-the-unit)
+      - [Core of the unit](#core-of-the-unit)
 - [PackTag](#packtag)
   - [Aperçu Général](#aperçu-général)
     - [Admin](#admin)
@@ -866,129 +869,326 @@ END_VAR
 
 ```
 
-# PRG_PackModule_Template
-Programming a PackML from scratch could be time consuming, as other implementations, the best way is to start from a model and customize it to your needs.
-
 This implementation is made from experience and use of various implementations, Allen Bradley, Siemens. The philosophy is the same.
 
 ## PLC_PACK
 This program use the Function Blocks described above.
 
-It contains a portion of code where the different SC, State Complete of various modules have to be integrated.
+``whatSC`` is a variable to get **State Complete** from all module from ``PRG_Unit``.
 
 ```iecst
-(*
-	Manage states and mode.
-    Receive a AND of SC of each module
-*)
-whatSC := fbModuleTest.SC 	AND
-          fbModuleOne.SC  	AND
-          fbModuleTwo.SC  	AND
-          fbModuleThree.SC	AND
-          // Try to integrate 3 FB_ModuleAxis from another program
-          // But other Task
-          PRG_Process.fbModuleAxis_X.SC AND
-          PRG_Process.fbModuleAxis_Y.SC AND
-          PRG_Process.fbModuleAxis_Z.SC AND
-          PRG_PackModule_Template.SC;
-```
-
-## The template
--   The main idea is to program the differents states in Actions. **ACT**.
--   Usually, only acting states have to be considered.
--   If you do not need a state, leave the action with default code.
-
-
-```iecst
-(*
-    Manage Completing
-*)
-IF actualState = E_PackState.eCompleting THEN
-    // Set to TRUE if no action requested
-    stActing.Completing_SC := TRUE;
-ELSE
-    stActing.Completing_SC := FALSE;
-END_IF
-
-```
-
-### Template header
-You can use the template as a Program or as a Function Block
-
-```iecst
-PROGRAM PRG_PackModule_Template
-VAR_IN_OUT
-	Status_StateCurrent: DINT;			// has to take the PackTag Status.StateCurrent
+// Abstract
+PROGRAM PLC_PACK // or PLC_PACK_ABox
+VAR_INPUT
+    (*	
+        Link this booleand the state complete of the unit.
+    *)
+    whatSC               : BOOL;
 END_VAR
 VAR
-	/// Store last cycle at the en of FB call to detect and state change
-	/// Used to force minimum of one testSC.In = 0 and reset SC once between each SC
-	stateLastCycie  : E_PackState := E_PackState.eUndefined;
-	actualState     : E_PackState := E_PackState.eAborted;
-	uliLoop         : ULINT;
-	init            : BOOL;
-	testSC          : TON;
-	// This Flag is used as result on SC State complete.
-	setSC           : BOOL;
-	stActing        : ST_Acting;
-	// For test, wait variable TRUE for resetting SC
-	LockResetting   : BOOL;
-END_VAR
+    fbCmdBoolInterface   : FB_PackStateCmdBoolInterface;
+    fbModeBoolInterface  : FB_PackModeBoolInterface;
+    fbPackMaster         : FB_PackMasterState;
+    fbPackMasterMode     : FB_PackMasterMode;
+    fbStopReason         : FB_HEVS_StopReason;
+    fbGetActualBoolState : FB_GetActualBoolState;
+    fbPackStatistic      : FB_PackStatistic;
+```
+---
+
+# PRG_Unit
+Une unité regroupe tous les éléments de l'unité, Equipment Module, constitués si nécessaire de Control Module et appelle les sous programmes.
+
+<div align="center">
+
+```mermaid
+---
+title: PRG_Unit
+---
+
+classDiagram
+    class PRG_Unit {
+	    emRobot : EM_Robot
+        emControSystem : EM_ControlSystem
+	    emConveyor : EM_Conveyor
+    }
+
+    class EM_Robot {
+	    cmAxis_x : CM_ModuleAxis
+	    cmAxis_y : CM_ModuleAxis
+	    cmAxis_z : CM_ModuleAxis_Z
+    }
+
+    PRG_Unit *-- EM_Robot
+    PRG_Unit *-- EM_ControlSystem
+    PRG_Unit *-- EM_Conveyor
 ```
 
-### Template Core
+</div>
+
+Le diagramme de classe est séparé en plusieurs parties pour plus de lisibilité
+
+<div align="center">
+
+```mermaid
+---
+title: EM_Abstract / CM_Abstract
+---
+
+classDiagram
+    class EM_Robot {
+	    cmAxis_x : CM_ModuleAxis
+	    cmAxis_y : CM_ModuleAxis
+	    cmAxis_z : CM_ModuleAxis_Z
+    }
+
+    class EM_Abstract
+    <<Abstract>> EM_Abstract
+
+    class CM_Abstract
+    <<Abstract>> CM_Abstract
+
+    EM_Abstract <|-- EM_Robot
+    CM_Abstract <|-- CM_ModuleAxis
+    CM_Abstract <|-- CM_ModuleAxis_Z
+
+
+```
+</div>
+
+## Module
+Equipment modules and control modules have the same principle
+
+### EM/CM header
+Equipment modules and/or control module receive **state** and **mode** as VAR_IN_OUT, that is references from PackTag.
+
+When the curent state, via ST_Acting is complete, they return the property get **SC**
+
+```iecst
+FUNCTION_BLOCK ABSTRACT EM_Abstract
+VAR_INPUT
+END_VAR
+VAR_IN_OUT
+    Status_StateCurrent     : DINT;   // has to take the PackTag Status.StateCurrent
+    Status_ModeCurrent      : DINT;   // has to take the PackTag Status.ModeCurrent
+END_VAR
+VAR_OUTPUT
+END_VAR
+VAR
+    // Equipment Module identification.
+    uiUniqueId              : USINT;    
+    // To be set at init with FB_init, Example:
+    usiEquipmentModuleId    : USINT (1..100);
+    strEquipmentModuleName  : STRING := 'Equipment Module xx';    
+
+    /// Store last cycle at the en of FB call to detect and state change
+    /// Used to force minimum of one testSC.In = 0 and reset SC once between each SC
+    stateLastCycie           : E_PackState := E_PackState.eUndefined;
+    actualState              : E_PackState := E_PackState.eAborted;
+    actualMode               : E_PackModes := E_PackModes.Manual;
+    init                     : BOOL;
+    testSC                   : TON;
+    // This Flag is used as result on SC State complete.
+    setSC                    : BOOL;
+    stActing                 : ST_Acting;
+```
+
+ST_Acting is composed of the state complete of the different acting states.
+
+```iecst
+TYPE ST_Acting :
+STRUCT
+    Clearing_SC     : BOOL;
+    Starting_SC     : BOOL;
+    Stopping_SC     : BOOL;
+    Aborting_SC     : BOOL;
+    Holding_SC      : BOOL;
+    Unholding_SC    : BOOL;
+    Suspending_SC   : BOOL;
+    Unsuspending_SC : BOOL;
+    Resetting_SC    : BOOL;
+    Completing_SC   : BOOL;
+END_STRUCT
+END_TYPE
+```
+
+### EM/CM Core
 -   There is a timer to delay **SC**, you can remove this timer if needed.
 
 ```iecst
 IF NOT init THEN
     init := TRUE;
 END_IF
+
 actualState := Status_StateCurrent;
+actualMode  := Status_ModeCurrent;
+
+// State machine is implicit because transitions are not set by this FB
+// That is: a CASE OF does not have place here
 
 (*
-	Your code here
-	For code in States, modify the actions. ACT
-	
-	Code for mode is still not impletemented
+   Methods should be call cyclically, to reset commands if state not active.
+   For example to init (or not) the internal state machine. Depending of user implementation.
 *)
 
-ACT_Aborting();
-ACT_Clearing();
-ACT_Completing();
-ACT_Execute();
-ACT_Holding();
-ACT_Resetting();
-ACT_Starting();
-ACT_Stopping();
-ACT_Suspending();
-ACT_Unholding();
-ACT_Unsuspending();
+mAborting();
+mClearing();
+mCompleting();
+mExecute();
+mHolding();
+mResetting();
+mStarting();
+mStopping();
+mSuspending();
+mUnholding();
+mUnsuspending();
 
 (*
-	Footer, do not modify the code below.
-
-	For test of State Machine, we use a timer.
-	Its allow to have some time to visualise it
-	We should remove this timer in production version
+	Manage State Complete at the end of the Function Block
 *)
-testSC(IN := stActing.Clearing_SC       OR
-             stActing.Starting_SC      	OR
-             stActing.Execute_SC       	OR
-             stActing.Stopping_SC      	OR
-             stActing.Aborting_SC      	OR
-             stActing.Holding_SC       	OR
-             stActing.Unholding_SC     	OR
-             stActing.Suspending_SC     OR
-             stActing.Unsuspending_SC   OR
-             stActing.Resetting_SC     	OR
+			
+// For test of State Machine, we use a timer.
+// Its allow to have some time to visualise it
+// We should remove this timer in production version
+testSC(IN := stActing.Clearing_SC     OR
+             stActing.Starting_SC     OR
+             stActing.Stopping_SC     OR
+             stActing.Aborting_SC     OR
+             stActing.Holding_SC      OR
+             stActing.Unholding_SC    OR
+             stActing.Suspending_SC   OR
+             stActing.Unsuspending_SC OR
+             stActing.Resetting_SC    OR
              stActing.Completing_SC,
-        PT := T#500MS); 
-           
+        PT := GVL_UnitParam.C_DelayForStateComplete); 
+
 // State Complete if setSC is TRUE,
 setSC := testSC.Q AND (stateLastCycie = actualState);
 
 // This Statement MUST be written AFTER evaluation of setSC
 stateLastCycie := actualState;
+```
+
+The core of the module call always each acting state, but execute it only if the state is active. 
+
+Example: Clearing in **abstract**, 
+
+```iecst
+(*
+   Manage Clearing
+*)
+IF actualState = E_PackState.eClearing THEN
+   // Set to TRUE if no action requested
+   // Code the acting state here, SC when finished
+   stActing.Clearing_SC := TRUE;
+ELSE
+   stActing.Clearing_SC := FALSE;
+END_IF
+```
+
+The advantage of this construction, it is easy to reset the internal state machine of the acting state if needed, for example, the **clearing of an axis**. See below: ``axisClearing := E_AxisClearing.eIdle``; 
+
+
+```iecst
+// From PLCopen Motion, the axis at start could be
+// Standstill   --> Enabled
+// Disabled      --> Need an enable for SC
+// ErrorStop   --> Need a reset befoire to be enabled
+IF actualState = E_PackState.eClearing THEN
+   CASE axisClearing OF
+      E_AxisClearing.eIdle :
+         IF mcReadStatus.Standstill THEN
+            axisClearing := E_AxisClearing.eEnabled;
+         ELSIF mcReadStatus.ErrorStop THEN
+            axisClearing := E_AxisClearing.eErrorStop;
+         ELSE
+            axisClearing := E_AxisClearing.eDisabled;
+         END_IF
+      
+      E_AxisClearing.eErrorStop :
+         IF mcReadStatus.Standstill THEN
+            axisClearing := E_AxisClearing.eEnabled;
+         ELSIF mcReadStatus.Disabled THEN
+            axisClearing := E_AxisClearing.eDisabled;
+         END_IF
+            IF tonResetAgain.Q THEN
+                axisClearing := E_AxisClearing.eErrorStopAgain;
+            END_IF
+
+      E_AxisClearing.eErrorStopAgain :
+         axisClearing := E_AxisClearing.eErrorStop;            
+      
+      E_AxisClearing.eDisabled  :
+         IF mcReadStatus.Standstill THEN
+            axisClearing := E_AxisClearing.eEnabled;
+         ELSIF mcReadStatus.ErrorStop THEN
+            axisClearing := E_AxisClearing.eErrorStop;
+         END_IF
+      
+      E_AxisClearing.eEnabled   :
+         IF mcReadStatus.ErrorStop THEN
+            axisClearing := E_AxisClearing.eErrorStop;
+         END_IF
+   END_CASE
+   stActing.Clearing_SC := (axisClearing = E_AxisClearing.eEnabled);
+ELSE
+   stActing.Clearing_SC := FALSE;
+   axisClearing := E_AxisClearing.eIdle; 
+END_IF
+```
+Main advantage of this construction with OO: **it is very easy to modify any module by overriding the method** with a child class.
+
+### Finally: the unit
+
+#### Header of the unit.
+
+```iecst
+PROGRAM PRG_Unit
+VAR_INPUT
+    // Some input if needed
+END_VAR
+VAR_OUTPUT
+   sendToPack_SC : BOOL;
+END_VAR
+VAR
+   strUnitName   : STRING := 'Unit X';      
+
+   (*
+      Define your modules here
+   *)
+   emRobot       : EM_Robot(usiEmId := 1);
+   emConveyor    : EM_Conveyor(usiEmId := 2);
+END_VAR
+
+```
+
+#### Core of the unit
+
+```iecst
+IF unitLoop < 1 THEN
+   // Some init here
+    ;
+END_IF
+
+PRG_MapBox();
+PRG_DeviceManager();
+PLC_PACK_ABox();
+
+PRG_GetTime_CtrlX();
+PRG_PackUpdate();
+//
+// My first Equipment Module here
+//
+emRobot(Status_StateCurrent := PackTag.Status.StateCurrent,
+        Status_ModeCurrent := PackTag.Status.UnitModeCurrent);
+
+emConveyor(Status_StateCurrent := PackTag.Status.StateCurrent,
+          Status_ModeCurrent := PackTag.Status.UnitModeCurrent);
+          
+// AND of each Equipement Module propery SC          
+PLC_PACK_ABox.whatSC := emRobot.SC   AND
+                        emConveyor.SC;               
+           
 ```
 
 ---
@@ -1122,6 +1322,10 @@ classDiagram
 </div>
 
 #### Use of Status Parameters
+
+In the PackML HEVS implementation, all access to PackTag parameters is grouped within a ``PRG_PackUpdate`` program. The advantage is that all accesses are grouped in the same file, and it is relatively easy to use a code generator to manage the parameter metadata, **ID**, **Name**, **Unit**.
+
+Furthermore, since each parameter has a fixed index in an array, it is easier to control these indexes in a single source.
 
 ```iecst
 PackTag.Status.Parameter_String[6].ID := 1306;
