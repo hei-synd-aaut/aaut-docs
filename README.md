@@ -106,3 +106,7 @@ Ce document explore les principes de sécurité des machines, en mettant l'accen
 
 ## AAut [Annex 01, System engineering](./AAut_Annex_01_System_Engineering/README.md).
 Some tools to work with UML diagrams in Visual Studio Code, including OO Class diagrams.
+
+## [Lab-report-template](./Lab_Report_Template/README.md).
+
+<!-- end of this document -->
