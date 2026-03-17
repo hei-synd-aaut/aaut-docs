@@ -2,11 +2,14 @@
   <br>
   <img src="./img/hei-en.png" alt="Logo HEI-Vs" width="350">
   <br>
-  Base d'Automatisation Industrielle
+  HEI-Vs Engineering School <h2>AAut Advanced Automation</h2>
   <br>
 </h1>
 
 Cours AutB
+
+
+[Node-RED OPU_UA Hands-On](./opc_ua_node_red_hands_on/HEVS_Version_Of_UA_Tutorial.md)
 
 # Module 12.1 Node-RED
 *Programmation basée sur les événements*
@@ -19,7 +22,6 @@ Cours AutB
          width="400">
   <figcaption>OpenJS Foundation: <a href="https://openjsf.org/">OpenJS</a></figcaption>
 </figure>
-
 
 
 # Introduction

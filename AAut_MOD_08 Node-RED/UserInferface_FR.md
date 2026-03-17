@@ -1,7 +1,7 @@
 <h1>
   <img src="./img/hei-en.png" alt="Logo HEI-Vs" width="350">
-  <br>  Base d'Automatisation Industrielle
-    <h2>Interfaces</h2>
+  <br>
+  HEI-Vs Engineering School <h2>AAut Advanced Automation</h2>
   <br>
 </h1>
 

@@ -92,8 +92,13 @@ Ce module traite de la norme **ISA-88** pour la modélisation et la gestion des 
 ## AAut [MOD 06 GMP](/AAut_MOD_06_Specification/README.md)
 Une introduction sur la spécification des processus pour l'automatisation, couvrant des concepts tels que les **V-Diagram**, **GMP**, GAMP® 5, et le cycle de vie des systèmes automatisés. Il explique l'importance des spécifications, les différentes composantes d'un système, et les principes de gestion de la qualité. Le document inclut également des exemples pratiques, des exercices, et des annexes pour aider à la rédaction des spécifications **URS**, **FS**, et **DS**. Enfin, il aborde les tests de validation, les **coûts des changements**, et fournit des ressources supplémentaires pour approfondir les connaissances.
 
+## AAut Module 7 [Node-RED and OpcUa Hands-On](./AAut_MOD_08%20Node-RED/opc_ua_node_red_hands_on/HEVS_Version_Of_UA_Tutorial.md)
 
-## AAut Modules 7/8/9 à revoir selon l'avancement du cours.
+## AAut Modules 8 [Node_RED](./AAut_MOD_08%20Node-RED/README.md)
+[Node_RED DE](./AAut_MOD_08%20Node-RED/README_DE.md)
+
+## AAut Modules 9 [OT Security](./AAut_MOD_09%20OPC-UA%20&%20OT%20Security/README.md)
+[OT Security DE](./AAut_MOD_09%20OPC-UA%20&%20OT%20Security/README_DE.md)
 
 
 ## AAut [Module 10, PackSafety](./AAut_MOD_10_Pack_Safety/)
