@@ -39,7 +39,7 @@ Que l'on se place du côté du client qui veut automatiser un système, ou de l'
 ## Ce qu'il faut savoir
 - Identifier les différentes composantes d'un système de spécifications.
 - Etablir une liste de spécifications simples.
-- Comprendre le foncionnement du diagramme en V.
+- Comprendre le fonctionnement du diagramme en V.
 - Comprendre et appliquer quelques principes pour une Bonnes Pratiques de Fabrication Automatisées.
 - Plus précisément être capable de construire les différents éléments d’un diagramme en V et une FMEA
 
@@ -59,8 +59,10 @@ Que l'on se place du côté du client qui veut automatiser un système, ou de l'
 
 *	**GMP (Good Manufacturing Practices)** sont des directives qui fournissent un cadre pour garantir que les produits sont fabriqués de manière cohérente et contrôlée selon des normes de qualité appropriées. Dans le cadre de l'automatisation des processus, GMP se concentre sur la validation et la vérification des systèmes automatisés pour s'assurer qu'ils fonctionnent correctement et de manière fiable. Cela inclut la documentation rigoureuse des spécifications, des tests et des procédures de maintenance pour garantir que les systèmes automatisés répondent aux exigences réglementaires et de qualité tout au long de leur cycle de vie.
 
+---
+
 # Introduction
-Le titre de ce chapitre aurait pu être, **Good Manufacturing Practices**, **GMP**, ou, Bonnes Pratiques de Fabrication BPF. Dans la pratique on retrouve l’utilisation de ces acronymes dans toute une série de publications qui sont destinées à garantir la bonne qualité de fabrication de produits. Elles ne sont pas utilisées dans tous les domaines, mais, dans de nombreux autres elles sont imposées par des normes destinées à satisfaire des réglementation.
+Le titre de ce chapitre aurait pu être, **Good Manufacturing Practices**, **GMP**, ou, Bonnes Pratiques de Fabrication BPF. Dans la pratique on retrouve l’utilisation de ces acronymes dans toute une série de publications qui sont destinées à garantir la bonne qualité de fabrication de produits. Elles ne sont pas utilisées dans tous les domaines, mais, dans de nombreux autres elles sont imposées par des normes destinées à satisfaire des réglementations.
 
 ## GMP
 La terminologie GMP est surtout utilisée dans les domaines suivants :
@@ -89,12 +91,14 @@ Pour prendre un exemple valaisan, la fabrication de l’aluminium.
 ### Composants pour l’automobile
 Les contraintes sont particulièrement marquées pour la disponibilité de la machine.
 
-> Dans la réalité, de nombreuses entreprises du monde de l'automation, continuent à utiliser les principes GMP après les avoir intégrés pour des projets dans le monde pharmaceutique. Le raisonnement est simple: *Une fois que l'entreprise et les collaborateurs ont assimilé les principaes de base GMP et que le système de qualité est prêt, la qualité des projets non liés au monde pharmaceutique bénéficient d'une amélioration de la qualité, ce qui permet souvent en finalité à l'entreprise d'améliorer sa rentabilité.*
+> Dans la réalité, de nombreuses entreprises du monde de l'automation, continuent à utiliser les principes GMP après les avoir intégrés pour des projets dans le monde pharmaceutique. Le raisonnement est simple: *Une fois que l'entreprise et les collaborateurs ont assimilé les principes de base GMP et que le système de qualité est prêt, la qualité des projets non liés au monde pharmaceutique bénéficie d'une amélioration de la qualité, ce qui permet souvent en finalité à l'entreprise d'améliorer sa rentabilité.*
+
+---
 
 #	Le cycle de vie
 
 ##	Motif
-### Pourquoi commencer par parler du GMP dans un cours d’automatisation ?
+### Pourquoi parler du GMP dans un cours d’automatisation ?
 Principalement parce que comme système de qualité, il décrit le cycle de vie de la machine automatisée. **L’ensemble du processus de développement** de l’automation fait partie du cycle de la machine. En d’autres termes et dans l’idéal, on ne peut pas valider un médicament si la partie automatique de la machine de production de ce médicament n’a pas été développé en tenant compte de ces impératifs.
 
 La première chose que fera probablement un cabinet de conseil en qualité mandaté pour une journée de formation sera de vous parler de ce client qui leur téléphone un beau jour pour leur demander de venir valider la machine qu’ils destinent à l’emballage d’un médicament.
@@ -105,18 +109,20 @@ Il est très peu probable qu’une machine ne soit validée que « après coup �
 Là encore, une mise en conformité du cycle de développement d’un projet de développement sera sans doute beaucoup plus couteuse si elle doit être greffer sur un processus existant, voire inexistant.
 
 ##	La certification n’est pas un frein à l’innovation
-Pour prendre l’exemple de la FDA, loin d’être un frein à l’innovation en mettant des bâtons dans les rouages de la créativité des ingénieur fournit des programmes d’aide à l’innovation.
+Pour prendre l’exemple de la FDA, loin d’être un frein à l’innovation en mettant des bâtons dans les rouages de la créativité des ingénieurs fournit des programmes d’aide à l’innovation.
 https://www.fda.gov/about-fda/cdrh-innovation/activities-support-medical-device-innovators
 Les organes de certification ne sont pas des policiers, ce sont des partenaires pour aider les ingénieurs à améliorer leurs processus de développement.
 
 ### Deux exemples:
-La fréquence du réseau électrique est de 50 [Hz]. Vous pouvez bien sur équiper votre machine d'un convertisseur AC/DC puis un générateur à 133 [Hz] pour différentes raisons, à voir si vos client seront intéressé par votre liberté novartrice.
+La fréquence du réseau électrique est de 50 [Hz]. Vous pouvez bien sur équiper votre machine d'un convertisseur AC/DC puis un générateur à 133 [Hz] pour différentes raisons. A voir si vos clients seront intéressés par votre liberté créatrice.
 
 La norme ISA-TR88.00.02-2022, Machine and Unit States: An implementation example of ISA-88.00.01 que nous aborderons par la suite. C'est un document de 112 pages qui décrit le fonctionnement d'une machine. Si vous décidez d'utiliser votre propre standard, il vous appartiendra à vous de définir et rédiger l'équivalent de ce document pour votre machine. A vous de voir si le temps consacré à ce document n'ampute pas le crédit que vous auriez pu consacrer à votre innovation...
 
+---
+
 #	Le système d’assurance qualité
 ## Pourquoi parler de l'assurance qualité en automation ?
-Ce paragraphe est destiné à comprendre que la partie automation n'est qu'une des étapes de développement d'une machine qui non seulement devra fonctionner au moment de sa mise en service, mais que son fonctionnement devra être maintenu et amélioré tout au long de son cycle de vie et même au delà. Ce cycle de vie va d'une dizaine d'année dans l'industrie des machines, à plusieurs dizaines d'années dans la production d'énergie.
+Ce paragraphe est destiné à comprendre que la partie automation n'est qu'une des étapes de développement d'une machine qui non seulement devra fonctionner au moment de sa mise en service, mais que son fonctionnement devra être maintenu et amélioré tout au long de son cycle de vie et même au-delà. Ce cycle de vie va d'une dizaine d'année dans l'industrie des machines, à plusieurs dizaines d'années dans la production d'énergie.
 
 QMS Qualité Management Process décrit les processus.
 
@@ -174,9 +180,11 @@ La continuité des activités consiste à planifier et à mettre en œuvre des m
 ## Quelques exemples.
 > Si une machine produit des pièces pour l'industrie automobile, chaque pièce produite se vera attribuer un numéro de série que l'on pourra relier à un lot de pièces envoyées à un client. Dans le cas où un défaut détecté ultérieurement présenterait un défaut pour l'utilisateur final, on pourrait demander à consulter si les différents tests effectués lors de la production étaient conformes. Même si la machine a été mise en service entre temps. Voir ci-dessus, les notions d'archivage et d'enregistrement. L'automaticien aura donc du enregistrer et archiver les tests, mais aussi garantir que le format de données des enregistrements puisse être garanti sur le long terme.
 
-> Dans un monde idéal, la machine sera parfaite. Dans la pratique, il est probable qu'à un moment donné il soit nécessaire d'analyser puis de modifier une composantes logicielle. La lisibilité d'un programme est autant importante que sa fonctionnalité. C'est pour cette raison que même un programme fonctionnel pourra être refusé si sa lisibilité ne présente pas un niveau de qualité suffisant.
+> Dans un monde idéal, la machine sera parfaite. Dans la pratique, il est probable qu'à un moment donné il soit nécessaire d'analyser puis de modifier une composante logicielle. La lisibilité d'un programme est autant importante que sa fonctionnalité. C'est pour cette raison que même un programme fonctionnel pourra être refusé si sa lisibilité ne présente pas un niveau de qualité suffisant.
 
-> Comme il a été décrit ci-dessus, la durée de vie d'une machine ou d'une installation peut se compter en dizaines d'années. Au moment de sélectionner les éléments d'un système d'automation, il sera important de se poser la question suivante: le fournisseur sélectionné est-il apte à garantir un support, et le cas échéant un remplacement d'un élément dans dix ans? On peut ajouter la notion suivante, sachant que: Après moi le déluge n'est pas une option. La documentation est-elle suffisantes pour qu'un ingénieur avec une formation adéquate puisse intervenir sur la machine?
+> Comme il a été décrit ci-dessus, la durée de vie d'une machine ou d'une installation peut se compter en dizaines d'années. Au moment de sélectionner les éléments d'un système d'automation, il sera important de se poser la question suivante: le fournisseur sélectionné est-il apte à garantir un support, et le cas échéant un remplacement d'un élément dans dix ans? On peut ajouter la notion suivante, sachant que: Après moi le déluge n'est pas une option. La documentation est-elle suffisante pour qu'un ingénieur avec une formation adéquate puisse intervenir sur la machine?
+
+---
 
 # Spécifications, principes généraux
 
@@ -266,6 +274,8 @@ Le diagramme en V est structuré de manière à représenter les différentes ph
 
 En résumé, le diagramme en V est une méthodologie éprouvée qui aide à garantir que les systèmes développés répondent aux exigences des utilisateurs et sont correctement validés à chaque étape du cycle de vie du projet.
 
+---
+
 # Traçabilité
 La traçabilité est un élément fondamental pour démontrer la conformité réglementaire. Dans la terminologie ISO, Organisation internationale de normalisation, la traçabilité démontre que le design d’entrée est validé pour le design de sortie et a été vérifié.
 
@@ -279,11 +289,13 @@ Dans certains systèmes très complexes, on pourra aller jusqu'à utiliser une M
   </figure>
 </div>
 
-> Toute cette phase documentaire ne garanti pas que votre machine fonctionne bien, mais que vous ayez **vérifié** si chaque élément fonctionne.
+> Toute cette phase documentaire ne garantit pas que votre machine fonctionne bien, mais que vous ayez **vérifié** si chaque élément fonctionne.
 
 > Il ne sert strictement à rien de rédiger ce genre de spécifications après avoir construit la machine. Le principe GMP veut vérifier que vous ayez construit votre machine dans les règles de l'art, **ce qui interdit une documentation rédigée à postériori** et empechera toute certification.
 
 > **Les meilleurs projets de bachelor en automation sont ceux qui ont utilisé de la manière la plus stricte le principe GMP et le diagramme en V !**
+
+---
 
 # URS ou User Request Specification
 |User Requirements Specification |Functional Specification |Design Specification |Test protocol|
@@ -337,7 +349,7 @@ Parce que les URS sont écrits en langage conversationnel, plutôt que dans une 
 *	Others
 
 ##	Exemple pour un banc de test.
-Ici, on suppose que les éléments ont déjà été sélectionnés par le client et que le client fournit un diagramme de type P&ID. **piping and instrumentation diagram** avec les différenta appareils. Le client fournit une spécification pour la réalisation du système de pilotage via un PLC.
+Ici, on suppose que les éléments ont déjà été sélectionnés par le client et que le client fournit un diagramme de type P&ID. **piping and instrumentation diagram** avec les différents appareils. Le client fournit une spécification pour la réalisation du système de pilotage via un PLC.
 
 <figure>
   <img src="./img/PandID_GasUnit.png"
@@ -345,9 +357,9 @@ Ici, on suppose que les éléments ont déjà été sélectionnés par le client
   <figcaption>P&ID Gas Unit</figcaption>
 </figure>
 
-Les différentes éléments **SV** Safety Valave, **FC** Flow Controller, **FT** Flow Transmitter, **TT** Temperature Transmitter et **TE** Temperature Element [sont définis selon un lexique P&ID](AAut_MOD_02_Specification_PandID_Table.md).
+Les différentes éléments **SV** Safety Valve, **FC** Flow Controller, **FT** Flow Transmitter, **TT** Temperature Transmitter et **TE** Temperature Element [sont définis selon un lexique P&ID](AAut_MOD_02_Specification_PandID_Table.md).
 
-Les abréviations **MFM** et **MFC** sont des des insturments de type Mass Flow Measurment et Mass Flow Controller. 
+Les abréviations **MFM** et **MFC** sont des des instruments de type Mass Flow Measurment et Mass Flow Controller. 
 
 ### Banc de test gaz, User Request Specification
 
@@ -375,6 +387,7 @@ Le document [suivant donne quelques indications de syntaxe pour l'écriture corr
 
 On notera qu'il existe un débat chez les anglophones pour savoir si il convient d'utiliser le verbe **shall** ou **must**, débat qui n'existe pas chez les francophones, le verbe se traduisant dans les deux cas par **devoir**.
 
+---
 
 #	 FS Functional Specification
 |User Requirements Specification |Functional Specification |Design Specification |Test protocol|
@@ -397,7 +410,7 @@ La spécification fonctionnelle devrait, dans la mesure du possible, éviter une
 
 > Il arrive souvent qu'une partie de la FS, voir DS soient inclus dans l'URS. Ceci pour plusieurs raisons.
 
-> **Premier exemple**: le client connait déjà suffisament bien son processus et souhaite le reproduire.
+> **Premier exemple**: le client connait déjà suffisamment bien son processus et souhaite le reproduire.
 
 > **Deuxième exemple**: le client dispose de personnel maintenance avec des connaissance avancée avec un type de PLC et souhaite rester dans la même gamme de produits.
 
@@ -408,6 +421,8 @@ De même, pour les petits projets, il est souvent plus pratique de combiner la s
 ##	Anticipate testing
 En gros cela signifie que l’on écrit plus ou moins les IQ et OQ en même temps que les FS. Ou juste après.
 On écrit la FS puis pour chaque point de la FS, on écrit comment on va tester. Nous y reviendrons plus bas dans les différents niveaux de test.
+
+---
 
 # DS Design Specification
 |User Requirements Specification	|Functional Specification	|Design Specification	|Test protocol|
@@ -433,10 +448,10 @@ Si on fait le lien avec le model S88, il faut se représenter le fait que la SDS
 ##	Software Design Specification
 La SDS peut prendre un temps considérable si elle est complétée élément par élément.
 Il est aussi à considérer dès le design, que chaque module software devra être testé. Dans la pratique, on pourra définir la SDS conjointement avec le document qui servira à le tester.
-Un exemple concret est de concevoir la SDS sous la forme d’un tableur qui permettra ensuite d’exporter sous une forme imprimable la liste des fonctionnalité à tester.
+Un exemple concret est de concevoir la SDS sous la forme d’un tableur qui permettra ensuite d’exporter sous une forme imprimable la liste des fonctionnalités à tester.
 
 ###	Liste des entrées sorties
-Toutes les entrées et sorties doivent être référencées et nommées. On peut par exemple aisément les réaliser sous forme de tableau Excel. Souvent il existe dans les environnement de développement des fonctionnalités qui permettent d’importer ou exporter ses listes, nommées par exemple « Tags ».
+Toutes les entrées et sorties doivent être référencées et nommées. On peut par exemple aisément les réaliser sous forme de tableau Excel. Souvent il existe dans les environnements de développement des fonctionnalités qui permettent d’importer ou exporter ses listes, nommées par exemple « Tags ».
 
 ###	Alarmes
 La liste de alarmes doit être complète et numérotée. Chaque alarme doit être testée. La aussi, dans les environnements de développement des PLC il est en général possible d’importer et/ou exporter des listes d’alarmes.
@@ -449,6 +464,8 @@ A ce niveau, un concept modulaire peut fournir un avantage déterminant car les 
 Dans une large mesure, les « Equipment’s Modules » assurent des tâches fonctionnelles.
 Voir model S88 de ce cours.
 
+---
+
 ##	Hardware Design Specification
 La HDS décrit l'architecture et la configuration matérielles, y compris les réseaux. Le HDS doit, par exemple, définir les points énumérés ci-dessous. Cette spécification est utilisée ultérieurement comme base de test pour la vérification.
 *	Schéma de présentation du matériel, structure et organisation du système
@@ -459,6 +476,8 @@ La HDS décrit l'architecture et la configuration matérielles, y compris les r�
 *	Synchronisation de l'heure pour le matériel (SICLOCK)
 *	Configuration du lecteur de codes-barres
 *	Appareils de terrain, capteurs, électrovannes, moteurs,
+
+---
 
 #	 Design Review
 
@@ -477,7 +496,7 @@ On trouve aussi la définition suivante : FMECA, Failure Mode, Effects, and Crit
 De manière générale et simplifiée, c’est une matrice d’analyse de risque.
 
 ###	Méthode
-Le principe de la méthode FMEA consiste à recenser toutes les causes potentielles de chaque mode de défaillance. Ensuite, il est nécessaire d’évaluer la criticité des mode de défaillance. La criticité est obtenue par une triple cotation.
+Le principe de la méthode FMEA consiste à recenser toutes les causes potentielles de chaque mode de défaillance. Ensuite, il est nécessaire d’évaluer la criticité des modes de défaillance. La criticité est obtenue par une triple cotation.
 
 *	La Gravité **G** ou sévérité de l’effet du défaut ou de la défaillance.
 *	L’Occurrence **O** ou fréquence d’apparition de la cause,
@@ -539,7 +558,9 @@ On constate que les risques **R1**, **R3** ont un niveau qui n’est pas accepta
 </figure>
 
 ### Commentaire
-Mieux vaut une analyse de risque relativement simple mais qui sera utilisée, qu'une analyse trop complexe qui ne sera pas mise en oeuvre, justement en raison de sa complexité. Le canevas Excel basé sur Innosuisse est [mis en disposition dans la documentation en ligne de ce cours](./documentation/A%20exemple%20of%20FMEA%20from%20Innosuisse.xlsx).
+Mieux vaut une analyse de risque relativement simple mais qui sera utilisée, qu'une analyse trop complexe qui ne sera pas mise en œuvre, justement en raison de sa complexité. Le canevas Excel basé sur Innosuisse est [mis en disposition dans la documentation en ligne de ce cours](./documentation/A%20exemple%20of%20FMEA%20from%20Innosuisse.xlsx).
+
+---
 
 #	Tests
 Dans un projet de validation, les plans de test ou les protocoles de test sont utilisés pour démontrer qu'un système répond aux exigences précédemment établies dans les documents de spécification, de conception et de configuration.
@@ -564,7 +585,7 @@ Vérifie que les systèmes se trouvent sur des machines adaptées pour exécuter
 Vérifie que les systèmes fonctionnent comme prévu. Les OQ testent les FS, Functional Specification, ou exigences fonctionnelles.
 
 ##	PQ Performance Qualifications
-Vérifie que les systèmes exécutent des tâches dans des conditions réelles. Les tests PQ vérifient les fonctionnalité décrites dans les URS, User Requirements Specification ou exigences de l'utilisateur.
+Vérifie que les systèmes exécutent des tâches dans des conditions réelles. Les tests PQ vérifient les fonctionnalités décrites dans les URS, User Requirements Specification ou exigences de l'utilisateur.
 
 ###	FAT Factory Acceptance Test
 Signifie le test d’acceptance du client dans la fabrique. Ici, fabrique est à comprendre dans le sens du site de fabrication de la machine dans le cas où une machine est assemblée chez le fournisseur de la machine. Le terme FAT est en partie relié au PQ et à l’OQ.
@@ -573,6 +594,8 @@ Vu du point de vue du comptable, la réussite de la FAT conditionne parfois pour
 
 ###	SAT Site Acceptance Test
 Test acceptance sur site, cela correspond à valider dans l’environnement final les tests OQ et PQ qui n’auraient pas pu être réalisé sur le site de fabrication de la machine.
+
+---
 
 #	 Coût des changements
 ##	Coût pendant le cycle de vie
@@ -583,11 +606,14 @@ Une erreur détectée au moment de l’écriture de l’URS aura un impact beauc
 ###	Risques et coûts techniques
 Contrairement à ce que l’on pourrait penser, les risques techniques au moment de l’implémentation « Bug » on impact négligeable sur le développement du projet par rapport aux défauts liés aux URS.
 
-> En d’autres termes et pour répéter la même chose, une erreur majeur pendant l’écriture de l’URS, ou une URS incomplète conduira très probablement à un dépassement du budget ou dépassement des délais établis.
+> En d’autres termes et pour répéter la même chose, une erreur majeure pendant l’écriture de l’URS, ou une URS incomplète conduira très probablement à un dépassement du budget ou dépassement des délais établis.
 
 #### Un petit exemple concret
 Si un moteur de 110 kW pour une pompe de refroidissement, soit un beau bébé de l’ordre de 750 kg est sous dimensionné en raison d’une erreur dans la spécification, le dépassement de budget et du délai seront probablement garantis. Cependant, il y a extrêmement peu de risque de détruire le même moteur en raison d’une erreur au niveau du codage du PLC de commande.
- 
+
+---
+
+
 # Exercices
 ## Exercice 1 - URS
 Dans le cas des [URS du diagramme P&ID de mesure de gaz](#banc-de-test-gaz-user-request-specification), rechercher les éléments qui peuvent compliquer la tâche de l'ingénieur.
@@ -662,13 +688,15 @@ On a demandé à copilot de rédiger une URS pour la fabrication d'une configure
 
 
 ## Exercice 3 - DS 
-Reprende l'exemple de la [SDS fournie en annexe](./documentation/TestBenchSpecification.xlsx).
+Reprendre l'exemple de la [SDS fournie en annexe](./documentation/TestBenchSpecification.xlsx).
 
 1.	Déterminer les éléments qui selon vous sont des éléments critiques.
 2.	Faire votre propre évaluation du temps nécessaire pour le codage de ce banc de test.
 
+---
+
 # Annexes
-Les documents de type URS, FS et autres font en général partie du savoir faire d'une entreprise et sont rarement disponibles en ligne. Des exemples utilisés dans des travaux pratiques et quelques travaux de bachelor à la HEVS sont disponibles en ligne [URS](./documentation/Mct2%20PW10%20URS%20Template.docx), [FS](./documentation/Mct2%20PW10%20FS%20Template.docx), [SDS](./documentation/Mct2%20PW10%20SDS%20Template.docx), [HDS](./documentation/Mct2%20PW10%20HDS%20Template.docx), [PQ](./documentation/Mct2%20PW10%20PQ%20Template.docx), [OQ](./documentation/Mct2%20PW10%20OQ%20Template.docx) et [IQ](./documentation/Mct2%20PW10%20IQ%20Template.docx) .
+Les documents de type URS, FS et autres font en général partie du savoir-faire d'une entreprise et sont rarement disponibles en ligne. Des exemples utilisés dans des travaux pratiques et quelques travaux de bachelor à la HEVS sont disponibles en ligne [URS](./documentation/Mct2%20PW10%20URS%20Template.docx), [FS](./documentation/Mct2%20PW10%20FS%20Template.docx), [SDS](./documentation/Mct2%20PW10%20SDS%20Template.docx), [HDS](./documentation/Mct2%20PW10%20HDS%20Template.docx), [PQ](./documentation/Mct2%20PW10%20PQ%20Template.docx), [OQ](./documentation/Mct2%20PW10%20OQ%20Template.docx) et [IQ](./documentation/Mct2%20PW10%20IQ%20Template.docx) .
 
 
 ### SDS
