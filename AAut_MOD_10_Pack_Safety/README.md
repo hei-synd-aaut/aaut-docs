@@ -11,7 +11,9 @@
 
 # AAut_MOD_10_SafetyPack
 
+:warning: La directive 2006/42/CE citée ci-dessous a été remplacée par le règlement 2023/1230. Le cours n'a pas encore été mis à jour.
 
+Une page générée automatiquement résume les principaux changements.
 
 ## Aperçu
 L'utilisation de PackML permet de simplifier la conformité de la sécurité de la machine avec sa conception logicielle.
